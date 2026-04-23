@@ -9,6 +9,7 @@ ENV BUNDLE_PATH=/usr/local/bundle \
     RAILS_ENV=production
 
 RUN apt-get update -qq && \
+    apt-get upgrade -y --no-install-recommends && \
     apt-get install --no-install-recommends -y \
       build-essential \
       git \
@@ -41,6 +42,7 @@ ENV BUNDLE_PATH=/usr/local/bundle \
     RAILS_SERVE_STATIC_FILES=1
 
 RUN apt-get update -qq && \
+    apt-get upgrade -y --no-install-recommends && \
     apt-get install --no-install-recommends -y \
       libsqlite3-0 \
       libyaml-0-2 \
