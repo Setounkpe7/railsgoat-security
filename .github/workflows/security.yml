@@ -126,7 +126,7 @@ jobs:
           fi
 
       - name: Trivy fs (CRITICAL)
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: fs
           severity: CRITICAL
@@ -166,7 +166,7 @@ jobs:
           failure-threshold: error
 
       - name: Trivy config (CRITICAL)
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: config
           severity: CRITICAL
@@ -212,7 +212,7 @@ jobs:
       - run: docker load -i /tmp/image.tar
 
       - name: Trivy image OS (CRITICAL)
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: railsgoat-security:ci
           severity: CRITICAL
@@ -223,7 +223,7 @@ jobs:
           trivyignores: .trivyignore
 
       - name: Trivy image libraries (HIGH+)
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: railsgoat-security:ci
           severity: HIGH,CRITICAL
