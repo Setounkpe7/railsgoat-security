@@ -1,0 +1,18 @@
+# Semgrep path exclusions (directories not scanned).
+# Rule-level exceptions are done with inline `# nosemgrep: <rule-id>`
+# comments; each must reference an RG-SEC-XXX entry in
+# SECURITY_EXCEPTIONS.md.
+
+vendor/
+node_modules/
+docs/scan-reports/
+tmp/
+log/
+coverage/
+db/migrate/
+public/assets/
+
+# RailsGoat asset pipeline ships old vendored libraries (jquery, bootstrap,
+# moment, etc.) on purpose. The "Vulnerable JS Library" findings against
+# those files are part of the training material — see RG-SEC entry for ZAP.
+app/assets/javascripts/

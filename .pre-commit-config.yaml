@@ -10,7 +10,7 @@ repos:
         entry: detect-secrets-hook --baseline .secrets.baseline
         language: system
         require_serial: true
-        exclude: "^(docs/scan-reports/|vendor/|node_modules/|\\.secrets\\.baseline$)"
+        exclude: "^(docs/scan-reports/|vendor/|node_modules/|\\.secrets\\.baseline$|\\.brakeman\\.ignore$)"
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
