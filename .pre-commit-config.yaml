@@ -5,10 +5,14 @@ repos:
       # Yelp/detect-secrets hook: that one runs in parallel batches and
       # races on the baseline file, returning a spurious failure even
       # when no new secret was introduced.
+      # Pinned to 1.5.0 to match the CI workflow exactly (PyPI's latest
+      # release; some local installs ship a non-PyPI 1.5.47 build with
+      # a different plugin set, which would cause baseline divergence).
       - id: detect-secrets
         name: detect-secrets (no new secrets vs baseline)
         entry: detect-secrets-hook --baseline .secrets.baseline
-        language: system
+        language: python
+        additional_dependencies: ["detect-secrets==1.5.0"]
         require_serial: true
         exclude: "^(docs/scan-reports/|vendor/|node_modules/|\\.secrets\\.baseline$|\\.brakeman\\.ignore$)"
 

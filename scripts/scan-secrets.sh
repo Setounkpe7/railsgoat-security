@@ -4,20 +4,23 @@ cd "$(dirname "$0")/.."
 mkdir -p docs/scan-reports
 
 echo "== Secrets: detect-secrets =="
-# Uses installed detect-secrets if present, otherwise falls back to a
-# pinned image (CI installs the pip package directly).
-if command -v detect-secrets-hook >/dev/null 2>&1; then
-  HOOK="detect-secrets-hook"
-else
-  HOOK="docker run --rm -v $PWD:/src -w /src ghcr.io/yelp/detect-secrets:1.5.47 detect-secrets-hook"
-fi
-
+# Pinned to detect-secrets==1.5.0 to match the CI workflow exactly (PyPI's
+# latest release; some local installs ship a non-PyPI 1.5.47 build with a
+# different plugin set, which would produce a divergent baseline).
 # Exclude .brakeman.ignore — its sha256 fingerprints trip the
 # Hex High Entropy String detector as a false positive (same exclusion
 # as in .pre-commit-config.yaml).
-# shellcheck disable=SC2046
-$HOOK --baseline .secrets.baseline \
-  $(git ls-files | grep -v -E '^\.brakeman\.ignore$') \
+
+# Compute the file list on the host (python:3.12-slim has no git) and
+# pass it positionally into the container.
+mapfile -t FILES < <(git ls-files | grep -v -E '^\.brakeman\.ignore$')
+
+docker run --rm -v "$PWD:/src" -w /src python:3.12-slim sh -c \
+  'apt-get update -qq >/dev/null 2>&1 && apt-get install -y -q --no-install-recommends git >/dev/null 2>&1 &&
+   pip install --quiet detect-secrets==1.5.0 >/dev/null 2>&1 &&
+   git config --global --add safe.directory /src &&
+   detect-secrets-hook --baseline .secrets.baseline "$@"' \
+  -- "${FILES[@]}" \
   > docs/scan-reports/detect-secrets.txt 2>&1 || {
     echo "FAIL — new secrets detected. See docs/scan-reports/detect-secrets.txt"
     cat docs/scan-reports/detect-secrets.txt
