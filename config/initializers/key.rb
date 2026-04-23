@@ -10,8 +10,11 @@
 #
 # Hardcoding keys or omitting secure secret management must NEVER be done
 # in production applications.
-if Rails.env.production?
-  # Specify env variable/location/etc. to retrieve key from
-else
-  KEY = "123456789101112123456789101112123456789101112"
-end
+KEY =
+  if Rails.env.production?
+    ENV.fetch("RAILSGOAT_KEY") do
+      raise "Set RAILSGOAT_KEY env var (32+ bytes) before booting in production"
+    end
+  else
+    "123456789101112123456789101112123456789101112"
+  end
