@@ -321,6 +321,10 @@ jobs:
         run: |
           set -uo pipefail
           mkdir -p reports
+          # ZAP container runs as uid 1000 (zap user); the runner-owned
+          # reports/ directory needs to be world-writable for ZAP to drop
+          # its config + report files there.
+          chmod 777 reports
           docker run --rm --network=host \
             -v "$PWD/reports:/zap/wrk" \
             ghcr.io/zaproxy/zaproxy:stable \
