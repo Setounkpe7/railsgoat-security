@@ -1,0 +1,414 @@
+name: Security pipeline
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+  security-events: write
+  pull-requests: write
+
+concurrency:
+  group: security-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # ──────────────── 1. SECRETS ────────────────
+  secrets-scan:
+    name: Secrets (detect-secrets)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "detect-secrets==1.5.0"
+      - name: Scan vs baseline (fail on new findings)
+        run: |
+          set -euo pipefail
+          # Same exclusion as scripts/scan-secrets.sh — Brakeman audit
+          # fingerprints are sha256s, false-positive on Hex High Entropy.
+          detect-secrets-hook --baseline .secrets.baseline \
+            $(git ls-files | grep -v -E '^\.brakeman\.ignore$')
+
+  # ──────────────── 2. SAST ────────────────
+  sast:
+    name: SAST (Brakeman + Semgrep)
+    runs-on: ubuntu-latest
+    needs: secrets-scan
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Brakeman (official image)
+        run: |
+          set -euo pipefail
+          mkdir -p reports
+          docker run --rm -v "$PWD:/code" presidentbeef/brakeman:latest \
+            --no-progress --no-pager \
+            --ignore-config /code/.brakeman.ignore \
+            --format json --output /code/reports/brakeman.json \
+            -w2 || true
+          docker run --rm -v "$PWD:/code" presidentbeef/brakeman:latest \
+            --no-progress --no-pager \
+            --ignore-config /code/.brakeman.ignore \
+            --format sarif --output /code/reports/brakeman.sarif \
+            -w2 >/dev/null 2>&1 || true
+          HIGH=$(jq '[.warnings[]? | select(.confidence == "High")] | length' reports/brakeman.json)
+          TOTAL=$(jq '[.warnings[]?] | length' reports/brakeman.json)
+          echo "Brakeman: $TOTAL warnings, $HIGH High-confidence" | tee -a $GITHUB_STEP_SUMMARY
+          [ "$HIGH" -eq 0 ]
+
+      - name: Upload Brakeman SARIF
+        if: always() && hashFiles('reports/brakeman.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: reports/brakeman.sarif
+          category: brakeman
+
+      - name: Semgrep
+        run: |
+          set -euo pipefail
+          mkdir -p reports
+          docker run --rm -v "$PWD:/src" -w /src semgrep/semgrep:latest \
+            semgrep scan --config=p/ruby --config=p/security-audit \
+              --sarif --output /src/reports/semgrep.sarif --quiet || true
+          # Gate on ERROR-level only (matches scripts/scan-sast.sh).
+          if [ -f reports/semgrep.sarif ]; then
+            ERROR=$(jq '[.runs[0].results[]? | select(.level == "error")] | length' reports/semgrep.sarif)
+            TOTAL=$(jq '[.runs[0].results[]?] | length' reports/semgrep.sarif)
+            echo "Semgrep: $TOTAL findings, $ERROR ERROR-level" | tee -a $GITHUB_STEP_SUMMARY
+            [ "$ERROR" -eq 0 ]
+          fi
+
+      - name: Upload Semgrep SARIF
+        if: always() && hashFiles('reports/semgrep.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: reports/semgrep.sarif
+          category: semgrep
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sast-reports
+          path: reports/
+          retention-days: 30
+
+  # ──────────────── 3. SCA ────────────────
+  sca:
+    name: SCA (bundler-audit + Trivy fs)
+    runs-on: ubuntu-latest
+    needs: secrets-scan
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler: "4.0.4"
+
+      - name: bundler-audit
+        run: |
+          set -euo pipefail
+          gem install bundler-audit --no-document
+          # Don't install gems — only check the lockfile against ruby-advisory-db.
+          bundle-audit check --update | tee bundler-audit.txt
+          if grep -qE "^Criticality: Critical$" bundler-audit.txt; then
+            echo "::error::bundler-audit reports Critical CVE"
+            exit 1
+          fi
+
+      - name: Trivy fs (CRITICAL)
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          scan-type: fs
+          severity: CRITICAL
+          exit-code: "1"
+          format: sarif
+          output: trivy-fs.sarif
+          trivyignores: .trivyignore
+
+      - name: Upload Trivy fs SARIF
+        if: always() && hashFiles('trivy-fs.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy-fs.sarif
+          category: trivy-fs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sca-reports
+          path: |
+            bundler-audit.txt
+            trivy-fs.sarif
+          retention-days: 30
+
+  # ──────────────── 4. DOCKER BUILD + LINT ────────────────
+  docker-build:
+    name: Docker build + lint
+    runs-on: ubuntu-latest
+    needs: secrets-scan
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+          config: .hadolint.yaml
+          failure-threshold: error
+
+      - name: Trivy config (CRITICAL)
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          scan-type: config
+          severity: CRITICAL
+          exit-code: "1"
+          format: sarif
+          output: trivy-config.sarif
+
+      - name: Upload Trivy config SARIF
+        if: always() && hashFiles('trivy-config.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy-config.sarif
+          category: trivy-config
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build image (load locally)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          push: false
+          tags: railsgoat-security:ci
+          outputs: type=docker,dest=/tmp/image.tar
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: docker-image
+          path: /tmp/image.tar
+          retention-days: 1
+
+  # ──────────────── 5. IMAGE SCAN ────────────────
+  image-scan:
+    name: Image scan (Trivy)
+    runs-on: ubuntu-latest
+    needs: docker-build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+          path: /tmp
+      - run: docker load -i /tmp/image.tar
+
+      - name: Trivy image OS (CRITICAL)
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          image-ref: railsgoat-security:ci
+          severity: CRITICAL
+          vuln-type: os
+          exit-code: "1"
+          format: sarif
+          output: trivy-image-os.sarif
+          trivyignores: .trivyignore
+
+      - name: Trivy image libraries (HIGH+)
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          image-ref: railsgoat-security:ci
+          severity: HIGH,CRITICAL
+          vuln-type: library
+          exit-code: "1"
+          format: sarif
+          output: trivy-image-lib.sarif
+          trivyignores: .trivyignore
+
+      - name: Upload SARIF (image OS)
+        if: always() && hashFiles('trivy-image-os.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy-image-os.sarif
+          category: trivy-image-os
+
+      - name: Upload SARIF (image libs)
+        if: always() && hashFiles('trivy-image-lib.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy-image-lib.sarif
+          category: trivy-image-lib
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: image-scan-reports
+          path: |
+            trivy-image-os.sarif
+            trivy-image-lib.sarif
+          retention-days: 30
+
+  # ──────────────── 6. DAST ────────────────
+  dast:
+    name: DAST (ZAP baseline)
+    runs-on: ubuntu-latest
+    needs: docker-build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+          path: /tmp
+      - run: docker load -i /tmp/image.tar
+
+      - name: Run app
+        run: |
+          set -euo pipefail
+          SECRET_KEY_BASE=$(openssl rand -hex 64)
+          RAILSGOAT_KEY=$(openssl rand -hex 32)
+          docker run -d --name rg -p 3000:3000 \
+            -e SECRET_KEY_BASE="$SECRET_KEY_BASE" \
+            -e RAILSGOAT_KEY="$RAILSGOAT_KEY" \
+            railsgoat-security:ci
+          for i in {1..45}; do
+            curl -fsS http://localhost:3000/ >/dev/null 2>&1 && break
+            sleep 2
+          done
+          curl -fsS http://localhost:3000/ >/dev/null
+
+      - name: ZAP baseline scan
+        uses: zaproxy/action-baseline@v0.13.0
+        with:
+          target: http://localhost:3000
+          fail_action: true
+          allow_issue_writing: false
+          cmd_options: "-I"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dast-reports
+          path: |
+            report_html.html
+            report_json.json
+            report_md.md
+          retention-days: 30
+
+      - name: Stop app
+        if: always()
+        run: docker rm -f rg || true
+
+  # ──────────────── 7. SBOM ────────────────
+  sbom:
+    name: SBOM (Syft + Grype)
+    runs-on: ubuntu-latest
+    needs: [sast, sca, image-scan, dast]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+          path: /tmp
+      - run: docker load -i /tmp/image.tar
+
+      - name: Syft (CycloneDX)
+        uses: anchore/sbom-action@v0
+        with:
+          image: railsgoat-security:ci
+          format: cyclonedx-json
+          output-file: sbom.cdx.json
+          upload-artifact: false
+
+      - name: Syft (SPDX)
+        uses: anchore/sbom-action@v0
+        with:
+          image: railsgoat-security:ci
+          format: spdx-json
+          output-file: sbom.spdx.json
+          upload-artifact: false
+
+      - name: Grype (Critical only)
+        uses: anchore/scan-action@v4
+        with:
+          sbom: sbom.cdx.json
+          fail-build: true
+          severity-cutoff: critical
+          output-format: sarif
+
+      - name: Upload Grype SARIF
+        if: always() && hashFiles('results.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: results.sarif
+          category: grype
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sbom-reports
+          path: |
+            sbom.cdx.json
+            sbom.spdx.json
+            results.sarif
+          retention-days: 90
+
+  # ──────────────── 8. SIGN + PUSH ────────────────
+  sign-and-push:
+    name: Sign + push (GHCR)
+    runs-on: ubuntu-latest
+    needs: sbom
+    if: github.event_name == 'pull_request' && github.base_ref == 'main'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: sigstore/cosign-installer@v3
+
+      - name: Compute lowercase image name (GHCR requirement)
+        run: |
+          echo "IMAGE=$(echo ${{ env.REGISTRY }}/${{ github.repository }} | tr '[:upper:]' '[:lower:]')" \
+            >> $GITHUB_ENV
+
+      - name: Login GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        id: build-push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:pr-${{ github.event.number }}
+            ${{ env.IMAGE }}:sha-${{ github.sha }}
+            ${{ env.IMAGE }}:latest
+
+      - name: Cosign sign (keyless)
+        env:
+          DIGEST: ${{ steps.build-push.outputs.digest }}
+        run: |
+          cosign sign --yes "${IMAGE}@${DIGEST}"
+
+      - name: Summary
+        run: |
+          {
+            echo "## Image published and signed"
+            echo "- Ref: \`${IMAGE}:sha-${{ github.sha }}\`"
+            echo "- Digest: \`${{ steps.build-push.outputs.digest }}\`"
+            echo "- Verify:"
+            echo "  \`\`\`"
+            echo "  cosign verify ${IMAGE}:latest \\"
+            echo "    --certificate-identity-regexp='https://github.com/Setounkpe7/.*' \\"
+            echo "    --certificate-oidc-issuer=https://token.actions.githubusercontent.com"
+            echo "  \`\`\`"
+          } >> $GITHUB_STEP_SUMMARY
