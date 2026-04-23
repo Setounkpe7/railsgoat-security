@@ -1,15 +1,55 @@
-.rvmrc
-/.bundle
-/bin
-/db/*.sqlite3
-/log/*.log
-/tmp
-.elasticbeanstalk/
-.DS_Store
-/public/data
+# === Rails / Ruby runtime artifacts ===
+/log/*
+!/log/.keep
+/tmp/*
+!/tmp/.keep
+/storage/*
+!/storage/.keep
 /public/assets
-*.png
-coverage
-.tags
-/.vagrant
-/vendor/ruby
+/vendor/bundle
+/.bundle
+.byebug_history
+.rspec_status
+coverage/
+
+# === Local databases ===
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# === Secrets (NEVER commit) ===
+.env
+.env.*
+!.env.example
+/config/master.key
+/config/credentials/*.key
+
+# === Node (if asset pipeline touches JS) ===
+node_modules/
+yarn-error.log
+yarn-debug.log*
+npm-debug.log*
+
+# === Tool caches ===
+.brakeman/
+.semgrep/
+.trivy/
+.bundler-audit/
+.cache/
+
+# === IDE / OS ===
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# === Temporary work artifacts ===
+_railsgoat-upstream/
+*.bak
+*.orig
+*.rej
+
+# NOTE: scan reports are deliberately NOT ignored — they are committed
+# to docs/scan-reports/ as part of the portfolio deliverable.
