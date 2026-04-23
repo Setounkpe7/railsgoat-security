@@ -23,6 +23,9 @@ repos:
       - id: check-json
       - id: check-added-large-files
         args: ["--maxkb=500"]
+        # Scan-report JSONs (Grype, SBOMs, Trivy) and the SARIF outputs
+        # are committed deliverables and legitimately exceed 500 KB.
+        exclude: "^docs/scan-reports/"
       - id: check-merge-conflict
 
   - repo: https://github.com/hadolint/hadolint

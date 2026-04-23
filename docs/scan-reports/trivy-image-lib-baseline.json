@@ -1,0 +1,4352 @@
+{
+  "SchemaVersion": 2,
+  "Trivy": {
+    "Version": "0.70.0"
+  },
+  "ReportID": "019dbc43-5890-73a4-a27a-84ac03b1ae3b",
+  "CreatedAt": "2026-04-23T21:33:43.440240379Z",
+  "ArtifactID": "sha256:610557fd98a53f0846845e8f23cd2ff1dc593b8482c99fc0d8637eadd2c854c1",
+  "ArtifactName": "railsgoat-security:local",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "Size": 318997504,
+    "OS": {
+      "Family": "debian",
+      "Name": "12.9"
+    },
+    "ImageID": "sha256:6b4c1c4624ac989012192545fb18656289ddfad549f3c3cec893726c3210bdad",
+    "DiffIDs": [
+      "sha256:7914c8f600f532b7adbd0b003888e3aa921687d62dbe2f1f829d0ab6234a158a",
+      "sha256:9a809b7d889da16e5a6e06d89c1de72216564255628f58d3394c5abd2169a521",
+      "sha256:eff720e6140dc84caea728c5a51d9fd030fe6156ca3f4ae987afb2a0613d19ad",
+      "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843",
+      "sha256:632edff3948629749fa47b47c8f8f701a4ed72e19504e71e0e50b265c13bb421",
+      "sha256:4afad476e5ca0349045903a3d0ad301c93a9a22d781d90584e407299dec20bad",
+      "sha256:3ad68ed15d42060468c06c0292e9e5007fffaf68077469dd9773aba287b2613d",
+      "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e",
+      "sha256:2e524db6763280065a48a9d4d6ea14f92c7fb5509307cc9d09f3fbf564e19eda",
+      "sha256:a6867cd3aae891e67c406565270e55326f2ff0e2917e44506c75a8ff28785793"
+    ],
+    "RepoTags": [
+      "railsgoat-security:local"
+    ],
+    "RepoDigests": [
+      "railsgoat-security@sha256:6b4c1c4624ac989012192545fb18656289ddfad549f3c3cec893726c3210bdad"
+    ],
+    "Reference": "railsgoat-security:local",
+    "ImageConfig": {
+      "architecture": "amd64",
+      "created": "2026-04-23T17:29:50.145818547-04:00",
+      "history": [
+        {
+          "created": "2025-01-14T19:28:22Z",
+          "created_by": "# debian.sh --arch 'amd64' out/ 'bookworm' '@1738540800'",
+          "comment": "debuerreotype 0.15"
+        },
+        {
+          "created": "2025-01-14T19:28:22Z",
+          "created_by": "RUN /bin/sh -c set -eux; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tca-certificates \t; \trm -rf /var/lib/apt/lists/* # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-01-14T19:28:22Z",
+          "created_by": "RUN /bin/sh -c set -eux; \tmkdir -p /usr/local/etc; \techo 'gem: --no-document' \u003e\u003e /usr/local/etc/gemrc # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-01-14T19:28:22Z",
+          "created_by": "ENV LANG=C.UTF-8",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-01-14T19:28:22Z",
+          "created_by": "ENV RUBY_VERSION=3.4.1",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-01-14T19:28:22Z",
+          "created_by": "ENV RUBY_DOWNLOAD_URL=https://cache.ruby-lang.org/pub/ruby/3.4/ruby-3.4.1.tar.xz",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-01-14T19:28:22Z",
+          "created_by": "ENV RUBY_DOWNLOAD_SHA256=018d59ffb52be3c0a6d847e22d3fd7a2c52d0ddfee249d3517a0c8c6dbfa70af",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-01-14T19:28:22Z",
+          "created_by": "RUN /bin/sh -c set -eux; \t\tsavedAptMark=\"$(apt-mark showmanual)\"; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tdpkg-dev \t\tlibgdbm-dev \t\truby \t\tautoconf \t\tbzip2 \t\tg++ \t\tgcc \t\tlibbz2-dev \t\tlibffi-dev \t\tlibgdbm-compat-dev \t\tlibglib2.0-dev \t\tlibgmp-dev \t\tlibncurses-dev \t\tlibssl-dev \t\tlibxml2-dev \t\tlibxslt-dev \t\tlibyaml-dev \t\tmake \t\twget \t\txz-utils \t\tzlib1g-dev \t; \t\trustArch=; \tdpkgArch=\"$(dpkg --print-architecture)\"; \tcase \"$dpkgArch\" in \t\t'amd64') rustArch='x86_64-unknown-linux-gnu'; rustupUrl='https://static.rust-lang.org/rustup/archive/1.27.1/x86_64-unknown-linux-gnu/rustup-init'; rustupSha256='6aeece6993e902708983b209d04c0d1dbb14ebb405ddb87def578d41f920f56d' ;; \t\t'arm64') rustArch='aarch64-unknown-linux-gnu'; rustupUrl='https://static.rust-lang.org/rustup/archive/1.27.1/aarch64-unknown-linux-gnu/rustup-init'; rustupSha256='1cffbf51e63e634c746f741de50649bbbcbd9dbe1de363c9ecef64e278dba2b2' ;; \tesac; \t\tif [ -n \"$rustArch\" ]; then \t\tmkdir -p /tmp/rust; \t\t\t\twget -O /tmp/rust/rustup-init \"$rustupUrl\"; \t\techo \"$rustupSha256 */tmp/rust/rustup-init\" | sha256sum --check --strict; \t\tchmod +x /tmp/rust/rustup-init; \t\t\t\texport RUSTUP_HOME='/tmp/rust/rustup' CARGO_HOME='/tmp/rust/cargo'; \t\texport PATH=\"$CARGO_HOME/bin:$PATH\"; \t\t/tmp/rust/rustup-init -y --no-modify-path --profile minimal --default-toolchain '1.84.0' --default-host \"$rustArch\"; \t\t\t\trustc --version; \t\tcargo --version; \tfi; \t\twget -O ruby.tar.xz \"$RUBY_DOWNLOAD_URL\"; \techo \"$RUBY_DOWNLOAD_SHA256 *ruby.tar.xz\" | sha256sum --check --strict; \t\tmkdir -p /usr/src/ruby; \ttar -xJf ruby.tar.xz -C /usr/src/ruby --strip-components=1; \trm ruby.tar.xz; \t\tcd /usr/src/ruby; \t\t{ \t\techo '#define ENABLE_PATH_CHECK 0'; \t\techo; \t\tcat file.c; \t} \u003e file.c.new; \tmv file.c.new file.c; \t\tautoconf; \tgnuArch=\"$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)\"; \t./configure \t\t--build=\"$gnuArch\" \t\t--disable-install-doc \t\t--enable-shared \t\t${rustArch:+--enable-yjit} \t; \tmake -j \"$(nproc)\"; \tmake install; \t\tsavedAptMark=\"$savedAptMark \t\tbzip2 \t\tlibffi-dev \t\tlibgmp-dev \t\tlibssl-dev \t\tlibyaml-dev \t\tprocps \t\tzlib1g-dev \t\"; \tapt-get install -y --no-install-recommends $savedAptMark; \t\trm -rf /tmp/rust; \tapt-mark auto '.*' \u003e /dev/null; \tapt-mark manual $savedAptMark \u003e /dev/null; \tfind /usr/local -type f -executable -not \\( -name '*tkinter*' \\) -exec ldd '{}' ';' \t\t| awk '/=\u003e/ { so = $(NF-1); if (index(so, \"/usr/local/\") == 1) { next }; gsub(\"^/(usr/)?\", \"\", so); printf \"*%s\\n\", so }' \t\t| sort -u \t\t| xargs -r dpkg-query --search \t\t| cut -d: -f1 \t\t| sort -u \t\t| xargs -r apt-mark manual \t; \tapt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \trm -rf /var/lib/apt/lists/*; \t\tcd /; \trm -r /usr/src/ruby; \tif dpkg -l | grep -i ruby; then exit 1; fi; \t[ \"$(command -v ruby)\" = '/usr/local/bin/ruby' ]; \truby --version; \tgem --version; \tbundle --version # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-01-14T19:28:22Z",
+          "created_by": "ENV GEM_HOME=/usr/local/bundle",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-01-14T19:28:22Z",
+          "created_by": "ENV BUNDLE_SILENCE_ROOT_WARNING=1 BUNDLE_APP_CONFIG=/usr/local/bundle",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-01-14T19:28:22Z",
+          "created_by": "ENV PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-01-14T19:28:22Z",
+          "created_by": "RUN /bin/sh -c set -eux; \tmkdir \"$GEM_HOME\"; \tchmod 1777 \"$GEM_HOME\" # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-01-14T19:28:22Z",
+          "created_by": "CMD [\"irb\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-04-23T20:49:01Z",
+          "created_by": "ENV BUNDLE_PATH=/usr/local/bundle BUNDLE_WITHOUT=development:test:mysql:openshift BUNDLE_DEPLOYMENT=1 RAILS_ENV=production RAILS_LOG_TO_STDOUT=1 RAILS_SERVE_STATIC_FILES=1",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-04-23T20:49:01Z",
+          "created_by": "RUN /bin/sh -c apt-get update -qq \u0026\u0026     apt-get install --no-install-recommends -y       libsqlite3-0       libyaml-0-2       curl       ca-certificates \u0026\u0026     rm -rf /var/lib/apt/lists/* \u0026\u0026     groupadd --system --gid 1000 app \u0026\u0026     useradd app --uid 1000 --gid 1000 --create-home --shell /bin/bash # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-04-23T20:49:03Z",
+          "created_by": "WORKDIR /app",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-04-23T20:51:35Z",
+          "created_by": "COPY --chown=app:app /usr/local/bundle /usr/local/bundle # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-04-23T21:29:35Z",
+          "created_by": "COPY --chown=app:app /app /app # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-04-23T21:29:50Z",
+          "created_by": "RUN /bin/sh -c printf '%s\\n'       '#!/usr/bin/env bash'       'set -e'       'mkdir -p tmp/pids db log'       'bundle exec rails db:prepare'       'exec \"$@\"'     \u003e /usr/local/bin/docker-entrypoint \u0026\u0026     chmod +x /usr/local/bin/docker-entrypoint \u0026\u0026     chown -R app:app /app # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-04-23T21:29:50Z",
+          "created_by": "USER app:app",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-04-23T21:29:50Z",
+          "created_by": "EXPOSE map[3000/tcp:{}]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-04-23T21:29:50Z",
+          "created_by": "HEALTHCHECK \u0026{[\"CMD-SHELL\" \"curl -fsS http://localhost:3000/ || exit 1\"] \"10s\" \"3s\" \"30s\" \"0s\" '\\x03'}",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-04-23T21:29:50Z",
+          "created_by": "ENTRYPOINT [\"docker-entrypoint\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-04-23T21:29:50Z",
+          "created_by": "CMD [\"bundle\" \"exec\" \"rails\" \"server\" \"-b\" \"0.0.0.0\" \"-p\" \"3000\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        }
+      ],
+      "os": "linux",
+      "rootfs": {
+        "type": "layers",
+        "diff_ids": [
+          "sha256:7914c8f600f532b7adbd0b003888e3aa921687d62dbe2f1f829d0ab6234a158a",
+          "sha256:9a809b7d889da16e5a6e06d89c1de72216564255628f58d3394c5abd2169a521",
+          "sha256:eff720e6140dc84caea728c5a51d9fd030fe6156ca3f4ae987afb2a0613d19ad",
+          "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843",
+          "sha256:632edff3948629749fa47b47c8f8f701a4ed72e19504e71e0e50b265c13bb421",
+          "sha256:4afad476e5ca0349045903a3d0ad301c93a9a22d781d90584e407299dec20bad",
+          "sha256:3ad68ed15d42060468c06c0292e9e5007fffaf68077469dd9773aba287b2613d",
+          "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e",
+          "sha256:2e524db6763280065a48a9d4d6ea14f92c7fb5509307cc9d09f3fbf564e19eda",
+          "sha256:a6867cd3aae891e67c406565270e55326f2ff0e2917e44506c75a8ff28785793"
+        ]
+      },
+      "config": {
+        "Cmd": [
+          "bundle",
+          "exec",
+          "rails",
+          "server",
+          "-b",
+          "0.0.0.0",
+          "-p",
+          "3000"
+        ],
+        "Healthcheck": {
+          "Test": [
+            "CMD-SHELL",
+            "curl -fsS http://localhost:3000/ || exit 1"
+          ],
+          "Interval": 10000000000,
+          "Timeout": 3000000000,
+          "StartPeriod": 30000000000,
+          "Retries": 3
+        },
+        "Entrypoint": [
+          "docker-entrypoint"
+        ],
+        "Env": [
+          "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "LANG=C.UTF-8",
+          "RUBY_VERSION=3.4.1",
+          "RUBY_DOWNLOAD_URL=https://cache.ruby-lang.org/pub/ruby/3.4/ruby-3.4.1.tar.xz",
+          "RUBY_DOWNLOAD_SHA256=018d59ffb52be3c0a6d847e22d3fd7a2c52d0ddfee249d3517a0c8c6dbfa70af",
+          "GEM_HOME=/usr/local/bundle",
+          "BUNDLE_SILENCE_ROOT_WARNING=1",
+          "BUNDLE_APP_CONFIG=/usr/local/bundle",
+          "BUNDLE_PATH=/usr/local/bundle",
+          "BUNDLE_WITHOUT=development:test:mysql:openshift",
+          "BUNDLE_DEPLOYMENT=1",
+          "RAILS_ENV=production",
+          "RAILS_LOG_TO_STDOUT=1",
+          "RAILS_SERVE_STATIC_FILES=1"
+        ],
+        "User": "app:app",
+        "WorkingDir": "/app",
+        "ExposedPorts": {
+          "3000/tcp": {}
+        },
+        "ArgsEscaped": true
+      }
+    },
+    "Layers": [
+      {
+        "Size": 77834240,
+        "Digest": "sha256:c29f5b76f736a8b555fd191c48d6581bb918bcd605a7cbcc76205dd6acff3260",
+        "DiffID": "sha256:7914c8f600f532b7adbd0b003888e3aa921687d62dbe2f1f829d0ab6234a158a"
+      },
+      {
+        "Size": 9516032,
+        "Digest": "sha256:d501d95a24b09bca8f6f38906808d62553f29b27571f59227c286f5c03813873",
+        "DiffID": "sha256:9a809b7d889da16e5a6e06d89c1de72216564255628f58d3394c5abd2169a521"
+      },
+      {
+        "Size": 3584,
+        "Digest": "sha256:147651d70e7283979839d931b6377b5fd9e94e626852bdd228305af122a65442",
+        "DiffID": "sha256:eff720e6140dc84caea728c5a51d9fd030fe6156ca3f4ae987afb2a0613d19ad"
+      },
+      {
+        "Size": 114495488,
+        "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+        "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+      },
+      {
+        "Size": 2560,
+        "Digest": "sha256:41b14109b12d039f03a8c1ec824550d232c0b4802d2f5343c7978ded6457da6b",
+        "DiffID": "sha256:632edff3948629749fa47b47c8f8f701a4ed72e19504e71e0e50b265c13bb421"
+      },
+      {
+        "Size": 7517696,
+        "Digest": "sha256:27c765d243c077983d332c7fa129200a380ececb981c3d715f9de4e0c7f158bb",
+        "DiffID": "sha256:4afad476e5ca0349045903a3d0ad301c93a9a22d781d90584e407299dec20bad"
+      },
+      {
+        "Size": 1536,
+        "Digest": "sha256:bfaa4d2cc887040b93a408fc16438a9634eed94f3d1c5e6aa1381217835d0940",
+        "DiffID": "sha256:3ad68ed15d42060468c06c0292e9e5007fffaf68077469dd9773aba287b2613d"
+      },
+      {
+        "Size": 100874240,
+        "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+        "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+      },
+      {
+        "Size": 8748032,
+        "Digest": "sha256:00b20c1b980db05d1c9d59f990eb957391e4c54265e8a6e68694d3082891bb6a",
+        "DiffID": "sha256:2e524db6763280065a48a9d4d6ea14f92c7fb5509307cc9d09f3fbf564e19eda"
+      },
+      {
+        "Size": 4096,
+        "Digest": "sha256:9e607b6b6e1e28d130e2b25786dd932e371d76b8090be4b8cc2ee2529a6488f5",
+        "DiffID": "sha256:a6867cd3aae891e67c406565270e55326f2ff0e2917e44506c75a8ff28785793"
+      }
+    ]
+  },
+  "Results": [
+    {
+      "Target": "Node.js",
+      "Class": "lang-pkgs",
+      "Type": "node-pkg",
+      "Packages": [
+        {
+          "ID": "@rails/actiontext@8.0.400",
+          "Name": "@rails/actiontext",
+          "Identifier": {
+            "PURL": "pkg:npm/%40rails/actiontext@8.0.400",
+            "UID": "eb8d408ca0c1c5dd"
+          },
+          "Version": "8.0.400",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/gems/actiontext-8.0.4/package.json",
+          "AnalyzedBy": "node-pkg"
+        }
+      ]
+    },
+    {
+      "Target": "Ruby",
+      "Class": "lang-pkgs",
+      "Type": "gemspec",
+      "Packages": [
+        {
+          "Name": "abbrev",
+          "Identifier": {
+            "PURL": "pkg:gem/abbrev@0.1.2",
+            "UID": "270e47b8975d42b8"
+          },
+          "Version": "0.1.2",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/abbrev-0.1.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "actioncable",
+          "Identifier": {
+            "PURL": "pkg:gem/actioncable@8.0.4",
+            "UID": "2e1452a0fb12464c"
+          },
+          "Version": "8.0.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/actioncable-8.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "actionmailbox",
+          "Identifier": {
+            "PURL": "pkg:gem/actionmailbox@8.0.4",
+            "UID": "d6d64777b3e47bc5"
+          },
+          "Version": "8.0.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/actionmailbox-8.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "actionmailer",
+          "Identifier": {
+            "PURL": "pkg:gem/actionmailer@8.0.4",
+            "UID": "4e487e80ec0b500a"
+          },
+          "Version": "8.0.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/actionmailer-8.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "actionpack",
+          "Identifier": {
+            "PURL": "pkg:gem/actionpack@8.0.4",
+            "UID": "55720df24bee90d7"
+          },
+          "Version": "8.0.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/actionpack-8.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "actiontext",
+          "Identifier": {
+            "PURL": "pkg:gem/actiontext@8.0.4",
+            "UID": "db99d285ac380fb0"
+          },
+          "Version": "8.0.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/actiontext-8.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "actionview",
+          "Identifier": {
+            "PURL": "pkg:gem/actionview@8.0.4",
+            "UID": "544035c504aa47cb"
+          },
+          "Version": "8.0.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/actionview-8.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "activejob",
+          "Identifier": {
+            "PURL": "pkg:gem/activejob@8.0.4",
+            "UID": "d1f3b32f66daa5ee"
+          },
+          "Version": "8.0.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/activejob-8.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "activemodel",
+          "Identifier": {
+            "PURL": "pkg:gem/activemodel@8.0.4",
+            "UID": "c901c9e40dbf1287"
+          },
+          "Version": "8.0.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/activemodel-8.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "activerecord",
+          "Identifier": {
+            "PURL": "pkg:gem/activerecord@8.0.4",
+            "UID": "48cdb7a009f4922f"
+          },
+          "Version": "8.0.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/activerecord-8.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "activestorage",
+          "Identifier": {
+            "PURL": "pkg:gem/activestorage@8.0.4",
+            "UID": "80f9bcf8ea3192e9"
+          },
+          "Version": "8.0.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/activestorage-8.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "activesupport",
+          "Identifier": {
+            "PURL": "pkg:gem/activesupport@8.0.4",
+            "UID": "2db334fe0153645b"
+          },
+          "Version": "8.0.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/activesupport-8.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "aruba",
+          "Identifier": {
+            "PURL": "pkg:gem/aruba@2.3.3",
+            "UID": "84928bb6637aedcc"
+          },
+          "Version": "2.3.3",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/aruba-2.3.3.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "base64",
+          "Identifier": {
+            "PURL": "pkg:gem/base64@0.2.0",
+            "UID": "1edd9f951916f3a8"
+          },
+          "Version": "0.2.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/base64-0.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "base64",
+          "Identifier": {
+            "PURL": "pkg:gem/base64@0.3.0",
+            "UID": "532aeb9b23772b87"
+          },
+          "Version": "0.3.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/base64-0.3.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "bcrypt",
+          "Identifier": {
+            "PURL": "pkg:gem/bcrypt@3.1.21",
+            "UID": "e49c27488e44a2a4"
+          },
+          "Version": "3.1.21",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/bcrypt-3.1.21.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "benchmark",
+          "Identifier": {
+            "PURL": "pkg:gem/benchmark@0.4.0",
+            "UID": "c0c8332a87e815d3"
+          },
+          "Version": "0.4.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/benchmark-0.4.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "benchmark",
+          "Identifier": {
+            "PURL": "pkg:gem/benchmark@0.5.0",
+            "UID": "c05d688a0d7b1693"
+          },
+          "Version": "0.5.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/benchmark-0.5.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "bigdecimal",
+          "Identifier": {
+            "PURL": "pkg:gem/bigdecimal@3.1.8",
+            "UID": "e0eba3fc2f80ac04"
+          },
+          "Version": "3.1.8",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/bigdecimal-3.1.8.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "bigdecimal",
+          "Identifier": {
+            "PURL": "pkg:gem/bigdecimal@4.0.1",
+            "UID": "b2f44c6976621c40"
+          },
+          "Version": "4.0.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/bigdecimal-4.0.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "builder",
+          "Identifier": {
+            "PURL": "pkg:gem/builder@3.3.0",
+            "UID": "d211637613a75615"
+          },
+          "Version": "3.3.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/builder-3.3.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "bundler",
+          "Identifier": {
+            "PURL": "pkg:gem/bundler@2.6.2",
+            "UID": "54b13cbcaa7adbc4"
+          },
+          "Version": "2.6.2",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/bundler-2.6.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "bundler",
+          "Identifier": {
+            "PURL": "pkg:gem/bundler@4.0.4",
+            "UID": "72a924f97f212440"
+          },
+          "Version": "4.0.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/specifications/bundler-4.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "cgi",
+          "Identifier": {
+            "PURL": "pkg:gem/cgi@0.4.1",
+            "UID": "969cda2143fa15df"
+          },
+          "Version": "0.4.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/cgi-0.4.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "coderay",
+          "Identifier": {
+            "PURL": "pkg:gem/coderay@1.1.3",
+            "UID": "c40c1d7665b28cb4"
+          },
+          "Version": "1.1.3",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/coderay-1.1.3.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "concurrent-ruby",
+          "Identifier": {
+            "PURL": "pkg:gem/concurrent-ruby@1.3.6",
+            "UID": "f16a7ce353b3210c"
+          },
+          "Version": "1.3.6",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/concurrent-ruby-1.3.6.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "connection_pool",
+          "Identifier": {
+            "PURL": "pkg:gem/connection_pool@3.0.2",
+            "UID": "fe2a71178fac313c"
+          },
+          "Version": "3.0.2",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/connection_pool-3.0.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "contracts",
+          "Identifier": {
+            "PURL": "pkg:gem/contracts@0.17.3",
+            "UID": "716164eebb9d01f1"
+          },
+          "Version": "0.17.3",
+          "Licenses": [
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/contracts-0.17.3.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "crass",
+          "Identifier": {
+            "PURL": "pkg:gem/crass@1.0.6",
+            "UID": "4e47a5db85a73c6d"
+          },
+          "Version": "1.0.6",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/crass-1.0.6.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "csv",
+          "Identifier": {
+            "PURL": "pkg:gem/csv@3.3.2",
+            "UID": "251cce582694cd6d"
+          },
+          "Version": "3.3.2",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/csv-3.3.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "cucumber",
+          "Identifier": {
+            "PURL": "pkg:gem/cucumber@10.2.0",
+            "UID": "a6ce829ba6b92d1c"
+          },
+          "Version": "10.2.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/cucumber-10.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "cucumber-ci-environment",
+          "Identifier": {
+            "PURL": "pkg:gem/cucumber-ci-environment@11.0.0",
+            "UID": "906dcf8cf78f9ab1"
+          },
+          "Version": "11.0.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/cucumber-ci-environment-11.0.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "cucumber-core",
+          "Identifier": {
+            "PURL": "pkg:gem/cucumber-core@16.1.1",
+            "UID": "c75db753115d3c2"
+          },
+          "Version": "16.1.1",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/cucumber-core-16.1.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "cucumber-cucumber-expressions",
+          "Identifier": {
+            "PURL": "pkg:gem/cucumber-cucumber-expressions@18.1.0",
+            "UID": "670c8971d25ee743"
+          },
+          "Version": "18.1.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/cucumber-cucumber-expressions-18.1.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "cucumber-gherkin",
+          "Identifier": {
+            "PURL": "pkg:gem/cucumber-gherkin@38.0.0",
+            "UID": "afef84feccd3aca2"
+          },
+          "Version": "38.0.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/cucumber-gherkin-38.0.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "cucumber-html-formatter",
+          "Identifier": {
+            "PURL": "pkg:gem/cucumber-html-formatter@22.3.0",
+            "UID": "a8175d71e7c4e6f5"
+          },
+          "Version": "22.3.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/cucumber-html-formatter-22.3.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "cucumber-messages",
+          "Identifier": {
+            "PURL": "pkg:gem/cucumber-messages@32.0.0",
+            "UID": "2532cf121ab3446c"
+          },
+          "Version": "32.0.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/cucumber-messages-32.0.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "cucumber-tag-expressions",
+          "Identifier": {
+            "PURL": "pkg:gem/cucumber-tag-expressions@8.1.0",
+            "UID": "7012e1fdfa419058"
+          },
+          "Version": "8.1.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/cucumber-tag-expressions-8.1.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "date",
+          "Identifier": {
+            "PURL": "pkg:gem/date@3.4.1",
+            "UID": "2aefcee3ee6f81cc"
+          },
+          "Version": "3.4.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/date-3.4.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "date",
+          "Identifier": {
+            "PURL": "pkg:gem/date@3.5.1",
+            "UID": "2dd06b7f9ade1e18"
+          },
+          "Version": "3.5.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/date-3.5.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "debug",
+          "Identifier": {
+            "PURL": "pkg:gem/debug@1.10.0",
+            "UID": "f6ea38abaff985b6"
+          },
+          "Version": "1.10.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/debug-1.10.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "delegate",
+          "Identifier": {
+            "PURL": "pkg:gem/delegate@0.4.0",
+            "UID": "825af1c2ad922d40"
+          },
+          "Version": "0.4.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/delegate-0.4.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "did_you_mean",
+          "Identifier": {
+            "PURL": "pkg:gem/did_you_mean@2.0.0",
+            "UID": "5b6fa6f79056e83"
+          },
+          "Version": "2.0.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/did_you_mean-2.0.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "diff-lcs",
+          "Identifier": {
+            "PURL": "pkg:gem/diff-lcs@1.6.2",
+            "UID": "71b8c91c4862a8e4"
+          },
+          "Version": "1.6.2",
+          "Licenses": [
+            "MIT",
+            "Artistic-1.0-Perl",
+            "GPL-2.0-or-later"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/diff-lcs-1.6.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "digest",
+          "Identifier": {
+            "PURL": "pkg:gem/digest@3.2.0",
+            "UID": "3a493bfea8bbb0e4"
+          },
+          "Version": "3.2.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/digest-3.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "drb",
+          "Identifier": {
+            "PURL": "pkg:gem/drb@2.2.1",
+            "UID": "1f4defd588196756"
+          },
+          "Version": "2.2.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/drb-2.2.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "drb",
+          "Identifier": {
+            "PURL": "pkg:gem/drb@2.2.3",
+            "UID": "6d5240d797f07970"
+          },
+          "Version": "2.2.3",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/drb-2.2.3.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "english",
+          "Identifier": {
+            "PURL": "pkg:gem/english@0.8.0",
+            "UID": "641f2026a9344260"
+          },
+          "Version": "0.8.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/english-0.8.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "erb",
+          "Identifier": {
+            "PURL": "pkg:gem/erb@4.0.4",
+            "UID": "72f12bf23fc60c52"
+          },
+          "Version": "4.0.4",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/erb-4.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "erb",
+          "Identifier": {
+            "PURL": "pkg:gem/erb@6.0.1",
+            "UID": "fa1ec25aa2316772"
+          },
+          "Version": "6.0.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/erb-6.0.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "error_highlight",
+          "Identifier": {
+            "PURL": "pkg:gem/error_highlight@0.7.0",
+            "UID": "15b80c9a6cf0fc64"
+          },
+          "Version": "0.7.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/error_highlight-0.7.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "erubi",
+          "Identifier": {
+            "PURL": "pkg:gem/erubi@1.13.1",
+            "UID": "d4432eb26968ee0a"
+          },
+          "Version": "1.13.1",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/erubi-1.13.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "etc",
+          "Identifier": {
+            "PURL": "pkg:gem/etc@1.4.5",
+            "UID": "4389629dec1453de"
+          },
+          "Version": "1.4.5",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/etc-1.4.5.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "fcntl",
+          "Identifier": {
+            "PURL": "pkg:gem/fcntl@1.2.0",
+            "UID": "fb3c6fe32a3807f1"
+          },
+          "Version": "1.2.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/fcntl-1.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "ffi",
+          "Identifier": {
+            "PURL": "pkg:gem/ffi@1.17.3",
+            "UID": "5c8aa5f66a44d3c8"
+          },
+          "Version": "1.17.3",
+          "Licenses": [
+            "BSD-3-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/ffi-1.17.3-x86_64-linux-gnu.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "fiddle",
+          "Identifier": {
+            "PURL": "pkg:gem/fiddle@1.1.6",
+            "UID": "6aade36178249def"
+          },
+          "Version": "1.1.6",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/fiddle-1.1.6.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "fileutils",
+          "Identifier": {
+            "PURL": "pkg:gem/fileutils@1.7.3",
+            "UID": "8fab18f59e89e0e"
+          },
+          "Version": "1.7.3",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/fileutils-1.7.3.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "find",
+          "Identifier": {
+            "PURL": "pkg:gem/find@0.2.0",
+            "UID": "24c5efc3365b3a63"
+          },
+          "Version": "0.2.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/find-0.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "foreman",
+          "Identifier": {
+            "PURL": "pkg:gem/foreman@0.90.0",
+            "UID": "59f8a70be73338d2"
+          },
+          "Version": "0.90.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/foreman-0.90.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "forwardable",
+          "Identifier": {
+            "PURL": "pkg:gem/forwardable@1.3.3",
+            "UID": "dd8c526247e326a9"
+          },
+          "Version": "1.3.3",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/forwardable-1.3.3.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "getoptlong",
+          "Identifier": {
+            "PURL": "pkg:gem/getoptlong@0.2.1",
+            "UID": "f6c3c7cc48ee3835"
+          },
+          "Version": "0.2.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/getoptlong-0.2.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "globalid",
+          "Identifier": {
+            "PURL": "pkg:gem/globalid@1.3.0",
+            "UID": "b76fd1dd72e3675e"
+          },
+          "Version": "1.3.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/globalid-1.3.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "i18n",
+          "Identifier": {
+            "PURL": "pkg:gem/i18n@1.14.8",
+            "UID": "7418fd7d9333ce2"
+          },
+          "Version": "1.14.8",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/i18n-1.14.8.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "importmap-rails",
+          "Identifier": {
+            "PURL": "pkg:gem/importmap-rails@2.2.3",
+            "UID": "d89f41dbb3cecff3"
+          },
+          "Version": "2.2.3",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/importmap-rails-2.2.3.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "io-console",
+          "Identifier": {
+            "PURL": "pkg:gem/io-console@0.8.0",
+            "UID": "87f58d86ad95e86d"
+          },
+          "Version": "0.8.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/io-console-0.8.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "io-console",
+          "Identifier": {
+            "PURL": "pkg:gem/io-console@0.8.2",
+            "UID": "a1f4a42a0744e40f"
+          },
+          "Version": "0.8.2",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/io-console-0.8.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "io-nonblock",
+          "Identifier": {
+            "PURL": "pkg:gem/io-nonblock@0.3.1",
+            "UID": "45fda8f9603f1e87"
+          },
+          "Version": "0.3.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/io-nonblock-0.3.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "io-wait",
+          "Identifier": {
+            "PURL": "pkg:gem/io-wait@0.3.1",
+            "UID": "ecf5890164fff99f"
+          },
+          "Version": "0.3.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/io-wait-0.3.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "ipaddr",
+          "Identifier": {
+            "PURL": "pkg:gem/ipaddr@1.2.7",
+            "UID": "98aab97a734ac7c4"
+          },
+          "Version": "1.2.7",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/ipaddr-1.2.7.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "irb",
+          "Identifier": {
+            "PURL": "pkg:gem/irb@1.14.3",
+            "UID": "6ce98dbd8c49a658"
+          },
+          "Version": "1.14.3",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/irb-1.14.3.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "irb",
+          "Identifier": {
+            "PURL": "pkg:gem/irb@1.16.0",
+            "UID": "113393676b363aa7"
+          },
+          "Version": "1.16.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/irb-1.16.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "jquery-fileupload-rails",
+          "Identifier": {
+            "PURL": "pkg:gem/jquery-fileupload-rails@1.0.0",
+            "UID": "bba1a5441b7251d9"
+          },
+          "Version": "1.0.0",
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/jquery-fileupload-rails-1.0.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "jquery-rails",
+          "Identifier": {
+            "PURL": "pkg:gem/jquery-rails@4.6.1",
+            "UID": "2f35052e9bf79bfe"
+          },
+          "Version": "4.6.1",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/jquery-rails-4.6.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "json",
+          "Identifier": {
+            "PURL": "pkg:gem/json@2.9.1",
+            "UID": "651f948c582ba705"
+          },
+          "Version": "2.9.1",
+          "Licenses": [
+            "Ruby"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/json-2.9.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "logger",
+          "Identifier": {
+            "PURL": "pkg:gem/logger@1.6.4",
+            "UID": "329d48eb6563c584"
+          },
+          "Version": "1.6.4",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/logger-1.6.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "logger",
+          "Identifier": {
+            "PURL": "pkg:gem/logger@1.7.0",
+            "UID": "c29705a1449db82b"
+          },
+          "Version": "1.7.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/logger-1.7.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "loofah",
+          "Identifier": {
+            "PURL": "pkg:gem/loofah@2.25.0",
+            "UID": "8a5c4b4a416d1798"
+          },
+          "Version": "2.25.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/loofah-2.25.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "mail",
+          "Identifier": {
+            "PURL": "pkg:gem/mail@2.9.0",
+            "UID": "e7813952d4147690"
+          },
+          "Version": "2.9.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/mail-2.9.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "marcel",
+          "Identifier": {
+            "PURL": "pkg:gem/marcel@1.1.0",
+            "UID": "77981383fe3d5a63"
+          },
+          "Version": "1.1.0",
+          "Licenses": [
+            "MIT",
+            "Apache-2.0"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/marcel-1.1.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "matrix",
+          "Identifier": {
+            "PURL": "pkg:gem/matrix@0.4.2",
+            "UID": "ee51956d4d6be90"
+          },
+          "Version": "0.4.2",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/matrix-0.4.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "memoist3",
+          "Identifier": {
+            "PURL": "pkg:gem/memoist3@1.0.0",
+            "UID": "e462ae98ea9dc7a9"
+          },
+          "Version": "1.0.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/memoist3-1.0.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "method_source",
+          "Identifier": {
+            "PURL": "pkg:gem/method_source@1.1.0",
+            "UID": "e0c43364ecb9a2"
+          },
+          "Version": "1.1.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/method_source-1.1.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "mini_mime",
+          "Identifier": {
+            "PURL": "pkg:gem/mini_mime@1.1.5",
+            "UID": "f0b832581e977e59"
+          },
+          "Version": "1.1.5",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/mini_mime-1.1.5.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "minitest",
+          "Identifier": {
+            "PURL": "pkg:gem/minitest@5.25.4",
+            "UID": "a822f52f42304b47"
+          },
+          "Version": "5.25.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/minitest-5.25.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "minitest",
+          "Identifier": {
+            "PURL": "pkg:gem/minitest@6.0.1",
+            "UID": "ff8737178a726206"
+          },
+          "Version": "6.0.1",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/minitest-6.0.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "multi_test",
+          "Identifier": {
+            "PURL": "pkg:gem/multi_test@1.1.0",
+            "UID": "2a16e6a5a9dfe03"
+          },
+          "Version": "1.1.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/multi_test-1.1.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "mutex_m",
+          "Identifier": {
+            "PURL": "pkg:gem/mutex_m@0.3.0",
+            "UID": "3b9ea47d4c498a80"
+          },
+          "Version": "0.3.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/mutex_m-0.3.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "net-ftp",
+          "Identifier": {
+            "PURL": "pkg:gem/net-ftp@0.3.8",
+            "UID": "63ede3a82e5d0d55"
+          },
+          "Version": "0.3.8",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/net-ftp-0.3.8.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "net-http",
+          "Identifier": {
+            "PURL": "pkg:gem/net-http@0.6.0",
+            "UID": "173c1a9cff9c2eb5"
+          },
+          "Version": "0.6.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/net-http-0.6.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "net-imap",
+          "Identifier": {
+            "PURL": "pkg:gem/net-imap@0.5.4",
+            "UID": "b361c823a95fb04f"
+          },
+          "Version": "0.5.4",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/net-imap-0.5.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "net-imap",
+          "Identifier": {
+            "PURL": "pkg:gem/net-imap@0.6.2",
+            "UID": "e687f9c0e46da5ef"
+          },
+          "Version": "0.6.2",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/net-imap-0.6.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "net-pop",
+          "Identifier": {
+            "PURL": "pkg:gem/net-pop@0.1.2",
+            "UID": "83db197d100894a7"
+          },
+          "Version": "0.1.2",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/net-pop-0.1.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "net-pop",
+          "Identifier": {
+            "PURL": "pkg:gem/net-pop@0.1.2",
+            "UID": "cd905157ad7d37a8"
+          },
+          "Version": "0.1.2",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/net-pop-0.1.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "net-protocol",
+          "Identifier": {
+            "PURL": "pkg:gem/net-protocol@0.2.2",
+            "UID": "77f8b6466ae792d4"
+          },
+          "Version": "0.2.2",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/net-protocol-0.2.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "net-protocol",
+          "Identifier": {
+            "PURL": "pkg:gem/net-protocol@0.2.2",
+            "UID": "c82410a2331bdc32"
+          },
+          "Version": "0.2.2",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/net-protocol-0.2.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "net-smtp",
+          "Identifier": {
+            "PURL": "pkg:gem/net-smtp@0.5.0",
+            "UID": "e37e59443a9229f3"
+          },
+          "Version": "0.5.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/net-smtp-0.5.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "net-smtp",
+          "Identifier": {
+            "PURL": "pkg:gem/net-smtp@0.5.1",
+            "UID": "601457a799c27ae5"
+          },
+          "Version": "0.5.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/net-smtp-0.5.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "nio4r",
+          "Identifier": {
+            "PURL": "pkg:gem/nio4r@2.7.5",
+            "UID": "ee122d63dfed11e"
+          },
+          "Version": "2.7.5",
+          "Licenses": [
+            "MIT",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/nio4r-2.7.5.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "nkf",
+          "Identifier": {
+            "PURL": "pkg:gem/nkf@0.2.0",
+            "UID": "e0f7ab3aeb12aa78"
+          },
+          "Version": "0.2.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/nkf-0.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "nokogiri",
+          "Identifier": {
+            "PURL": "pkg:gem/nokogiri@1.19.0",
+            "UID": "c7db2fb8f1bcdb98"
+          },
+          "Version": "1.19.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/nokogiri-1.19.0-x86_64-linux-gnu.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "observer",
+          "Identifier": {
+            "PURL": "pkg:gem/observer@0.1.2",
+            "UID": "8f7ba8120c837489"
+          },
+          "Version": "0.1.2",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/observer-0.1.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "open-uri",
+          "Identifier": {
+            "PURL": "pkg:gem/open-uri@0.5.0",
+            "UID": "349ec27d1f2b5512"
+          },
+          "Version": "0.5.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/open-uri-0.5.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "open3",
+          "Identifier": {
+            "PURL": "pkg:gem/open3@0.2.1",
+            "UID": "5dfac12ceeba42ee"
+          },
+          "Version": "0.2.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/open3-0.2.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "openssl",
+          "Identifier": {
+            "PURL": "pkg:gem/openssl@3.3.0",
+            "UID": "369afa54138b1542"
+          },
+          "Version": "3.3.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/openssl-3.3.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "optparse",
+          "Identifier": {
+            "PURL": "pkg:gem/optparse@0.6.0",
+            "UID": "2861e3ed908ea8ed"
+          },
+          "Version": "0.6.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/optparse-0.6.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "ostruct",
+          "Identifier": {
+            "PURL": "pkg:gem/ostruct@0.6.1",
+            "UID": "39b70d67bb599f6b"
+          },
+          "Version": "0.6.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/ostruct-0.6.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "pathname",
+          "Identifier": {
+            "PURL": "pkg:gem/pathname@0.4.0",
+            "UID": "33149f5f77330126"
+          },
+          "Version": "0.4.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/pathname-0.4.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "power_assert",
+          "Identifier": {
+            "PURL": "pkg:gem/power_assert@2.0.5",
+            "UID": "c18e1239285ccb23"
+          },
+          "Version": "2.0.5",
+          "Licenses": [
+            "BSD-2-Clause",
+            "Ruby"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/power_assert-2.0.5.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "pp",
+          "Identifier": {
+            "PURL": "pkg:gem/pp@0.6.2",
+            "UID": "1569ccb349a6112b"
+          },
+          "Version": "0.6.2",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/pp-0.6.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "pp",
+          "Identifier": {
+            "PURL": "pkg:gem/pp@0.6.3",
+            "UID": "c882cb72e1a0694f"
+          },
+          "Version": "0.6.3",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/pp-0.6.3.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "prettyprint",
+          "Identifier": {
+            "PURL": "pkg:gem/prettyprint@0.2.0",
+            "UID": "ea7206d3d446333b"
+          },
+          "Version": "0.2.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/prettyprint-0.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "prettyprint",
+          "Identifier": {
+            "PURL": "pkg:gem/prettyprint@0.2.0",
+            "UID": "6a812a0372aa45e9"
+          },
+          "Version": "0.2.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/prettyprint-0.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "prime",
+          "Identifier": {
+            "PURL": "pkg:gem/prime@0.1.3",
+            "UID": "e575aed81d68679c"
+          },
+          "Version": "0.1.3",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/prime-0.1.3.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "prism",
+          "Identifier": {
+            "PURL": "pkg:gem/prism@1.2.0",
+            "UID": "8a9f4f9a5493fa08"
+          },
+          "Version": "1.2.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/prism-1.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "prism",
+          "Identifier": {
+            "PURL": "pkg:gem/prism@1.8.0",
+            "UID": "51b4ee10fa8cfb30"
+          },
+          "Version": "1.8.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/prism-1.8.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "pry",
+          "Identifier": {
+            "PURL": "pkg:gem/pry@0.16.0",
+            "UID": "729e1883720432d5"
+          },
+          "Version": "0.16.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/pry-0.16.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "pry-rails",
+          "Identifier": {
+            "PURL": "pkg:gem/pry-rails@0.3.11",
+            "UID": "d337ebaaf6af5378"
+          },
+          "Version": "0.3.11",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/pry-rails-0.3.11.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "pstore",
+          "Identifier": {
+            "PURL": "pkg:gem/pstore@0.1.4",
+            "UID": "a450ba1d4c1a73e0"
+          },
+          "Version": "0.1.4",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/pstore-0.1.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "psych",
+          "Identifier": {
+            "PURL": "pkg:gem/psych@5.2.2",
+            "UID": "158c6522e1b22aa6"
+          },
+          "Version": "5.2.2",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/psych-5.2.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "psych",
+          "Identifier": {
+            "PURL": "pkg:gem/psych@5.3.1",
+            "UID": "504015924150460f"
+          },
+          "Version": "5.3.1",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/psych-5.3.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "puma",
+          "Identifier": {
+            "PURL": "pkg:gem/puma@6.6.1",
+            "UID": "fba15c688119f889"
+          },
+          "Version": "6.6.1",
+          "Licenses": [
+            "BSD-3-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/puma-6.6.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "racc",
+          "Identifier": {
+            "PURL": "pkg:gem/racc@1.8.1",
+            "UID": "8e799f8dcd07d486"
+          },
+          "Version": "1.8.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/racc-1.8.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "racc",
+          "Identifier": {
+            "PURL": "pkg:gem/racc@1.8.1",
+            "UID": "8976a82fceb92395"
+          },
+          "Version": "1.8.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/racc-1.8.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rack",
+          "Identifier": {
+            "PURL": "pkg:gem/rack@3.1.19",
+            "UID": "a97b4048d970d396"
+          },
+          "Version": "3.1.19",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/rack-3.1.19.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rack-session",
+          "Identifier": {
+            "PURL": "pkg:gem/rack-session@2.1.1",
+            "UID": "f1d233a97270a95"
+          },
+          "Version": "2.1.1",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/rack-session-2.1.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rack-test",
+          "Identifier": {
+            "PURL": "pkg:gem/rack-test@2.2.0",
+            "UID": "39471324fa361ab5"
+          },
+          "Version": "2.2.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/rack-test-2.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rackup",
+          "Identifier": {
+            "PURL": "pkg:gem/rackup@2.3.1",
+            "UID": "cf7d4a1db9c4c45"
+          },
+          "Version": "2.3.1",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/rackup-2.3.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rails",
+          "Identifier": {
+            "PURL": "pkg:gem/rails@8.0.4",
+            "UID": "2ac46bed09deee97"
+          },
+          "Version": "8.0.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/rails-8.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rails-dom-testing",
+          "Identifier": {
+            "PURL": "pkg:gem/rails-dom-testing@2.3.0",
+            "UID": "d626f5a8135dcad7"
+          },
+          "Version": "2.3.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/rails-dom-testing-2.3.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rails-html-sanitizer",
+          "Identifier": {
+            "PURL": "pkg:gem/rails-html-sanitizer@1.6.2",
+            "UID": "9eb84d4bac3cc08b"
+          },
+          "Version": "1.6.2",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/rails-html-sanitizer-1.6.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "railties",
+          "Identifier": {
+            "PURL": "pkg:gem/railties@8.0.4",
+            "UID": "c53b4758e461524f"
+          },
+          "Version": "8.0.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/railties-8.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rake",
+          "Identifier": {
+            "PURL": "pkg:gem/rake@13.2.1",
+            "UID": "2793197ab6bfb89b"
+          },
+          "Version": "13.2.1",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/rake-13.2.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rake",
+          "Identifier": {
+            "PURL": "pkg:gem/rake@13.3.1",
+            "UID": "677a06032384da25"
+          },
+          "Version": "13.3.1",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/rake-13.3.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rbs",
+          "Identifier": {
+            "PURL": "pkg:gem/rbs@3.8.0",
+            "UID": "a3065c3bb9d70e9a"
+          },
+          "Version": "3.8.0",
+          "Licenses": [
+            "BSD-2-Clause",
+            "Ruby"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/rbs-3.8.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rdoc",
+          "Identifier": {
+            "PURL": "pkg:gem/rdoc@6.10.0",
+            "UID": "8e36820e625565c3"
+          },
+          "Version": "6.10.0",
+          "Licenses": [
+            "Ruby"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/rdoc-6.10.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rdoc",
+          "Identifier": {
+            "PURL": "pkg:gem/rdoc@7.1.0",
+            "UID": "b0e00827cd46da57"
+          },
+          "Version": "7.1.0",
+          "Licenses": [
+            "Ruby"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/rdoc-7.1.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "readline",
+          "Identifier": {
+            "PURL": "pkg:gem/readline@0.0.4",
+            "UID": "34cbfb3144b193d3"
+          },
+          "Version": "0.0.4",
+          "Licenses": [
+            "Ruby"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/readline-0.0.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "reline",
+          "Identifier": {
+            "PURL": "pkg:gem/reline@0.6.0",
+            "UID": "ba072457e3e13ce4"
+          },
+          "Version": "0.6.0",
+          "Licenses": [
+            "Ruby"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/reline-0.6.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "reline",
+          "Identifier": {
+            "PURL": "pkg:gem/reline@0.6.3",
+            "UID": "79e38a243004d2ff"
+          },
+          "Version": "0.6.3",
+          "Licenses": [
+            "Ruby"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/reline-0.6.3.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "repl_type_completor",
+          "Identifier": {
+            "PURL": "pkg:gem/repl_type_completor@0.1.9",
+            "UID": "b480a6dce6d21c23"
+          },
+          "Version": "0.1.9",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/repl_type_completor-0.1.9.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "resolv",
+          "Identifier": {
+            "PURL": "pkg:gem/resolv@0.6.0",
+            "UID": "d799dfae5ccdb476"
+          },
+          "Version": "0.6.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/resolv-0.6.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "resolv-replace",
+          "Identifier": {
+            "PURL": "pkg:gem/resolv-replace@0.1.1",
+            "UID": "60f6e416513038f4"
+          },
+          "Version": "0.1.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/resolv-replace-0.1.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "responders",
+          "Identifier": {
+            "PURL": "pkg:gem/responders@3.2.0",
+            "UID": "b860fc4f8c37e3ed"
+          },
+          "Version": "3.2.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/responders-3.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rexml",
+          "Identifier": {
+            "PURL": "pkg:gem/rexml@3.4.0",
+            "UID": "fcc4046f4ac630a3"
+          },
+          "Version": "3.4.0",
+          "Licenses": [
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/rexml-3.4.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rinda",
+          "Identifier": {
+            "PURL": "pkg:gem/rinda@0.2.0",
+            "UID": "11f4a14e29c01de5"
+          },
+          "Version": "0.2.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/rinda-0.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rspec-expectations",
+          "Identifier": {
+            "PURL": "pkg:gem/rspec-expectations@3.13.5",
+            "UID": "32d4f3a895cde7b5"
+          },
+          "Version": "3.13.5",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/rspec-expectations-3.13.5.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rspec-support",
+          "Identifier": {
+            "PURL": "pkg:gem/rspec-support@3.13.6",
+            "UID": "6b13b5bd5ab330ea"
+          },
+          "Version": "3.13.6",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/rspec-support-3.13.6.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "rss",
+          "Identifier": {
+            "PURL": "pkg:gem/rss@0.3.1",
+            "UID": "a9a05be32ca66a75"
+          },
+          "Version": "0.3.1",
+          "Licenses": [
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/rss-0.3.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "ruby-prof",
+          "Identifier": {
+            "PURL": "pkg:gem/ruby-prof@1.7.2",
+            "UID": "9b16af296745e831"
+          },
+          "Version": "1.7.2",
+          "Licenses": [
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/ruby-prof-1.7.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "ruby2_keywords",
+          "Identifier": {
+            "PURL": "pkg:gem/ruby2_keywords@0.0.5",
+            "UID": "329d68035a3c073d"
+          },
+          "Version": "0.0.5",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/ruby2_keywords-0.0.5.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "sassc",
+          "Identifier": {
+            "PURL": "pkg:gem/sassc@2.4.0",
+            "UID": "fb67e5cf6793c27f"
+          },
+          "Version": "2.4.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/sassc-2.4.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "sassc-rails",
+          "Identifier": {
+            "PURL": "pkg:gem/sassc-rails@2.1.2",
+            "UID": "fc8c375640c3f382"
+          },
+          "Version": "2.1.2",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/sassc-rails-2.1.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "securerandom",
+          "Identifier": {
+            "PURL": "pkg:gem/securerandom@0.4.1",
+            "UID": "88bfb0c6c176c749"
+          },
+          "Version": "0.4.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/securerandom-0.4.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "securerandom",
+          "Identifier": {
+            "PURL": "pkg:gem/securerandom@0.4.1",
+            "UID": "71a8281bcf056930"
+          },
+          "Version": "0.4.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/securerandom-0.4.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "set",
+          "Identifier": {
+            "PURL": "pkg:gem/set@1.1.1",
+            "UID": "881c11093ac4d2fa"
+          },
+          "Version": "1.1.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/set-1.1.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "shellwords",
+          "Identifier": {
+            "PURL": "pkg:gem/shellwords@0.2.2",
+            "UID": "d3d919cf8b17fb25"
+          },
+          "Version": "0.2.2",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/shellwords-0.2.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "singleton",
+          "Identifier": {
+            "PURL": "pkg:gem/singleton@0.3.0",
+            "UID": "3ab29f12f722991c"
+          },
+          "Version": "0.3.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/singleton-0.3.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "sprockets",
+          "Identifier": {
+            "PURL": "pkg:gem/sprockets@4.2.2",
+            "UID": "b146aa2096cdb37"
+          },
+          "Version": "4.2.2",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/sprockets-4.2.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "sprockets-rails",
+          "Identifier": {
+            "PURL": "pkg:gem/sprockets-rails@3.5.2",
+            "UID": "4a987b5586c8de9a"
+          },
+          "Version": "3.5.2",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/sprockets-rails-3.5.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "sqlite3",
+          "Identifier": {
+            "PURL": "pkg:gem/sqlite3@2.9.0",
+            "UID": "c57c356c98d4f558"
+          },
+          "Version": "2.9.0",
+          "Licenses": [
+            "BSD-3-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/sqlite3-2.9.0-x86_64-linux-gnu.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "stimulus-rails",
+          "Identifier": {
+            "PURL": "pkg:gem/stimulus-rails@1.3.4",
+            "UID": "d3d29f2248e5db07"
+          },
+          "Version": "1.3.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/stimulus-rails-1.3.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "stringio",
+          "Identifier": {
+            "PURL": "pkg:gem/stringio@3.1.2",
+            "UID": "1e5956e07213060f"
+          },
+          "Version": "3.1.2",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/stringio-3.1.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "stringio",
+          "Identifier": {
+            "PURL": "pkg:gem/stringio@3.2.0",
+            "UID": "72e95b13f24bab27"
+          },
+          "Version": "3.2.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/stringio-3.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "strscan",
+          "Identifier": {
+            "PURL": "pkg:gem/strscan@3.1.2",
+            "UID": "9691a17de4a3302d"
+          },
+          "Version": "3.1.2",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/strscan-3.1.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "syntax_suggest",
+          "Identifier": {
+            "PURL": "pkg:gem/syntax_suggest@2.0.2",
+            "UID": "125d780f2282633c"
+          },
+          "Version": "2.0.2",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/syntax_suggest-2.0.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "sys-uname",
+          "Identifier": {
+            "PURL": "pkg:gem/sys-uname@1.4.1",
+            "UID": "34a98ddedc75acfb"
+          },
+          "Version": "1.4.1",
+          "Licenses": [
+            "Apache-2.0"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/sys-uname-1.4.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "syslog",
+          "Identifier": {
+            "PURL": "pkg:gem/syslog@0.2.0",
+            "UID": "95b8c53e6facc0d5"
+          },
+          "Version": "0.2.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/syslog-0.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "tempfile",
+          "Identifier": {
+            "PURL": "pkg:gem/tempfile@0.3.1",
+            "UID": "7a00827dcae074d9"
+          },
+          "Version": "0.3.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/tempfile-0.3.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "test-unit",
+          "Identifier": {
+            "PURL": "pkg:gem/test-unit@3.6.7",
+            "UID": "973a171fa674b4f1"
+          },
+          "Version": "3.6.7",
+          "Licenses": [
+            "Ruby",
+            "BSDL",
+            "PSFL"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/test-unit-3.6.7.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "thor",
+          "Identifier": {
+            "PURL": "pkg:gem/thor@1.5.0",
+            "UID": "fde9256dbcd76bc9"
+          },
+          "Version": "1.5.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/thor-1.5.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "tilt",
+          "Identifier": {
+            "PURL": "pkg:gem/tilt@2.7.0",
+            "UID": "22d07d84a6eae08e"
+          },
+          "Version": "2.7.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/tilt-2.7.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "time",
+          "Identifier": {
+            "PURL": "pkg:gem/time@0.4.1",
+            "UID": "d5a83d19ab47378a"
+          },
+          "Version": "0.4.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/time-0.4.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "timeout",
+          "Identifier": {
+            "PURL": "pkg:gem/timeout@0.4.3",
+            "UID": "fadd3e2ba43674da"
+          },
+          "Version": "0.4.3",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/timeout-0.4.3.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "timeout",
+          "Identifier": {
+            "PURL": "pkg:gem/timeout@0.6.0",
+            "UID": "81f9ce4f8d8e20ad"
+          },
+          "Version": "0.6.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/timeout-0.6.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "tmpdir",
+          "Identifier": {
+            "PURL": "pkg:gem/tmpdir@0.3.1",
+            "UID": "ec2840444f220d44"
+          },
+          "Version": "0.3.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/tmpdir-0.3.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "tsort",
+          "Identifier": {
+            "PURL": "pkg:gem/tsort@0.2.0",
+            "UID": "33659bb71792396c"
+          },
+          "Version": "0.2.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/tsort-0.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "tsort",
+          "Identifier": {
+            "PURL": "pkg:gem/tsort@0.2.0",
+            "UID": "82eaa83c2383352e"
+          },
+          "Version": "0.2.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/tsort-0.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "turbo-rails",
+          "Identifier": {
+            "PURL": "pkg:gem/turbo-rails@2.0.21",
+            "UID": "2b8168987944d58d"
+          },
+          "Version": "2.0.21",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/turbo-rails-2.0.21.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "turbolinks",
+          "Identifier": {
+            "PURL": "pkg:gem/turbolinks@5.2.1",
+            "UID": "bf5b5c1424213a0b"
+          },
+          "Version": "5.2.1",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/turbolinks-5.2.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "turbolinks-source",
+          "Identifier": {
+            "PURL": "pkg:gem/turbolinks-source@5.2.0",
+            "UID": "ef8f1b1e7e02738c"
+          },
+          "Version": "5.2.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/turbolinks-source-5.2.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "typeprof",
+          "Identifier": {
+            "PURL": "pkg:gem/typeprof@0.30.1",
+            "UID": "b01501158ed4574"
+          },
+          "Version": "0.30.1",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/typeprof-0.30.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "tzinfo",
+          "Identifier": {
+            "PURL": "pkg:gem/tzinfo@2.0.6",
+            "UID": "47e0e472ba020414"
+          },
+          "Version": "2.0.6",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/tzinfo-2.0.6.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "un",
+          "Identifier": {
+            "PURL": "pkg:gem/un@0.3.0",
+            "UID": "d75d10ffbd83f709"
+          },
+          "Version": "0.3.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/un-0.3.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "uri",
+          "Identifier": {
+            "PURL": "pkg:gem/uri@1.0.2",
+            "UID": "c77064f678be08e4"
+          },
+          "Version": "1.0.2",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/uri-1.0.2.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "uri",
+          "Identifier": {
+            "PURL": "pkg:gem/uri@1.1.1",
+            "UID": "818add3c24201ff0"
+          },
+          "Version": "1.1.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/uri-1.1.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "useragent",
+          "Identifier": {
+            "PURL": "pkg:gem/useragent@0.16.11",
+            "UID": "f2bb7cad37a2fd7e"
+          },
+          "Version": "0.16.11",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/useragent-0.16.11.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "weakref",
+          "Identifier": {
+            "PURL": "pkg:gem/weakref@0.1.3",
+            "UID": "af4e15c4c485f598"
+          },
+          "Version": "0.1.3",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/weakref-0.1.3.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "websocket-driver",
+          "Identifier": {
+            "PURL": "pkg:gem/websocket-driver@0.8.0",
+            "UID": "7b6737825bf4857e"
+          },
+          "Version": "0.8.0",
+          "Licenses": [
+            "Apache-2.0"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/websocket-driver-0.8.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "websocket-extensions",
+          "Identifier": {
+            "PURL": "pkg:gem/websocket-extensions@0.1.5",
+            "UID": "e3d0296dc4be03c8"
+          },
+          "Version": "0.1.5",
+          "Licenses": [
+            "Apache-2.0"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/websocket-extensions-0.1.5.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "yaml",
+          "Identifier": {
+            "PURL": "pkg:gem/yaml@0.4.0",
+            "UID": "bbd65c1eb6991bdf"
+          },
+          "Version": "0.4.0",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/yaml-0.4.0.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "zeitwerk",
+          "Identifier": {
+            "PURL": "pkg:gem/zeitwerk@2.7.4",
+            "UID": "e1a62cbd98e2a6f0"
+          },
+          "Version": "2.7.4",
+          "Licenses": [
+            "MIT"
+          ],
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "FilePath": "usr/local/bundle/ruby/3.4.0/specifications/zeitwerk-2.7.4.gemspec",
+          "AnalyzedBy": "gemspec"
+        },
+        {
+          "Name": "zlib",
+          "Identifier": {
+            "PURL": "pkg:gem/zlib@3.2.1",
+            "UID": "380419e8d0602a85"
+          },
+          "Version": "3.2.1",
+          "Licenses": [
+            "Ruby",
+            "BSD-2-Clause"
+          ],
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "FilePath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/zlib-3.2.1.gemspec",
+          "AnalyzedBy": "gemspec"
+        }
+      ],
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2026-33195",
+          "VendorIDs": [
+            "GHSA-9xrj-h377-fr87"
+          ],
+          "PkgName": "activestorage",
+          "PkgPath": "usr/local/bundle/ruby/3.4.0/specifications/activestorage-8.0.4.gemspec",
+          "PkgIdentifier": {
+            "PURL": "pkg:gem/activestorage@8.0.4",
+            "UID": "80f9bcf8ea3192e9"
+          },
+          "InstalledVersion": "8.0.4",
+          "FixedVersion": "8.1.2.1, 8.0.4.1, 7.2.3.1",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-33195",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory RubyGems",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Arubygems"
+          },
+          "Fingerprint": "sha256:e0bb2fa94c57d34a747892fdc5c179e9980361380efc9b8a8df88df22a8d215e",
+          "Title": "Rails: Active Storage: Active Storage (Rails): Arbitrary file access via path traversal in blob keys",
+          "Description": "Active Storage allows users to attach cloud and local files in Rails applications. Prior to versions 8.1.2.1, 8.0.4.1, and 7.2.3.1, Active Storage's `DiskService#path_for` does not validate that the resolved filesystem path remains within the storage root directory. If a blob key containing path traversal sequences (e.g. `../`) is used, it could allow reading, writing, or deleting arbitrary files on the server. Blob keys are expected to be trusted strings, but some applications could be passing user input as keys and would be affected. Versions 8.1.2.1, 8.0.4.1, and 7.2.3.1 contain a patch.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-22"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "nvd": 4,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N/E:U",
+              "V40Score": 8
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:R/S:C/C:H/I:H/A:N",
+              "V3Score": 8.1
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-33195",
+            "https://github.com/rails/rails",
+            "https://github.com/rails/rails/commit/4933c1e3b8c1bb04925d60347be9f69270392f2c",
+            "https://github.com/rails/rails/commit/9b06fbc0f504b8afe333f33d19548f3b85fbe655",
+            "https://github.com/rails/rails/commit/a290c8a1ec189d793aa6d7f2570b6a763f675348",
+            "https://github.com/rails/rails/releases/tag/v7.2.3.1",
+            "https://github.com/rails/rails/releases/tag/v8.0.4.1",
+            "https://github.com/rails/rails/releases/tag/v8.1.2.1",
+            "https://github.com/rails/rails/security/advisories/GHSA-9xrj-h377-fr87",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-33195",
+            "https://www.cve.org/CVERecord?id=CVE-2026-33195"
+          ],
+          "PublishedDate": "2026-03-24T00:16:28.987Z",
+          "LastModifiedDate": "2026-03-24T17:55:45.48Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-33658",
+          "PkgName": "activestorage",
+          "PkgPath": "usr/local/bundle/ruby/3.4.0/specifications/activestorage-8.0.4.gemspec",
+          "PkgIdentifier": {
+            "PURL": "pkg:gem/activestorage@8.0.4",
+            "UID": "80f9bcf8ea3192e9"
+          },
+          "InstalledVersion": "8.0.4",
+          "FixedVersion": "~\u003e 7.2.3, \u003e= 7.2.3.1, ~\u003e 8.0.4, \u003e= 8.0.4.1, \u003e= 8.1.2.1",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-33658",
+          "DataSource": {
+            "ID": "ruby-advisory-db",
+            "Name": "Ruby Advisory Database",
+            "URL": "https://github.com/rubysec/ruby-advisory-db"
+          },
+          "Fingerprint": "sha256:a7f44164e2d769c6d5a43f36dfaacd461845fe1fecb5fe32e08d5584bc157935",
+          "Title": "rails: activestorage: Active Storage: Denial of Service via HTTP Range header processing",
+          "Description": "Active Storage allows users to attach cloud and local files in Rails applications. Prior to versions 8.1.2.1, 8.0.4.1, and 7.2.3.1\nActive Storage's proxy controller does not limit the number of byte ranges in an HTTP Range header. A request with thousands of small ranges causes disproportionate CPU usage compared to a normal request for the same file, possibly resulting in a DoS vulnerability. Versions 8.1.2.1, 8.0.4.1, and 7.2.3.1 contain a patch.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-770"
+          ],
+          "VendorSeverity": {
+            "ghsa": 1,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:U",
+              "V40Score": 2.3
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-33658",
+            "https://discuss.rubyonrails.org/t/cve-2026-33658-possible-dos-vulnerability-in-active-storage-proxy-mode-via-multi-range-requests/90906",
+            "https://github.com/advisories/GHSA-p9fm-f462-ggrg",
+            "https://github.com/rails/rails",
+            "https://github.com/rails/rails/commit/85ec5b1e00d3197d8c69a5e622e1b398a1b10b06.patch",
+            "https://github.com/rails/rails/commit/b8a1665824a43d71cd6406cf9adcae842ceb1c22.patch",
+            "https://github.com/rails/rails/commit/d7da4ef03f99035fba5add8828646f1e9173549c.patch",
+            "https://github.com/rails/rails/releases/tag/v7.2.3.1",
+            "https://github.com/rails/rails/releases/tag/v8.0.4.1",
+            "https://github.com/rails/rails/releases/tag/v8.1.2.1",
+            "https://github.com/rails/rails/security/advisories/GHSA-p9fm-f462-ggrg",
+            "https://github.com/rubysec/ruby-advisory-db/blob/master/gems/activestorage/CVE-2026-33658.yml",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-33658",
+            "https://rubyonrails.org/2026/3/23/Rails-Versions-7-2-3-1-8-0-4-1-and-8-1-2-1-have-been-released",
+            "https://www.cve.org/CVERecord?id=CVE-2026-33658"
+          ],
+          "PublishedDate": "2026-03-26T22:16:29.387Z",
+          "LastModifiedDate": "2026-03-30T13:26:50.827Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-33306",
+          "PkgName": "bcrypt",
+          "PkgPath": "usr/local/bundle/ruby/3.4.0/specifications/bcrypt-3.1.21.gemspec",
+          "PkgIdentifier": {
+            "PURL": "pkg:gem/bcrypt@3.1.21",
+            "UID": "e49c27488e44a2a4"
+          },
+          "InstalledVersion": "3.1.21",
+          "FixedVersion": "\u003e= 3.1.22",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-33306",
+          "DataSource": {
+            "ID": "ruby-advisory-db",
+            "Name": "Ruby Advisory Database",
+            "URL": "https://github.com/rubysec/ruby-advisory-db"
+          },
+          "Fingerprint": "sha256:005db117973aa4caecf780001d1902f046bc69321f5fd43e77ca6f5217de506e",
+          "Title": "github.com/bcrypt-ruby/bcrypt-ruby: bcrypt-ruby (JRuby): Weakened password hashing due to integer overflow",
+          "Description": "bcrypt-ruby is a Ruby binding for the OpenBSD bcrypt() password hashing algorithm. Prior to version 3.1.22, an integer overflow in the Java BCrypt implementation for JRuby can cause zero iterations in the strengthening loop.  Impacted applications must be setting the cost to 31 to see this happen. The JRuby implementation of bcrypt-ruby (`BCrypt.java`) computes the key-strengthening round count as a signed 32-bit integer. When `cost=31` (the maximum allowed by the gem), signed integer overflow causes the round count to become negative, and the strengthening loop executes **zero iterations**. This collapses bcrypt from 2^31 rounds of exponential key-strengthening to effectively constant-time computation — only the initial EksBlowfish key setup and final 64x encryption phase remain. The resulting hash looks valid (`$2a$31$...`) and verifies correctly via `checkpw`, making the weakness invisible to the application. This issue is triggered only when cost=31 is used or when verifying a `$2a$31$` hash. This problem has been fixed in version 3.1.22. As a workaround, set the cost to something less than 31.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-190"
+          ],
+          "VendorSeverity": {
+            "ghsa": 2,
+            "nvd": 3,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V40Vector": "CVSS:4.0/AV:L/AC:H/AT:P/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N/E:U",
+              "V40Score": 4.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+              "V3Score": 6.7
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-33306",
+            "https://github.com/advisories/GHSA-f27w-vcwj-c954",
+            "https://github.com/bcrypt-ruby/bcrypt-ruby",
+            "https://github.com/bcrypt-ruby/bcrypt-ruby/commit/5faa2748331d3edc661c127ef2fbb3afcb6b02a4",
+            "https://github.com/bcrypt-ruby/bcrypt-ruby/commit/831ce64cb0a9502130fa93a28bfd9527a5fa45c4",
+            "https://github.com/bcrypt-ruby/bcrypt-ruby/releases/tag/v3.1.22",
+            "https://github.com/bcrypt-ruby/bcrypt-ruby/security/advisories/GHSA-f27w-vcwj-c954",
+            "https://github.com/rubysec/ruby-advisory-db/blob/master/gems/bcrypt/CVE-2026-33306.yml",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-33306",
+            "https://www.cve.org/CVERecord?id=CVE-2026-33306"
+          ],
+          "PublishedDate": "2026-03-24T01:17:02.037Z",
+          "LastModifiedDate": "2026-03-30T14:07:23.3Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-22860",
+          "PkgName": "rack",
+          "PkgPath": "usr/local/bundle/ruby/3.4.0/specifications/rack-3.1.19.gemspec",
+          "PkgIdentifier": {
+            "PURL": "pkg:gem/rack@3.1.19",
+            "UID": "a97b4048d970d396"
+          },
+          "InstalledVersion": "3.1.19",
+          "FixedVersion": "~\u003e 2.2.22, ~\u003e 3.1.20, \u003e= 3.2.5",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "SeveritySource": "ruby-advisory-db",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-22860",
+          "DataSource": {
+            "ID": "ruby-advisory-db",
+            "Name": "Ruby Advisory Database",
+            "URL": "https://github.com/rubysec/ruby-advisory-db"
+          },
+          "Fingerprint": "sha256:ceb32afb7d646be8f2de29f112aa4068724f0afed32ead5161e3de740d3e72ec",
+          "Title": "rubygem-rack: Rack Directory Traversal via Rack:Directory",
+          "Description": "Rack is a modular Ruby web server interface. Prior to versions 2.2.22, 3.1.20, and 3.2.5, `Rack::Directory`’s path check used a string prefix match on the expanded path. A request like `/../root_example/` can escape the configured root if the target path starts with the root string, allowing directory listing outside the intended root. Versions 2.2.22, 3.1.20, and 3.2.5 fix the issue.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-22",
+            "CWE-548"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "redhat": 3,
+            "ruby-advisory-db": 3,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-22860",
+            "https://github.com/advisories/GHSA-mxw3-3hh2-x2mh",
+            "https://github.com/rack/rack",
+            "https://github.com/rack/rack/commit/75c5745c286637a8f049a33790c71237762069e7",
+            "https://github.com/rack/rack/security/advisories/GHSA-mxw3-3hh2-x2mh",
+            "https://github.com/rubysec/ruby-advisory-db/blob/master/gems/rack/CVE-2026-22860.yml",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-22860",
+            "https://ubuntu.com/security/notices/USN-8066-1",
+            "https://www.cve.org/CVERecord?id=CVE-2026-22860"
+          ],
+          "PublishedDate": "2026-02-18T19:21:43.933Z",
+          "LastModifiedDate": "2026-02-19T18:27:09.117Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-34785",
+          "VendorIDs": [
+            "GHSA-h2jq-g4cq-5ppq"
+          ],
+          "PkgName": "rack",
+          "PkgPath": "usr/local/bundle/ruby/3.4.0/specifications/rack-3.1.19.gemspec",
+          "PkgIdentifier": {
+            "PURL": "pkg:gem/rack@3.1.19",
+            "UID": "a97b4048d970d396"
+          },
+          "InstalledVersion": "3.1.19",
+          "FixedVersion": "2.2.23, 3.1.21, 3.2.6",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-34785",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory RubyGems",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Arubygems"
+          },
+          "Fingerprint": "sha256:b77b0e22cd26755f851c7f7975892a1f594c2504dcb835bdb9dda1d14070379c",
+          "Title": "github.com/rack/rack: Rack: Information disclosure via incorrect static file serving prefix check",
+          "Description": "Rack is a modular Ruby web server interface. Prior to versions 2.2.23, 3.1.21, and 3.2.6, Rack::Static determines whether a request should be served as a static file using a simple string prefix check. When configured with URL prefixes such as \"/css\", it matches any request path that begins with that string, including unrelated paths such as \"/css-config.env\" or \"/css-backup.sql\". As a result, files under the static root whose names merely share the configured prefix may be served unintentionally, leading to information disclosure. This issue has been patched in versions 2.2.23, 3.1.21, and 3.2.6.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-187",
+            "CWE-200"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "redhat": 3,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-34785",
+            "https://github.com/rack/rack",
+            "https://github.com/rack/rack/security/advisories/GHSA-h2jq-g4cq-5ppq",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-34785",
+            "https://ubuntu.com/security/notices/USN-8182-1",
+            "https://www.cve.org/CVERecord?id=CVE-2026-34785"
+          ],
+          "PublishedDate": "2026-04-02T17:16:24.873Z",
+          "LastModifiedDate": "2026-04-16T17:19:35.29Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-34827",
+          "VendorIDs": [
+            "GHSA-v6x5-cg8r-vv6x"
+          ],
+          "PkgName": "rack",
+          "PkgPath": "usr/local/bundle/ruby/3.4.0/specifications/rack-3.1.19.gemspec",
+          "PkgIdentifier": {
+            "PURL": "pkg:gem/rack@3.1.19",
+            "UID": "a97b4048d970d396"
+          },
+          "InstalledVersion": "3.1.19",
+          "FixedVersion": "3.1.21, 3.2.6",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-34827",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory RubyGems",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Arubygems"
+          },
+          "Fingerprint": "sha256:2ee93f335002f446c69b31215b6a06aac68e17a89717297ecae5205c98fc3017",
+          "Title": "rack: Rack: Denial of Service via crafted multipart/form-data requests",
+          "Description": "Rack is a modular Ruby web server interface. From versions 3.0.0.beta1 to before 3.1.21, and 3.2.0 to before 3.2.6, Rack::Multipart::Parser#handle_mime_head parses quoted multipart parameters such as Content-Disposition: form-data; name=\"...\" using repeated String#index searches combined with String#slice! prefix deletion. For escape-heavy quoted values, this causes super-linear processing. An unauthenticated attacker can send a crafted multipart/form-data request containing many parts with long backslash-escaped parameter values to trigger excessive CPU usage during multipart parsing. This results in a denial of service condition in Rack applications that accept multipart form data. This issue has been patched in versions 3.1.21 and 3.2.6.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-400",
+            "CWE-407",
+            "CWE-770"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "redhat": 3,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-34827",
+            "https://github.com/rack/rack",
+            "https://github.com/rack/rack/security/advisories/GHSA-v6x5-cg8r-vv6x",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-34827",
+            "https://ubuntu.com/security/notices/USN-8182-1",
+            "https://www.cve.org/CVERecord?id=CVE-2026-34827"
+          ],
+          "PublishedDate": "2026-04-02T18:16:33.49Z",
+          "LastModifiedDate": "2026-04-03T16:10:23.73Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-34829",
+          "VendorIDs": [
+            "GHSA-8vqr-qjwx-82mw"
+          ],
+          "PkgName": "rack",
+          "PkgPath": "usr/local/bundle/ruby/3.4.0/specifications/rack-3.1.19.gemspec",
+          "PkgIdentifier": {
+            "PURL": "pkg:gem/rack@3.1.19",
+            "UID": "a97b4048d970d396"
+          },
+          "InstalledVersion": "3.1.19",
+          "FixedVersion": "2.2.23, 3.1.21, 3.2.6",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-34829",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory RubyGems",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Arubygems"
+          },
+          "Fingerprint": "sha256:567c17a307a2e6227c93f80cb2e641c46df714aa2f16854e81c7bddf0ffe9c10",
+          "Title": "rack: Rack: Denial of Service via unbounded multipart file upload",
+          "Description": "Rack is a modular Ruby web server interface. Prior to versions 2.2.23, 3.1.21, and 3.2.6, Rack::Multipart::Parser only wraps the request body in a BoundedIO when CONTENT_LENGTH is present. When a multipart/form-data request is sent without a Content-Length header, such as with HTTP chunked transfer encoding, multipart parsing continues until end-of-stream with no total size limit. For file parts, the uploaded body is written directly to a temporary file on disk rather than being constrained by the buffered in-memory upload limit. An unauthenticated attacker can therefore stream an arbitrarily large multipart file upload and consume unbounded disk space. This results in a denial of service condition for Rack applications that accept multipart form data. This issue has been patched in versions 2.2.23, 3.1.21, and 3.2.6.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-400",
+            "CWE-770"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "redhat": 3,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-34829",
+            "https://github.com/rack/rack",
+            "https://github.com/rack/rack/security/advisories/GHSA-8vqr-qjwx-82mw",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-34829",
+            "https://ubuntu.com/security/notices/USN-8182-1",
+            "https://www.cve.org/CVERecord?id=CVE-2026-34829"
+          ],
+          "PublishedDate": "2026-04-02T17:16:26.103Z",
+          "LastModifiedDate": "2026-04-16T16:54:00.403Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-39324",
+          "VendorIDs": [
+            "GHSA-33qg-7wpp-89cq"
+          ],
+          "PkgName": "rack-session",
+          "PkgPath": "usr/local/bundle/ruby/3.4.0/specifications/rack-session-2.1.1.gemspec",
+          "PkgIdentifier": {
+            "PURL": "pkg:gem/rack-session@2.1.1",
+            "UID": "f1d233a97270a95"
+          },
+          "InstalledVersion": "2.1.1",
+          "FixedVersion": "2.1.2",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:3df5c53f1b5a9053e142fb1b775e4200ef6718f24c75ae276a1d82908f976a08",
+            "DiffID": "sha256:f74910c5900741fdaefae6a24fe661c8c87543cc13717f172ec5dc396fd1036e"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-39324",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory RubyGems",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Arubygems"
+          },
+          "Fingerprint": "sha256:a55c37a9adeada807f9363a9187188328a3d4b7d7e75a2b932ba5259aa67e240",
+          "Title": "Rack::Session is a session management implementation for Rack. From 2. ...",
+          "Description": "Rack::Session is a session management implementation for Rack. From 2.0.0 to before 2.1.2, Rack::Session::Cookie incorrectly handles decryption failures when configured with secrets:. If cookie decryption fails, the implementation falls back to a default decoder instead of rejecting the cookie. This allows an unauthenticated attacker to supply a crafted session cookie that is accepted as valid session data without knowledge of any configured secret. Because this mechanism is used to load session state, an attacker can manipulate session contents and potentially gain unauthorized access. This vulnerability is fixed in 2.1.2.",
+          "Severity": "CRITICAL",
+          "CweIDs": [
+            "CWE-287",
+            "CWE-345",
+            "CWE-502",
+            "CWE-565"
+          ],
+          "VendorSeverity": {
+            "ghsa": 4,
+            "nvd": 4,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N",
+              "V40Score": 9.1
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            }
+          },
+          "References": [
+            "https://github.com/rack/rack-session",
+            "https://github.com/rack/rack-session/security/advisories/GHSA-33qg-7wpp-89cq",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-39324",
+            "https://ubuntu.com/security/notices/USN-8190-1",
+            "https://www.cve.org/CVERecord?id=CVE-2026-39324"
+          ],
+          "PublishedDate": "2026-04-07T18:16:43.387Z",
+          "LastModifiedDate": "2026-04-15T20:17:18.877Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-24294",
+          "PkgName": "resolv",
+          "PkgPath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/resolv-0.6.0.gemspec",
+          "PkgIdentifier": {
+            "PURL": "pkg:gem/resolv@0.6.0",
+            "UID": "d799dfae5ccdb476"
+          },
+          "InstalledVersion": "0.6.0",
+          "FixedVersion": "~\u003e 0.2.2, ~\u003e 0.3.0, \u003e= 0.6.1",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "SeveritySource": "ruby-advisory-db",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-24294",
+          "DataSource": {
+            "ID": "ruby-advisory-db",
+            "Name": "Ruby Advisory Database",
+            "URL": "https://github.com/rubysec/ruby-advisory-db"
+          },
+          "Fingerprint": "sha256:d6517c467fe8bea75c43945c095e64398a4e25852327c8fd11a695ccf74e163b",
+          "Title": "resolv: Denial of Service in resolv gem",
+          "Description": "The attack vector is a potential Denial of Service (DoS). The vulnerability is caused by an insufficient check on the length of a decompressed domain name within a DNS packet.\r\n\r\nAn attacker can craft a malicious DNS packet containing a highly compressed domain name. When the resolv library parses such a packet, the name decompression process consumes a large amount of CPU resources, as the library does not limit the resulting length of the name.\r\n\r\nThis resource consumption can cause the application thread to become unresponsive, resulting in a Denial of Service condition.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-400"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 2,
+            "azure": 2,
+            "cbl-mariner": 2,
+            "ghsa": 2,
+            "oracle-oval": 2,
+            "redhat": 2,
+            "rocky": 2,
+            "ruby-advisory-db": 3,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:U",
+              "V3Score": 5.3,
+              "V40Score": 6.6
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+              "V3Score": 5.3
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2025:23063",
+            "https://access.redhat.com/security/cve/CVE-2025-24294",
+            "https://bugzilla.redhat.com/2379684",
+            "https://bugzilla.redhat.com/2396186",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2379684",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2396186",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2426336",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24294",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-58767",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-61594",
+            "https://errata.almalinux.org/9/ALSA-2025-23063.html",
+            "https://errata.rockylinux.org/RLSA-2025:23062",
+            "https://github.com/advisories/GHSA-xh69-987w-hrp8",
+            "https://github.com/ruby/resolv",
+            "https://github.com/ruby/resolv/commit/4c2f71b5e80826506f78417d85b38481c058fb25",
+            "https://github.com/rubysec/ruby-advisory-db/blob/master/gems/resolv/CVE-2025-24294.yml",
+            "https://linux.oracle.com/cve/CVE-2025-24294.html",
+            "https://linux.oracle.com/errata/ELSA-2025-23141.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-24294",
+            "https://rubygems.org/gems/resolv",
+            "https://ubuntu.com/security/notices/USN-7734-1",
+            "https://ubuntu.com/security/notices/USN-7735-1",
+            "https://www.cve.org/CVERecord?id=CVE-2025-24294",
+            "https://www.ruby-lang.org/en/news/2025/07/08/dos-resolv-cve-2025-24294",
+            "https://www.ruby-lang.org/en/news/2025/07/08/dos-resolv-cve-2025-24294/",
+            "https://www.vuxml.org/freebsd/eed1a411-699b-11f0-91fe-000c295725e4.html"
+          ],
+          "PublishedDate": "2025-07-12T04:15:46.683Z",
+          "LastModifiedDate": "2026-04-15T00:35:42.02Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-61594",
+          "PkgName": "uri",
+          "PkgPath": "usr/local/lib/ruby/gems/3.4.0/specifications/default/uri-1.0.2.gemspec",
+          "PkgIdentifier": {
+            "PURL": "pkg:gem/uri@1.0.2",
+            "UID": "c77064f678be08e4"
+          },
+          "InstalledVersion": "1.0.2",
+          "FixedVersion": "~\u003e 0.12.5, ~\u003e 0.13.3, \u003e= 1.0.4",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:a2c553e5763465fcb6803a838278a8aab701b6d1841c64246e4742db63a2467c",
+            "DiffID": "sha256:bc2fb572359ac5cac5fe7725a499863f3f2db25cf4622cd620ee0e20862da843"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-61594",
+          "DataSource": {
+            "ID": "ruby-advisory-db",
+            "Name": "Ruby Advisory Database",
+            "URL": "https://github.com/rubysec/ruby-advisory-db"
+          },
+          "Fingerprint": "sha256:912e95a11600bbf37b85f841b906129442b40cdb0ec0361396b7c2566181db02",
+          "Title": "uri: URI module: Credential exposure via URI + operator",
+          "Description": "URI is a module providing classes to handle Uniform Resource Identifiers. In versions 0.12.4 and earlier (bundled in Ruby 3.2 series) 0.13.2 and earlier (bundled in Ruby 3.3 series), 1.0.3 and earlier (bundled in Ruby 3.4 series), when using the + operator to combine URIs, sensitive information like passwords from the original URI can be leaked, violating RFC3986 and making applications vulnerable to credential exposure. This is a a bypass for the fix to CVE-2025-27221 that can expose user credentials. This issue has been fixed in versions 0.12.5, 0.13.3 and 1.0.4.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-200",
+            "CWE-212"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "azure": 1,
+            "cbl-mariner": 1,
+            "ghsa": 1,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "ghsa": {
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N/E:U",
+              "V40Score": 2.7
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N",
+              "V3Score": 6.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2025:23063",
+            "https://access.redhat.com/security/cve/CVE-2025-61594",
+            "https://bugzilla.redhat.com/2379684",
+            "https://bugzilla.redhat.com/2396186",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2379684",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2396186",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2426336",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24294",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-58767",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-61594",
+            "https://errata.almalinux.org/9/ALSA-2025-23063.html",
+            "https://errata.rockylinux.org/RLSA-2025:23062",
+            "https://github.com/advisories/GHSA-22h5-pq3x-2gf2",
+            "https://github.com/ruby/uri",
+            "https://github.com/ruby/uri/commit/20157e3e29b125ff41f1d9662e2e3b1d066f5902",
+            "https://github.com/ruby/uri/commit/7e521b2da0833d964aab43019e735aea674e1c2c",
+            "https://github.com/ruby/uri/commit/d3116ca66a3b1c97dc7577f9d2d6e353f391cd6a",
+            "https://github.com/ruby/uri/security/advisories/GHSA-j4pr-3wm6-xx2r",
+            "https://github.com/rubysec/ruby-advisory-db/blob/master/gems/uri/CVE-2025-61594.yml",
+            "https://hackerone.com/reports/2957667",
+            "https://linux.oracle.com/cve/CVE-2025-61594.html",
+            "https://linux.oracle.com/errata/ELSA-2025-23141.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-61594",
+            "https://rubygems.org/gems/uri/versions/0.12.5",
+            "https://rubygems.org/gems/uri/versions/0.13.3",
+            "https://rubygems.org/gems/uri/versions/1.0.4",
+            "https://ubuntu.com/security/notices/USN-8137-1",
+            "https://www.cve.org/CVERecord?id=CVE-2025-61594",
+            "https://www.ruby-lang.org/en/news/2025/02/26/security-advisories",
+            "https://www.ruby-lang.org/en/news/2025/10/07/uri-cve-2025-61594",
+            "https://www.ruby-lang.org/en/news/2025/10/07/uri-cve-2025-61594/"
+          ],
+          "PublishedDate": "2025-12-30T21:15:43.893Z",
+          "LastModifiedDate": "2026-04-16T18:16:44.4Z"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+Unable to find image 'ruby:3.4.1-slim' locally
+3.4.1-slim: Pulling from library/ruby
+Digest: sha256:156c4e22be088cf8e31438eb28204e61e89c201968740720c36604e571b74e8a
+Status: Downloaded newer image for ruby:3.4.1-slim
+Download ruby-advisory-db ...
+failed to download https://github.com/rubysec/ruby-advisory-db.git to "/root/.local/share/ruby-advisory-db"

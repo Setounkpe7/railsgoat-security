@@ -83,3 +83,75 @@ through `docker compose up`.
 
 **Time spent on phase 2.** ~1h30 (target was 3-4h; the upstream
 modernization removed most of the originally-planned migration work).
+
+---
+
+## 2026-04-23 — Phase 3: Local security tooling and baseline scan
+
+**Context.** Wire up every layer of the DevSecOps pipeline locally before
+porting to GitHub Actions in Phase 5: pre-commit hooks for fast feedback,
+six scan scripts mirroring the future CI jobs, a full baseline pass to
+establish the starting point.
+
+**Tooling decision: Docker-backed scripts for everything not natively
+installed.** Available natively on this workstation: detect-secrets 1.5.47,
+semgrep 1.159.0, pre-commit 4.5.1, jq, docker. Missing: brakeman,
+bundler-audit, trivy, hadolint, syft, grype, cosign, ruby. Rather than
+spend 30-45 min installing rbenv + ruby + 6 gems + 4 binary releases,
+each scan script invokes the official Docker image of its tool with the
+working tree mounted. Identical invocation locally and in CI; no host
+toolchain dependency beyond docker + jq + openssl.
+
+**Pre-commit detect-secrets hook race.** The upstream `Yelp/detect-secrets`
+pre-commit hook ran in parallel batches on this 1000-file tree and the
+workers raced on `.secrets.baseline`, returning a spurious failure
+("baseline file was updated") on every run, even when no new secret was
+introduced. Replaced with a `local` hook calling `detect-secrets-hook`
+with `require_serial: true`. Single invocation, zero race, hook passes
+cleanly.
+
+**Initial pre-commit pass autofixes.** Trailing whitespace and missing
+EOL in 41 legacy RailsGoat files (mostly minified JS, vendored CSS, ERB
+views). Captured in one commit after configuring the hooks; no behavioural
+change.
+
+**Baseline scan results.**
+
+```
+Layer            Status   Findings
+[1/6] Secrets    OK       0 new vs 30 baselined
+[2/6] SAST       FAIL     Brakeman 13 High + 5 Medium ; Semgrep 22
+[3/6] SCA        FAIL     Trivy fs 2 CRITICAL ; bundler-audit n/a
+[4/6] Image      FAIL     Hadolint OK ; Trivy OS 7 CRITICAL ; libs 1C+9H
+[5/6] DAST       OK       ZAP 0 High ; 4 Medium ; 16 Low/Info
+[6/6] SBOM       FAIL     Grype 7 Critical (4 overlap glibc CVE-2026-5450)
+```
+
+Total wall-clock: ~13 minutes, dominated by first-time Docker image pulls
+(ZAP ~1 GB, plus Trivy, Syft, Grype, ruby:3.4.1-slim). Re-runs with
+images cached: ~4-6 minutes expected.
+
+**Tool surprises:**
+
+- **Semgrep SARIF doesn't populate `.level`** for `p/ruby` + `p/security-audit`
+  rulesets. Per-severity gating won't work as written; need to switch to
+  per-rule severity from the rule metadata, or use Semgrep's own
+  `--severity ERROR` filter instead. Captured as a Phase 4 follow-up.
+- **bundler-audit can't reach github.com** from inside the one-off ruby
+  container in this environment (no egress). Known limitation, will work
+  from GitHub-hosted runners. Local fix: pre-clone `ruby-advisory-db`
+  into a docker volume — deferred, not blocking the baseline.
+- **All 13 Brakeman High-confidence findings are intentional RailsGoat
+  vulnerabilities** (Marshal.load deserialization, `constantize`-based
+  RCE, mass assignment, SQLi in `users_controller`, missing CSRF, etc.).
+  Phase 4 dispositions them as accepted in `SECURITY_EXCEPTIONS.md` —
+  rewriting them would defeat the purpose of the project.
+- **glibc CVE-2026-5450 hits 4 packages** at once. Same upstream CVE,
+  no Debian backport at scan date, residual after `apt upgrade`.
+  Single accept entry covering all 4 occurrences.
+
+**Phase 3 → 4 split.** Triage published in
+`docs/scan-reports/TRIAGE.md` with explicit fix-or-accept disposition
+for every finding. That file is the work plan for Phase 4.
+
+**Time spent on phase 3.** ~1h45 (target was 2h).
