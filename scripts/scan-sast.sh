@@ -6,9 +6,12 @@ mkdir -p docs/scan-reports
 FAIL=0
 
 echo "== SAST: Brakeman =="
-# Run Brakeman from its official image to avoid requiring Ruby locally.
+# Run Brakeman from its official image. Explicit --ignore-config because
+# the container's cwd is /code and Brakeman's auto-discovery prefers
+# config/brakeman.ignore over .brakeman.ignore at the root.
 docker run --rm -v "$PWD:/code" presidentbeef/brakeman:latest \
   --no-progress --no-pager \
+  --ignore-config /code/.brakeman.ignore \
   --format json --output /code/docs/scan-reports/brakeman.json \
   -w2 || true
 
@@ -27,6 +30,7 @@ if [ -f docs/scan-reports/brakeman.json ]; then
   # HTML report (best-effort, separate run for the rich format)
   docker run --rm -v "$PWD:/code" presidentbeef/brakeman:latest \
     --no-progress --no-pager \
+    --ignore-config /code/.brakeman.ignore \
     --format html --output /code/docs/scan-reports/brakeman.html \
     -w2 >/dev/null 2>&1 || true
 else

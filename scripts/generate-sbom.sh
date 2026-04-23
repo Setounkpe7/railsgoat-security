@@ -16,8 +16,10 @@ docker run --rm \
 echo "== SBOM CVE scan: Grype =="
 docker run --rm \
   -v "$PWD/docs/scan-reports:/out" \
+  -v "$PWD/.grype.yaml:/.grype.yaml:ro" \
   anchore/grype:latest \
   sbom:/out/sbom.cdx.json \
+  --config /.grype.yaml \
   --fail-on critical \
   -o json > docs/scan-reports/grype.json || {
     echo "FAIL — Grype reports Critical CVE"

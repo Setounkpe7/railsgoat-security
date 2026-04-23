@@ -37,8 +37,9 @@ fi
 
 echo "== Image: Trivy image (OS packages) =="
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
-  -v "$PWD:/src" aquasec/trivy:latest \
+  -v "$PWD:/src" -w /src aquasec/trivy:latest \
   image --severity CRITICAL --pkg-types os \
+        --ignorefile /src/.trivyignore \
         --format json --output /src/docs/scan-reports/trivy-image-os.json \
         "$IMAGE" || true
 if [ -f docs/scan-reports/trivy-image-os.json ]; then
@@ -50,8 +51,9 @@ fi
 
 echo "== Image: Trivy image (application libs) =="
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
-  -v "$PWD:/src" aquasec/trivy:latest \
+  -v "$PWD:/src" -w /src aquasec/trivy:latest \
   image --severity HIGH,CRITICAL --pkg-types library \
+        --ignorefile /src/.trivyignore \
         --format json --output /src/docs/scan-reports/trivy-image-lib.json \
         "$IMAGE" || true
 if [ -f docs/scan-reports/trivy-image-lib.json ]; then

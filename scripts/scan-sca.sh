@@ -22,6 +22,7 @@ fi
 echo "== SCA: Trivy filesystem =="
 docker run --rm -v "$PWD:/src" -w /src aquasec/trivy:latest \
   fs --severity CRITICAL \
+     --ignorefile /src/.trivyignore \
      --format json --output docs/scan-reports/trivy-fs.json \
      /src || true
 

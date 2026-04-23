@@ -12,8 +12,12 @@ else
   HOOK="docker run --rm -v $PWD:/src -w /src ghcr.io/yelp/detect-secrets:1.5.47 detect-secrets-hook"
 fi
 
+# Exclude .brakeman.ignore — its sha256 fingerprints trip the
+# Hex High Entropy String detector as a false positive (same exclusion
+# as in .pre-commit-config.yaml).
 # shellcheck disable=SC2046
-$HOOK --baseline .secrets.baseline $(git ls-files) \
+$HOOK --baseline .secrets.baseline \
+  $(git ls-files | grep -v -E '^\.brakeman\.ignore$') \
   > docs/scan-reports/detect-secrets.txt 2>&1 || {
     echo "FAIL — new secrets detected. See docs/scan-reports/detect-secrets.txt"
     cat docs/scan-reports/detect-secrets.txt
