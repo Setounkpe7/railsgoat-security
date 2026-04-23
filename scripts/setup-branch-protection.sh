@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Applies branch protection on main. Idempotent — safe to re-run.
+# Applies branch protection on main with all 8 security.yml jobs as
+# required status checks. Idempotent — safe to re-run.
 # Run from repo root. Requires `gh` authenticated with repo-admin scope.
+#
+# The check names below MUST match the `name:` of each job in
+# .github/workflows/security.yml exactly.
 
 OWNER="Setounkpe7"
 REPO="railsgoat-security"
-
-# The status checks list will be populated once CI job names exist.
-# For phase 1 we apply structural protections only; required checks
-# are added in Task 5.7 after security.yml lands on main.
 
 gh api \
   --method PUT \
@@ -17,7 +17,19 @@ gh api \
   "/repos/${OWNER}/${REPO}/branches/main/protection" \
   --input - <<'EOF'
 {
-  "required_status_checks": null,
+  "required_status_checks": {
+    "strict": true,
+    "contexts": [
+      "Secrets (detect-secrets)",
+      "SAST (Brakeman + Semgrep)",
+      "SCA (bundler-audit + Trivy fs)",
+      "Docker build + lint",
+      "Image scan (Trivy)",
+      "DAST (ZAP baseline)",
+      "SBOM (Syft + Grype)",
+      "Sign + push (GHCR)"
+    ]
+  },
   "enforce_admins": true,
   "required_pull_request_reviews": {
     "dismiss_stale_reviews": true,
@@ -33,4 +45,4 @@ gh api \
 }
 EOF
 
-echo "Branch protection applied on main."
+echo "Branch protection (with required checks) applied on main."
