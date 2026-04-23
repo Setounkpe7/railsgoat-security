@@ -903,7 +903,7 @@
 
         //Edited by Arjun
 
-        actualWidth = $tip[0] ? $tip[0].offsetWidth : '' 
+        actualWidth = $tip[0] ? $tip[0].offsetWidth : ''
         actualHeight = $tip[0] ? $tip[0].offsetHeight : ''
 
         switch (inside ? placement.split(' ')[1] : placement) {

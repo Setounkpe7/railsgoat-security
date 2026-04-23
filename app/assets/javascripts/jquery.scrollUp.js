@@ -65,7 +65,7 @@ Twitter: @markgdyr
 		}
 
 		// Scroll funtion
-		$(window).scroll(function(){	
+		$(window).scroll(function(){
 
 			// Fade animation
 			if (an === "fade") {

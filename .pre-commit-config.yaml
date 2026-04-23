@@ -1,0 +1,36 @@
+repos:
+  - repo: local
+    hooks:
+      # Use a local serial wrapper rather than the upstream
+      # Yelp/detect-secrets hook: that one runs in parallel batches and
+      # races on the baseline file, returning a spurious failure even
+      # when no new secret was introduced.
+      - id: detect-secrets
+        name: detect-secrets (no new secrets vs baseline)
+        entry: detect-secrets-hook --baseline .secrets.baseline
+        language: system
+        require_serial: true
+        exclude: "^(docs/scan-reports/|vendor/|node_modules/|\\.secrets\\.baseline$)"
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+        # Exclude ERB-templated YAML (Rails)
+        exclude: "^(config/database\\.yml|config/storage\\.yml|config/locales/.*\\.yml)$"
+      - id: check-json
+      - id: check-added-large-files
+        args: ["--maxkb=500"]
+      - id: check-merge-conflict
+
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.13.1-beta
+    hooks:
+      - id: hadolint-docker
+        files: ^Dockerfile$
+
+# Note: bundler-audit is intentionally NOT run as a pre-commit hook
+# (slow, requires Ruby toolchain). It runs in scripts/scan-sca.sh and
+# in the CI security.yml workflow.

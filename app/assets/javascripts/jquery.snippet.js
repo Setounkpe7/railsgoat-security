@@ -10,18 +10,18 @@
  */
 
 (function($) {
-	
+
 	//enables console.log() in all browsers for error messages
-	window.log=function(){log.history=log.history||[];log.history.push(arguments);if(this.console){console.log(Array.prototype.slice.call(arguments))}};		  
+	window.log=function(){log.history=log.history||[];log.history.push(arguments);if(this.console){console.log(Array.prototype.slice.call(arguments))}};
 
 	$.fn.snippet = function(language,settings) {
-	
+
 		if(typeof language == "object"){settings = language;}
-		
+
 		if(typeof language == "string"){
 			language = language.toLowerCase();
 		}
-		
+
 		var defaults = {
 			style:"random",
 			showNum:true,
@@ -37,10 +37,10 @@
 			boxColor:"",
 			boxFill:""
 		};
-		
+
 		// array containing all style names
 		var styleArr = ["acid","berries-dark","berries-light","bipolar","blacknblue","bright","contrast","darkblue","darkness","desert","dull","easter","emacs","golden","greenlcd","ide-anjuta","ide-codewarrior","ide-devcpp","ide-eclipse","ide-kdev","ide-msvcpp","kwrite","matlab","navy","nedit","neon","night","pablo","peachpuff","print","rand01","the","typical","vampire","vim","vim-dark","whatis","whitengrey","zellner"];
-		
+
 		if(settings){$.extend(defaults,settings)}
 
 		return this.each(function() {
@@ -48,28 +48,28 @@
 			// variable containing the style to be used
 			var useStyle = defaults.style.toLowerCase();
 			if(defaults.style == "random"){
-				var randomnumber=Math.floor(Math.random()*(styleArr.length));		   
-				useStyle = styleArr[randomnumber];	
+				var randomnumber=Math.floor(Math.random()*(styleArr.length));
+				useStyle = styleArr[randomnumber];
 			}
 
 			// variable containing the selected node
 			var o = $(this);
-			
+
 			// the name of the selected node
 			var node = this.nodeName.toLowerCase();
-			
+
 			// if the node is indeed a <pre> element...
 			if(node == "pre"){
-				
+
 				// saves the original html as a data on the node
 				if(o.data('orgHtml')==undefined || o.data('orgHtml')==null){
 					var orgHtml = o.html();
 					o.data('orgHtml',orgHtml);
 				}
-				
+
 				// if node IS NOT an existing Snippet...
 				if(!o.parent().hasClass("snippet-wrap")){
-					
+
 					// if language is NOT a string...
 					if(typeof language != "string"){
 						if(o.attr('class').length>0){var errclass=" class=\""+o.attr('class')+"\""}else{var errclass="";}
@@ -78,11 +78,11 @@
 						console.log(error);
 						return false;
 					}
-					
+
 					o.addClass("sh_"+language).addClass("snippet-formatted").wrap("<div class='snippet-container' style='"+o.attr('style')+";'><div class='sh_"+useStyle+" snippet-wrap'></div></div>");
 					o.removeAttr('style');
 					sh_highlightDocument();
-					
+
 					// build an ordered list if showNum is true
 					if(defaults.showNum){
 						var newhtml = o.html();
@@ -90,8 +90,8 @@
 						newhtml="<ol class='snippet-num'><li>"+newhtml+"</li></ol>";
 						while(newhtml.indexOf("<li></li></ol>") != -1){
 							newhtml=newhtml.replace("<li></li></ol>","</ol>");
-						}		
-					} 
+						}
+					}
 					// build an unordered list if showNum is false
 					else {
 						var newhtml = o.html();
@@ -101,14 +101,14 @@
 							newhtml=newhtml.replace("<li></li></ul>","</ul>");
 						}
 					}
-					
+
 					// normalizes tab space by replacing them with 4 non-breaking spaces
-					newhtml=newhtml.replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;");	
-											
-					
+					newhtml=newhtml.replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;");
+
+
 					// insert highlighted code into <pre> element
-					o.html(newhtml);					
-					
+					o.html(newhtml);
+
 					// cleans up the highlighted html
 					while(o.find("li").eq(0).html() == ""){
 						o.find("li").eq(0).remove();
@@ -120,12 +120,12 @@
 								if($.browser.opera){
 									$(this).html("&nbsp;");
 								} else {
-									$(this).html("<span style='display:none;'>&nbsp;</span>");	
+									$(this).html("<span style='display:none;'>&nbsp;</span>");
 								}
 							}
 						}
 					});
-					
+
 					// builds text-only view and hover menu
 					var txtOnly = "<pre class='snippet-textonly sh_sourceCode' style='display:none;'>"+o.data('orgHtml')+"</pre>";
 					var controls = "<div class='snippet-menu sh_sourceCode' style='display:none;'><pre>"
@@ -133,24 +133,24 @@
 								  +"<a class='snippet-text' href='#'>text</a>"
 								  +"<a class='snippet-window' href='#'>pop-up</a>"
 								  +"</pre></div>";
-								  
-					o.parent().append(txtOnly);	  
+
+					o.parent().append(txtOnly);
 					o.parent().prepend(controls);
 					o.parent().hover(function(){$(this).find('.snippet-menu').fadeIn("fast");},function(){$(this).find('.snippet-menu').fadeOut("fast");});
-					
+
 					// builds clipboard
 					if(defaults.clipboard!="" && defaults.clipboard!=false){
 						var cpy = o.parent().find('a.snippet-copy');
 						cpy.show();
 						cpy.parents('.snippet-menu').show();
 						var txt = o.parents('.snippet-wrap').find('.snippet-textonly').text();
-						ZeroClipboard.setMoviePath(defaults.clipboard);	
+						ZeroClipboard.setMoviePath(defaults.clipboard);
 						var clip = new ZeroClipboard.Client();
 						clip.setText(txt);
 						clip.glue(cpy[0], cpy.parents('.snippet-menu')[0]);
 						clip.addEventListener( 'complete', function(client, text) {
 							if(text.length > 500){
-								text = text.substr(0,500)+"...\n\n("+(text.length-500)+" characters not shown)";	
+								text = text.substr(0,500)+"...\n\n("+(text.length-500)+" characters not shown)";
 							}
 							alert("Copied text to clipboard:\n\n " + text );
 						});
@@ -158,16 +158,16 @@
 						cpy.parents('.snippet-menu').hide();
 
 					} else {
-						o.parent().find('a.snippet-copy').hide();	
+						o.parent().find('a.snippet-copy').hide();
 					}
-					
+
 					// click event for text-only view
 					o.parent().find("a.snippet-text").click(function(){
 						var org = $(this).parents('.snippet-wrap').find('.snippet-formatted');
 						var txt = $(this).parents('.snippet-wrap').find('.snippet-textonly');
 						org.toggle();
 						txt.toggle();
-						
+
 						if(txt.is(':visible')){
 							$(this).html("html");
 						} else {
@@ -176,29 +176,29 @@
 						$(this).blur();
 						return false;
 					});
-					
+
 					// click event for popup view
 					o.parent().find("a.snippet-window").click(function(){
 						var txt = $(this).parents('.snippet-wrap').find('.snippet-textonly').html();
 						snippetPopup(txt);
 						$(this).blur();
 						return false;
-					});						
-					
+					});
+
 					// disables menu
 					if(!defaults.menu){
 						o.prev('.snippet-menu').find('pre,.snippet-clipboard').hide();
 					}
-					
+
 					// collapse functionality
 					if(defaults.collapse){
 						var styleClass = o.parent().attr('class');
 						var collapseShow = "<div class='snippet-reveal "+styleClass+"'><pre class='sh_sourceCode'><a href='#' class='snippet-toggle'>"+defaults.showMsg+"</a></pre></div>";
 						var collapseHide = "<div class='sh_sourceCode snippet-hide'><pre><a href='#' class='snippet-revealed snippet-toggle'>"+defaults.hideMsg+"</a></pre></div>";
-						
+
 						o.parents('.snippet-container').append(collapseShow);
 						o.parent().append(collapseHide);
-						
+
 						var root = o.parents('.snippet-container');
 						if(defaults.startCollapsed){
 							root.find('.snippet-reveal').show();
@@ -207,30 +207,30 @@
 							root.find('.snippet-reveal').hide();
 							root.find('.snippet-wrap').eq(0).show();
 						}
-						
+
 						root.find('a.snippet-toggle').click(function(){
 							root.find('.snippet-wrap').toggle();
 							return false;
 						});
-						
+
 					}
-					
+
 					// makes snippet background transparent
 					if(defaults.transparent){
-						var styleObj = {"background-color":"transparent","box-shadow":"none","-moz-box-shadow":"none","-webkit-box-shadow":"none"} 
+						var styleObj = {"background-color":"transparent","box-shadow":"none","-moz-box-shadow":"none","-webkit-box-shadow":"none"}
 						o.css(styleObj);
-						o.next(".snippet-textonly").css(styleObj);	
+						o.next(".snippet-textonly").css(styleObj);
 						o.parents('.snippet-container').find('.snippet-reveal pre').css(styleObj);
 					}
-					
+
 					// starts snippet on text-only view
 					if(defaults.startText){
 						o.hide();
 						o.next(".snippet-textonly").show();
 						o.parent().find(".snippet-text").html("html");
-						
+
 					}
-					
+
 					// boxes in specified lines of code
 					if(defaults.box!=""){
 						var spacer = "<span class='box-sp'>&nbsp;</span>";
@@ -253,64 +253,64 @@
 										o.find("li").eq(numStart).addClass('box').prepend(spacer);
 									}
 								}
-							
+
 						}
-						
+
 						// sets the color of the box
 						if(defaults.boxColor!=""){
-							o.find("li.box").css('border-color',defaults.boxColor);	
+							o.find("li.box").css('border-color',defaults.boxColor);
 						}
-						
+
 						// sets the fill (background color) of the box
 						if(defaults.boxFill!=""){
 							o.find("li.box, li.box-top, li.box-mid, li.box-bot").addClass('box-bg').css('background-color',defaults.boxFill);
-						}	
-						
+						}
+
 						if($.browser.webkit){
 							o.find(".snippet-num li.box").css('margin-left','-3.3em');
-							o.find(".snippet-num li .box-sp").css('width','21px');	
+							o.find(".snippet-num li .box-sp").css('width','21px');
 						}
-						
-					}					
-					
+
+					}
+
 					// adds a css class to all links in the snippet so they are themed properly
 					o.parents('.snippet-container').find("a").addClass("sh_url");
-					
+
 				}
 				// if node IS an existing Snippet...
 				else {
-					
+
 					// set new style classes, remove boxes
 					o.parent().attr("class","sh_"+useStyle+" snippet-wrap");
 					o.parents('.snippet-container').find('.snippet-reveal').attr("class","sh_"+useStyle+" snippet-wrap snippet-reveal");
 					o.find("li.box, li.box-top, li.box-mid, li.box-bot").removeAttr('style').removeAttr('class');
 					o.find("li .box-sp").remove();
-					
+
 					// set background to transparent
 					if(defaults.transparent){
-						var styleObj = {"background-color":"transparent","box-shadow":"none","-moz-box-shadow":"none","-webkit-box-shadow":"none"} 
+						var styleObj = {"background-color":"transparent","box-shadow":"none","-moz-box-shadow":"none","-webkit-box-shadow":"none"}
 						o.css(styleObj);
-						o.next(".snippet-textonly").css(styleObj);	
+						o.next(".snippet-textonly").css(styleObj);
 						o.parents('.snippet-container').find('.snippet-hide pre').css(styleObj);
 					}
-					// remove transparency 
+					// remove transparency
 					else {
-						var styleObj = {"background-color":"","box-shadow":"","-moz-box-shadow":"","-webkit-box-shadow":""} 
+						var styleObj = {"background-color":"","box-shadow":"","-moz-box-shadow":"","-webkit-box-shadow":""}
 						o.css(styleObj);
-						o.next(".snippet-textonly").css(styleObj);	
-						o.parents('.snippet-container').find('.snippet-reveal pre').css(styleObj);						
+						o.next(".snippet-textonly").css(styleObj);
+						o.parents('.snippet-container').find('.snippet-reveal pre').css(styleObj);
 					}
-					
+
 					// show numbers by switching <ul> to <ol>
 					if(defaults.showNum){
-			
+
 						var list = o.find("li").eq(0).parent();
 						if(list.hasClass("snippet-no-num")){
 							list.wrap("<ol class='snippet-num'></ol>");
 							var li = o.find("li").eq(0);
 							li.unwrap();
 						}
-					} 
+					}
 					// hide numbers by switching <ol> to <ul>
 					else {
 						var list = o.find("li").eq(0).parent();
@@ -320,8 +320,8 @@
 							li.unwrap();
 						}
 					}
-					
-					// box in specified lines			
+
+					// box in specified lines
 					if(defaults.box!=""){
 						var spacer = "<span class='box-sp'>&nbsp;</span>";
 						var boxNums = defaults.box.split(',');
@@ -343,35 +343,35 @@
 										o.find("li").eq(numStart).addClass('box').prepend(spacer);
 									}
 								}
-							
+
 						}
-						
+
 						if(defaults.boxColor!=""){
-							o.find("li.box").css('border-color',defaults.boxColor);	
+							o.find("li.box").css('border-color',defaults.boxColor);
 						}
-						
+
 						if(defaults.boxFill!=""){
 							o.find("li.box").addClass('box-bg').css('background-color',defaults.boxFill);
-						}					
-						
+						}
+
 						if($.browser.webkit){
 							o.find(".snippet-num li.box").css('margin-left','-3.3em');
 							o.find(".snippet-num li .box-sp").css('width','21px');
-						}						
-						
-					}
-					
+						}
 
-					
+					}
+
+
+
 					sh_highlightDocument();
-					
+
 					// show/hide hover menu
 					if(!defaults.menu){
-						o.prev('.snippet-menu').find('pre,.snippet-clipboard').hide();					
+						o.prev('.snippet-menu').find('pre,.snippet-clipboard').hide();
 					} else {
-						o.prev('.snippet-menu').find('pre,.snippet-clipboard').show();	
+						o.prev('.snippet-menu').find('pre,.snippet-clipboard').show();
 					}
-			
+
 				}
 
 			} else {
@@ -416,12 +416,12 @@ function snippetPopup(content) {
 // Author: Joseph Huckaby
 
 var ZeroClipboard = {
-	
+
 	version: "1.0.7",
 	clients: {}, // registered upload clients on page, indexed by id
 	moviePath: 'ZeroClipboard.swf', // URL to movie
 	nextId: 1, // ID of next movie
-	
+
 	$: function(thingy) {
 		// simple DOM lookup utility function
 		if (typeof(thingy) == 'string') thingy = document.getElementById(thingy);
@@ -448,31 +448,31 @@ var ZeroClipboard = {
 		}
 		return thingy;
 	},
-	
+
 	setMoviePath: function(path) {
 		// set path to ZeroClipboard.swf
 		this.moviePath = path;
 	},
-	
+
 	dispatch: function(id, eventName, args) {
-		// receive event from flash movie, send to client		
+		// receive event from flash movie, send to client
 		var client = this.clients[id];
 		if (client) {
 			client.receiveEvent(eventName, args);
 		}
 	},
-	
+
 	register: function(id, client) {
 		// register new client to receive events
 		this.clients[id] = client;
 	},
-	
+
 	getDOMObjectPosition: function(obj, stopObj) {
 		// get absolute coordinates for dom element
 		var info = {
-			left: 0, 
-			top: 0, 
-			width: obj.width ? obj.width : obj.offsetWidth, 
+			left: 0,
+			top: 0,
+			width: obj.width ? obj.width : obj.offsetWidth,
 			height: obj.height ? obj.height : obj.offsetHeight
 		};
 
@@ -484,25 +484,25 @@ var ZeroClipboard = {
 
 		return info;
 	},
-	
+
 	Client: function(elem) {
 		// constructor for new simple upload client
 		this.handlers = {};
-		
+
 		// unique ID
 		this.id = ZeroClipboard.nextId++;
 		this.movieId = 'ZeroClipboardMovie_' + this.id;
-		
+
 		// register client with singleton to receive flash events
 		ZeroClipboard.register(this.id, this);
-		
+
 		// create movie
 		if (elem) this.glue(elem);
 	}
 };
 
 ZeroClipboard.Client.prototype = {
-	
+
 	id: 0, // unique ID for us
 	ready: false, // whether movie is ready to receive events or not
 	movie: null, // reference to movie object
@@ -510,28 +510,28 @@ ZeroClipboard.Client.prototype = {
 	handCursorEnabled: true, // whether to show hand cursor, or default pointer cursor
 	cssEffects: true, // enable CSS mouse effects on dom container
 	handlers: null, // user event handlers
-	
+
 	glue: function(elem, appendElem, stylesToAdd) {
 		// glue to DOM element
 		// elem can be ID or actual DOM element object
 		this.domElement = ZeroClipboard.$(elem);
-		
+
 		// float just above object, or zIndex 99 if dom element isn't set
 		var zIndex = 99;
 		if (this.domElement.style.zIndex) {
 			zIndex = parseInt(this.domElement.style.zIndex, 10) + 1;
 		}
-		
+
 		if (typeof(appendElem) == 'string') {
 			appendElem = ZeroClipboard.$(appendElem);
 		}
 		else if (typeof(appendElem) == 'undefined') {
 			appendElem = document.getElementsByTagName('body')[0];
 		}
-		
+
 		// find X/Y position of domElement
 		var box = ZeroClipboard.getDOMObjectPosition(this.domElement, appendElem);
-		
+
 		// create floating DIV above element
 		this.div = document.createElement('div');
 		this.div.className = "snippet-clipboard";
@@ -542,27 +542,27 @@ ZeroClipboard.Client.prototype = {
 		style.width = '' + box.width + 'px';
 		style.height = '' + box.height + 'px';
 		style.zIndex = zIndex;
-		
+
 		if (typeof(stylesToAdd) == 'object') {
 			for (addedStyle in stylesToAdd) {
 				style[addedStyle] = stylesToAdd[addedStyle];
 			}
 		}
-		
+
 		// style.backgroundColor = '#f00'; // debug
-		
+
 		appendElem.appendChild(this.div);
-		
+
 		this.div.innerHTML = this.getHTML( box.width, box.height );
 	},
-	
+
 	getHTML: function(width, height) {
 		// return HTML for movie
 		var html = '';
-		var flashvars = 'id=' + this.id + 
-			'&width=' + width + 
+		var flashvars = 'id=' + this.id +
+			'&width=' + width +
 			'&height=' + height;
-			
+
 		if (navigator.userAgent.match(/MSIE/)) {
 			// IE gets an OBJECT tag
 			var protocol = location.href.match(/^https/i) ? 'https://' : 'http://';
@@ -574,33 +574,33 @@ ZeroClipboard.Client.prototype = {
 		}
 		return html;
 	},
-	
+
 	hide: function() {
 		// temporarily hide floater offscreen
 		if (this.div) {
 			this.div.style.left = '-2000px';
 		}
 	},
-	
+
 	show: function() {
 		// show ourselves after a call to hide()
 		this.reposition();
 	},
-	
+
 	destroy: function() {
 		// destroy control and floater
 		if (this.domElement && this.div) {
 			this.hide();
 			this.div.innerHTML = '';
-			
+
 			var body = document.getElementsByTagName('body')[0];
 			try { body.removeChild( this.div ); } catch(e) {;}
-			
+
 			this.domElement = null;
 			this.div = null;
 		}
 	},
-	
+
 	reposition: function(elem) {
 		// reposition our floating div, optionally to new container
 		// warning: container CANNOT change size, only position
@@ -608,7 +608,7 @@ ZeroClipboard.Client.prototype = {
 			this.domElement = ZeroClipboard.$(elem);
 			if (!this.domElement) this.hide();
 		}
-		
+
 		if (this.domElement && this.div) {
 			var box = ZeroClipboard.getDOMObjectPosition(this.domElement);
 			var style = this.div.style;
@@ -616,13 +616,13 @@ ZeroClipboard.Client.prototype = {
 			style.top = '' + box.top + 'px';
 		}
 	},
-	
+
 	setText: function(newText) {
 		// set text to be copied to clipboard
 		this.clipText = newText;
 		if (this.ready){ this.movie.setText(newText);}
 	},
-	
+
 	addEventListener: function(eventName, func) {
 		// add user event listener for event
 		// event types: load, queueStart, fileStart, fileComplete, queueComplete, progress, error, cancel
@@ -630,22 +630,22 @@ ZeroClipboard.Client.prototype = {
 		if (!this.handlers[eventName]){ this.handlers[eventName] = [];}
 		this.handlers[eventName].push(func);
 	},
-	
+
 	setHandCursor: function(enabled) {
 		// enable hand cursor (true), or default arrow cursor (false)
 		this.handCursorEnabled = enabled;
 		if (this.ready){ this.movie.setHandCursor(enabled);}
 	},
-	
+
 	setCSSEffects: function(enabled) {
 		// enable or disable CSS effects on DOM container
 		this.cssEffects = !!enabled;
 	},
-	
+
 	receiveEvent: function(eventName, args) {
 		// receive event from flash
 		eventName = eventName.toString().toLowerCase().replace(/^on/, '');
-				
+
 		// special behavior for certain events
 		switch (eventName) {
 			case 'load':
@@ -657,7 +657,7 @@ ZeroClipboard.Client.prototype = {
 					setTimeout( function() { self.receiveEvent('load', null); }, 1 );
 					return;
 				}
-				
+
 				// firefox on pc needs a "kick" in order to set these in certain cases
 				if (!this.ready && navigator.userAgent.match(/Firefox/) && navigator.userAgent.match(/Windows/)) {
 					var self = this;
@@ -665,7 +665,7 @@ ZeroClipboard.Client.prototype = {
 					this.ready = true;
 					return;
 				}
-				
+
 				this.ready = true;
 				try{
 				this.movie.setText( this.clipText );
@@ -674,14 +674,14 @@ ZeroClipboard.Client.prototype = {
 				this.movie.setHandCursor( this.handCursorEnabled );
 				}catch(e){}
 				break;
-			
+
 			case 'mouseover':
 				if (this.domElement && this.cssEffects) {
 					this.domElement.addClass('hover');
 					if (this.recoverActive){ this.domElement.addClass('active');}
 				}
 				break;
-			
+
 			case 'mouseout':
 				if (this.domElement && this.cssEffects) {
 					this.recoverActive = false;
@@ -692,13 +692,13 @@ ZeroClipboard.Client.prototype = {
 					this.domElement.removeClass('hover');
 				}
 				break;
-			
+
 			case 'mousedown':
 				if (this.domElement && this.cssEffects) {
 					this.domElement.addClass('active');
 				}
 				break;
-			
+
 			case 'mouseup':
 				if (this.domElement && this.cssEffects) {
 					this.domElement.removeClass('active');
@@ -706,11 +706,11 @@ ZeroClipboard.Client.prototype = {
 				}
 				break;
 		} // switch eventName
-		
+
 		if (this.handlers[eventName]) {
 			for (var idx = 0, len = this.handlers[eventName].length; idx < len; idx++) {
 				var func = this.handlers[eventName][idx];
-			
+
 				if (typeof(func) == 'function') {
 					// actual function reference
 					func(this, args);
@@ -726,7 +726,7 @@ ZeroClipboard.Client.prototype = {
 			} // foreach event handler defined
 		} // user defined handler for event
 	}
-	
+
 };
 
 
@@ -789,7 +789,7 @@ if(!this.sh_languages){this.sh_languages={}}sh_languages.java=[[[/\b(?:import|pa
 if(!this.sh_languages){this.sh_languages={}}sh_languages.javascript=[[[/\/\/\//g,"sh_comment",1],[/\/\//g,"sh_comment",7],[/\/\*\*/g,"sh_comment",8],[/\/\*/g,"sh_comment",9],[/\b(?:abstract|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|final|finally|for|function|goto|if|implements|in|instanceof|interface|native|new|null|private|protected|prototype|public|return|static|super|switch|synchronized|throw|throws|this|transient|true|try|typeof|var|volatile|while|with)\b/g,"sh_keyword",-1],[/(\+\+|--|\)|\])(\s*)(\/=?(?![*\/]))/g,["sh_symbol","sh_normal","sh_symbol"],-1],[/(0x[A-Fa-f0-9]+|(?:[\d]*\.)?[\d]+(?:[eE][+-]?[\d]+)?)(\s*)(\/(?![*\/]))/g,["sh_number","sh_normal","sh_symbol"],-1],[/([A-Za-z$_][A-Za-z0-9$_]*\s*)(\/=?(?![*\/]))/g,["sh_normal","sh_symbol"],-1],[/\/(?:\\.|[^*\\\/])(?:\\.|[^\\\/])*\/[gim]*/g,"sh_regexp",-1],[/\b[+-]?(?:(?:0x[A-Fa-f0-9]+)|(?:(?:[\d]*\.)?[\d]+(?:[eE][+-]?[\d]+)?))u?(?:(?:int(?:8|16|32|64))|L)?\b/g,"sh_number",-1],[/"/g,"sh_string",10],[/'/g,"sh_string",11],[/~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|\/|\?|&|<|>|\|/g,"sh_symbol",-1],[/\{|\}/g,"sh_cbracket",-1],[/\b(?:Math|Infinity|NaN|undefined|arguments)\b/g,"sh_predef_var",-1],[/\b(?:Array|Boolean|Date|Error|EvalError|Function|Number|Object|RangeError|ReferenceError|RegExp|String|SyntaxError|TypeError|URIError|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|eval|isFinite|isNaN|parseFloat|parseInt)\b/g,"sh_predef_func",-1],[/(?:[A-Za-z]|_)[A-Za-z0-9_]*(?=[ \t]*\()/g,"sh_function",-1]],[[/$/g,null,-2],[/(?:<?)[A-Za-z0-9_\.\/\-_~]+@[A-Za-z0-9_\.\/\-_~]+(?:>?)|(?:<?)[A-Za-z0-9_]+:\/\/[A-Za-z0-9_\.\/\-_~]+(?:>?)/g,"sh_url",-1],[/<\?xml/g,"sh_preproc",2,1],[/<!DOCTYPE/g,"sh_preproc",4,1],[/<!--/g,"sh_comment",5],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)/g,"sh_keyword",6,1],[/&(?:[A-Za-z0-9]+);/g,"sh_preproc",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*/g,"sh_keyword",6,1],[/@[A-Za-z]+/g,"sh_type",-1],[/(?:TODO|FIXME|BUG)(?:[:]?)/g,"sh_todo",-1]],[[/\?>/g,"sh_preproc",-2],[/([^=" \t>]+)([ \t]*)(=?)/g,["sh_type","sh_normal","sh_symbol"],-1],[/"/g,"sh_string",3]],[[/\\(?:\\|")/g,null,-1],[/"/g,"sh_string",-2]],[[/>/g,"sh_preproc",-2],[/([^=" \t>]+)([ \t]*)(=?)/g,["sh_type","sh_normal","sh_symbol"],-1],[/"/g,"sh_string",3]],[[/-->/g,"sh_comment",-2],[/<!--/g,"sh_comment",5]],[[/(?:\/)?>/g,"sh_keyword",-2],[/([^=" \t>]+)([ \t]*)(=?)/g,["sh_type","sh_normal","sh_symbol"],-1],[/"/g,"sh_string",3]],[[/$/g,null,-2]],[[/\*\//g,"sh_comment",-2],[/(?:<?)[A-Za-z0-9_\.\/\-_~]+@[A-Za-z0-9_\.\/\-_~]+(?:>?)|(?:<?)[A-Za-z0-9_]+:\/\/[A-Za-z0-9_\.\/\-_~]+(?:>?)/g,"sh_url",-1],[/<\?xml/g,"sh_preproc",2,1],[/<!DOCTYPE/g,"sh_preproc",4,1],[/<!--/g,"sh_comment",5],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)/g,"sh_keyword",6,1],[/&(?:[A-Za-z0-9]+);/g,"sh_preproc",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*/g,"sh_keyword",6,1],[/@[A-Za-z]+/g,"sh_type",-1],[/(?:TODO|FIXME|BUG)(?:[:]?)/g,"sh_todo",-1]],[[/\*\//g,"sh_comment",-2],[/(?:<?)[A-Za-z0-9_\.\/\-_~]+@[A-Za-z0-9_\.\/\-_~]+(?:>?)|(?:<?)[A-Za-z0-9_]+:\/\/[A-Za-z0-9_\.\/\-_~]+(?:>?)/g,"sh_url",-1],[/(?:TODO|FIXME|BUG)(?:[:]?)/g,"sh_todo",-1]],[[/"/g,"sh_string",-2],[/\\./g,"sh_specialchar",-1]],[[/'/g,"sh_string",-2],[/\\./g,"sh_specialchar",-1]]];
 
 /* Javascript DOM language (http://shjs.sourceforge.net/lang/sh_javascript_dom.min.js) */
-if(!this.sh_languages){this.sh_languages={}}sh_languages.javascript_dom=[[[/\/\/\//g,"sh_comment",1],[/\/\//g,"sh_comment",7],[/\/\*\*/g,"sh_comment",8],[/\/\*/g,"sh_comment",9],[/\b(?:abstract|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|final|finally|for|function|goto|if|implements|in|instanceof|interface|native|new|null|private|protected|prototype|public|return|static|super|switch|synchronized|throw|throws|this|transient|true|try|typeof|var|volatile|while|with)\b/g,"sh_keyword",-1],[/(\+\+|--|\)|\])(\s*)(\/=?(?![*\/]))/g,["sh_symbol","sh_normal","sh_symbol"],-1],[/(0x[A-Fa-f0-9]+|(?:[\d]*\.)?[\d]+(?:[eE][+-]?[\d]+)?)(\s*)(\/(?![*\/]))/g,["sh_number","sh_normal","sh_symbol"],-1],[/([A-Za-z$_][A-Za-z0-9$_]*\s*)(\/=?(?![*\/]))/g,["sh_normal","sh_symbol"],-1],[/\/(?:\\.|[^*\\\/])(?:\\.|[^\\\/])*\/[gim]*/g,"sh_regexp",-1],[/\b[+-]?(?:(?:0x[A-Fa-f0-9]+)|(?:(?:[\d]*\.)?[\d]+(?:[eE][+-]?[\d]+)?))u?(?:(?:int(?:8|16|32|64))|L)?\b/g,"sh_number",-1],[/"/g,"sh_string",10],[/'/g,"sh_string",11],[/~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|\/|\?|&|<|>|\|/g,"sh_symbol",-1],[/\{|\}/g,"sh_cbracket",-1],[/\b(?:Math|Infinity|NaN|undefined|arguments)\b/g,"sh_predef_var",-1],[/\b(?:Array|Boolean|Date|Error|EvalError|Function|Number|Object|RangeError|ReferenceError|RegExp|String|SyntaxError|TypeError|URIError|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|eval|isFinite|isNaN|parseFloat|parseInt)\b/g,"sh_predef_func",-1],[/\b(?:applicationCache|closed|Components|content|controllers|crypto|defaultStatus|dialogArguments|directories|document|frameElement|frames|fullScreen|globalStorage|history|innerHeight|innerWidth|length|location|locationbar|menubar|name|navigator|opener|outerHeight|outerWidth|pageXOffset|pageYOffset|parent|personalbar|pkcs11|returnValue|screen|availTop|availLeft|availHeight|availWidth|colorDepth|height|left|pixelDepth|top|width|screenX|screenY|scrollbars|scrollMaxX|scrollMaxY|scrollX|scrollY|self|sessionStorage|sidebar|status|statusbar|toolbar|top|window)\b/g,"sh_predef_var",-1],[/\b(?:alert|addEventListener|atob|back|blur|btoa|captureEvents|clearInterval|clearTimeout|close|confirm|dump|escape|find|focus|forward|getAttention|getComputedStyle|getSelection|home|moveBy|moveTo|open|openDialog|postMessage|print|prompt|releaseEvents|removeEventListener|resizeBy|resizeTo|scroll|scrollBy|scrollByLines|scrollByPages|scrollTo|setInterval|setTimeout|showModalDialog|sizeToContent|stop|unescape|updateCommands|onabort|onbeforeunload|onblur|onchange|onclick|onclose|oncontextmenu|ondragdrop|onerror|onfocus|onkeydown|onkeypress|onkeyup|onload|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|onpaint|onreset|onresize|onscroll|onselect|onsubmit|onunload)\b/g,"sh_predef_func",-1],[/(?:[A-Za-z]|_)[A-Za-z0-9_]*(?=[ \t]*\()/g,"sh_function",-1]],[[/$/g,null,-2],[/(?:<?)[A-Za-z0-9_\.\/\-_~]+@[A-Za-z0-9_\.\/\-_~]+(?:>?)|(?:<?)[A-Za-z0-9_]+:\/\/[A-Za-z0-9_\.\/\-_~]+(?:>?)/g,"sh_url",-1],[/<\?xml/g,"sh_preproc",2,1],[/<!DOCTYPE/g,"sh_preproc",4,1],[/<!--/g,"sh_comment",5],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)/g,"sh_keyword",6,1],[/&(?:[A-Za-z0-9]+);/g,"sh_preproc",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*/g,"sh_keyword",6,1],[/@[A-Za-z]+/g,"sh_type",-1],[/(?:TODO|FIXME|BUG)(?:[:]?)/g,"sh_todo",-1]],[[/\?>/g,"sh_preproc",-2],[/([^=" \t>]+)([ \t]*)(=?)/g,["sh_type","sh_normal","sh_symbol"],-1],[/"/g,"sh_string",3]],[[/\\(?:\\|")/g,null,-1],[/"/g,"sh_string",-2]],[[/>/g,"sh_preproc",-2],[/([^=" \t>]+)([ \t]*)(=?)/g,["sh_type","sh_normal","sh_symbol"],-1],[/"/g,"sh_string",3]],[[/-->/g,"sh_comment",-2],[/<!--/g,"sh_comment",5]],[[/(?:\/)?>/g,"sh_keyword",-2],[/([^=" \t>]+)([ \t]*)(=?)/g,["sh_type","sh_normal","sh_symbol"],-1],[/"/g,"sh_string",3]],[[/$/g,null,-2]],[[/\*\//g,"sh_comment",-2],[/(?:<?)[A-Za-z0-9_\.\/\-_~]+@[A-Za-z0-9_\.\/\-_~]+(?:>?)|(?:<?)[A-Za-z0-9_]+:\/\/[A-Za-z0-9_\.\/\-_~]+(?:>?)/g,"sh_url",-1],[/<\?xml/g,"sh_preproc",2,1],[/<!DOCTYPE/g,"sh_preproc",4,1],[/<!--/g,"sh_comment",5],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)/g,"sh_keyword",6,1],[/&(?:[A-Za-z0-9]+);/g,"sh_preproc",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*/g,"sh_keyword",6,1],[/@[A-Za-z]+/g,"sh_type",-1],[/(?:TODO|FIXME|BUG)(?:[:]?)/g,"sh_todo",-1]],[[/\*\//g,"sh_comment",-2],[/(?:<?)[A-Za-z0-9_\.\/\-_~]+@[A-Za-z0-9_\.\/\-_~]+(?:>?)|(?:<?)[A-Za-z0-9_]+:\/\/[A-Za-z0-9_\.\/\-_~]+(?:>?)/g,"sh_url",-1],[/(?:TODO|FIXME|BUG)(?:[:]?)/g,"sh_todo",-1]],[[/"/g,"sh_string",-2],[/\\./g,"sh_specialchar",-1]],[[/'/g,"sh_string",-2],[/\\./g,"sh_specialchar",-1]]];																																																																																																																																																																												
+if(!this.sh_languages){this.sh_languages={}}sh_languages.javascript_dom=[[[/\/\/\//g,"sh_comment",1],[/\/\//g,"sh_comment",7],[/\/\*\*/g,"sh_comment",8],[/\/\*/g,"sh_comment",9],[/\b(?:abstract|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|final|finally|for|function|goto|if|implements|in|instanceof|interface|native|new|null|private|protected|prototype|public|return|static|super|switch|synchronized|throw|throws|this|transient|true|try|typeof|var|volatile|while|with)\b/g,"sh_keyword",-1],[/(\+\+|--|\)|\])(\s*)(\/=?(?![*\/]))/g,["sh_symbol","sh_normal","sh_symbol"],-1],[/(0x[A-Fa-f0-9]+|(?:[\d]*\.)?[\d]+(?:[eE][+-]?[\d]+)?)(\s*)(\/(?![*\/]))/g,["sh_number","sh_normal","sh_symbol"],-1],[/([A-Za-z$_][A-Za-z0-9$_]*\s*)(\/=?(?![*\/]))/g,["sh_normal","sh_symbol"],-1],[/\/(?:\\.|[^*\\\/])(?:\\.|[^\\\/])*\/[gim]*/g,"sh_regexp",-1],[/\b[+-]?(?:(?:0x[A-Fa-f0-9]+)|(?:(?:[\d]*\.)?[\d]+(?:[eE][+-]?[\d]+)?))u?(?:(?:int(?:8|16|32|64))|L)?\b/g,"sh_number",-1],[/"/g,"sh_string",10],[/'/g,"sh_string",11],[/~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|\/|\?|&|<|>|\|/g,"sh_symbol",-1],[/\{|\}/g,"sh_cbracket",-1],[/\b(?:Math|Infinity|NaN|undefined|arguments)\b/g,"sh_predef_var",-1],[/\b(?:Array|Boolean|Date|Error|EvalError|Function|Number|Object|RangeError|ReferenceError|RegExp|String|SyntaxError|TypeError|URIError|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|eval|isFinite|isNaN|parseFloat|parseInt)\b/g,"sh_predef_func",-1],[/\b(?:applicationCache|closed|Components|content|controllers|crypto|defaultStatus|dialogArguments|directories|document|frameElement|frames|fullScreen|globalStorage|history|innerHeight|innerWidth|length|location|locationbar|menubar|name|navigator|opener|outerHeight|outerWidth|pageXOffset|pageYOffset|parent|personalbar|pkcs11|returnValue|screen|availTop|availLeft|availHeight|availWidth|colorDepth|height|left|pixelDepth|top|width|screenX|screenY|scrollbars|scrollMaxX|scrollMaxY|scrollX|scrollY|self|sessionStorage|sidebar|status|statusbar|toolbar|top|window)\b/g,"sh_predef_var",-1],[/\b(?:alert|addEventListener|atob|back|blur|btoa|captureEvents|clearInterval|clearTimeout|close|confirm|dump|escape|find|focus|forward|getAttention|getComputedStyle|getSelection|home|moveBy|moveTo|open|openDialog|postMessage|print|prompt|releaseEvents|removeEventListener|resizeBy|resizeTo|scroll|scrollBy|scrollByLines|scrollByPages|scrollTo|setInterval|setTimeout|showModalDialog|sizeToContent|stop|unescape|updateCommands|onabort|onbeforeunload|onblur|onchange|onclick|onclose|oncontextmenu|ondragdrop|onerror|onfocus|onkeydown|onkeypress|onkeyup|onload|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|onpaint|onreset|onresize|onscroll|onselect|onsubmit|onunload)\b/g,"sh_predef_func",-1],[/(?:[A-Za-z]|_)[A-Za-z0-9_]*(?=[ \t]*\()/g,"sh_function",-1]],[[/$/g,null,-2],[/(?:<?)[A-Za-z0-9_\.\/\-_~]+@[A-Za-z0-9_\.\/\-_~]+(?:>?)|(?:<?)[A-Za-z0-9_]+:\/\/[A-Za-z0-9_\.\/\-_~]+(?:>?)/g,"sh_url",-1],[/<\?xml/g,"sh_preproc",2,1],[/<!DOCTYPE/g,"sh_preproc",4,1],[/<!--/g,"sh_comment",5],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)/g,"sh_keyword",6,1],[/&(?:[A-Za-z0-9]+);/g,"sh_preproc",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*/g,"sh_keyword",6,1],[/@[A-Za-z]+/g,"sh_type",-1],[/(?:TODO|FIXME|BUG)(?:[:]?)/g,"sh_todo",-1]],[[/\?>/g,"sh_preproc",-2],[/([^=" \t>]+)([ \t]*)(=?)/g,["sh_type","sh_normal","sh_symbol"],-1],[/"/g,"sh_string",3]],[[/\\(?:\\|")/g,null,-1],[/"/g,"sh_string",-2]],[[/>/g,"sh_preproc",-2],[/([^=" \t>]+)([ \t]*)(=?)/g,["sh_type","sh_normal","sh_symbol"],-1],[/"/g,"sh_string",3]],[[/-->/g,"sh_comment",-2],[/<!--/g,"sh_comment",5]],[[/(?:\/)?>/g,"sh_keyword",-2],[/([^=" \t>]+)([ \t]*)(=?)/g,["sh_type","sh_normal","sh_symbol"],-1],[/"/g,"sh_string",3]],[[/$/g,null,-2]],[[/\*\//g,"sh_comment",-2],[/(?:<?)[A-Za-z0-9_\.\/\-_~]+@[A-Za-z0-9_\.\/\-_~]+(?:>?)|(?:<?)[A-Za-z0-9_]+:\/\/[A-Za-z0-9_\.\/\-_~]+(?:>?)/g,"sh_url",-1],[/<\?xml/g,"sh_preproc",2,1],[/<!DOCTYPE/g,"sh_preproc",4,1],[/<!--/g,"sh_comment",5],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)/g,"sh_keyword",6,1],[/&(?:[A-Za-z0-9]+);/g,"sh_preproc",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*/g,"sh_keyword",6,1],[/@[A-Za-z]+/g,"sh_type",-1],[/(?:TODO|FIXME|BUG)(?:[:]?)/g,"sh_todo",-1]],[[/\*\//g,"sh_comment",-2],[/(?:<?)[A-Za-z0-9_\.\/\-_~]+@[A-Za-z0-9_\.\/\-_~]+(?:>?)|(?:<?)[A-Za-z0-9_]+:\/\/[A-Za-z0-9_\.\/\-_~]+(?:>?)/g,"sh_url",-1],[/(?:TODO|FIXME|BUG)(?:[:]?)/g,"sh_todo",-1]],[[/"/g,"sh_string",-2],[/\\./g,"sh_specialchar",-1]],[[/'/g,"sh_string",-2],[/\\./g,"sh_specialchar",-1]]];
 
 /* perl language (http://shjs.sourceforge.net/lang/sh_perl.min.js) */
 if(!this.sh_languages){this.sh_languages={}}sh_languages.perl=[[[/\b(?:import)\b/g,"sh_preproc",-1],[/(s)(\{(?:\\\}|[^}])*\}\{(?:\\\}|[^}])*\})([ixsmogce]*)/g,["sh_keyword","sh_regexp","sh_keyword"],-1],[/(s)(\((?:\\\)|[^)])*\)\((?:\\\)|[^)])*\))([ixsmogce]*)/g,["sh_keyword","sh_regexp","sh_keyword"],-1],[/(s)(\[(?:\\\]|[^\]])*\]\[(?:\\\]|[^\]])*\])([ixsmogce]*)/g,["sh_keyword","sh_regexp","sh_keyword"],-1],[/(s)(<.*><.*>)([ixsmogce]*)/g,["sh_keyword","sh_regexp","sh_keyword"],-1],[/(q(?:q?))(\{(?:\\\}|[^}])*\})/g,["sh_keyword","sh_string"],-1],[/(q(?:q?))(\((?:\\\)|[^)])*\))/g,["sh_keyword","sh_string"],-1],[/(q(?:q?))(\[(?:\\\]|[^\]])*\])/g,["sh_keyword","sh_string"],-1],[/(q(?:q?))(<.*>)/g,["sh_keyword","sh_string"],-1],[/(q(?:q?))([^A-Za-z0-9 \t])(.*\2)/g,["sh_keyword","sh_string","sh_string"],-1],[/(s)([^A-Za-z0-9 \t])(.*\2.*\2)([ixsmogce]*(?=[ \t]*(?:\)|;)))/g,["sh_keyword","sh_regexp","sh_regexp","sh_keyword"],-1],[/(s)([^A-Za-z0-9 \t])(.*\2[ \t]*)([^A-Za-z0-9 \t])(.*\4)([ixsmogce]*(?=[ \t]*(?:\)|;)))/g,["sh_keyword","sh_regexp","sh_regexp","sh_regexp","sh_regexp","sh_keyword"],-1],[/#/g,"sh_comment",1],[/\b[+-]?(?:(?:0x[A-Fa-f0-9]+)|(?:(?:[\d]*\.)?[\d]+(?:[eE][+-]?[\d]+)?))u?(?:(?:int(?:8|16|32|64))|L)?\b/g,"sh_number",-1],[/(?:m|qr)(?=\{)/g,"sh_keyword",2],[/(?:m|qr)(?=#)/g,"sh_keyword",4],[/(?:m|qr)(?=\|)/g,"sh_keyword",6],[/(?:m|qr)(?=@)/g,"sh_keyword",8],[/(?:m|qr)(?=<)/g,"sh_keyword",10],[/(?:m|qr)(?=\[)/g,"sh_keyword",12],[/(?:m|qr)(?=\\)/g,"sh_keyword",14],[/(?:m|qr)(?=\/)/g,"sh_keyword",16],[/"/g,"sh_string",18],[/'/g,"sh_string",19],[/</g,"sh_string",20],[/\/[^\n]*\//g,"sh_string",-1],[/\b(?:chomp|chop|chr|crypt|hex|i|index|lc|lcfirst|length|oct|ord|pack|q|qq|reverse|rindex|sprintf|substr|tr|uc|ucfirst|m|s|g|qw|abs|atan2|cos|exp|hex|int|log|oct|rand|sin|sqrt|srand|my|local|our|delete|each|exists|keys|values|pack|read|syscall|sysread|syswrite|unpack|vec|undef|unless|return|length|grep|sort|caller|continue|dump|eval|exit|goto|last|next|redo|sub|wantarray|pop|push|shift|splice|unshift|split|switch|join|defined|foreach|last|chop|chomp|bless|dbmclose|dbmopen|ref|tie|tied|untie|while|next|map|eq|die|cmp|lc|uc|and|do|if|else|elsif|for|use|require|package|import|chdir|chmod|chown|chroot|fcntl|glob|ioctl|link|lstat|mkdir|open|opendir|readlink|rename|rmdir|stat|symlink|umask|unlink|utime|binmode|close|closedir|dbmclose|dbmopen|die|eof|fileno|flock|format|getc|print|printf|read|readdir|rewinddir|seek|seekdir|select|syscall|sysread|sysseek|syswrite|tell|telldir|truncate|warn|write|alarm|exec|fork|getpgrp|getppid|getpriority|kill|pipe|qx|setpgrp|setpriority|sleep|system|times|x|wait|waitpid)\b/g,"sh_keyword",-1],[/^\=(?:head1|head2|item)/g,"sh_comment",21],[/(?:\$[#]?|@|%)[\/A-Za-z0-9_]+/g,"sh_variable",-1],[/~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|\/|\?|&|<|>|\|/g,"sh_symbol",-1],[/\{|\}/g,"sh_cbracket",-1],[/(?:[A-Za-z]|_)[A-Za-z0-9_]*(?=[ \t]*\()/g,"sh_function",-1]],[[/$/g,null,-2]],[[/\{/g,"sh_regexp",3]],[[/[ \t]+#.*/g,"sh_comment",-1],[/\$(?:[A-Za-z0-9_]+|\{[A-Za-z0-9_]+\})/g,"sh_variable",-1],[/\\\{|\\\}|\}/g,"sh_regexp",-3]],[[/#/g,"sh_regexp",5]],[[/[ \t]+#.*/g,"sh_comment",-1],[/\$(?:[A-Za-z0-9_]+|\{[A-Za-z0-9_]+\})/g,"sh_variable",-1],[/\\#|#/g,"sh_regexp",-3]],[[/\|/g,"sh_regexp",7]],[[/[ \t]+#.*/g,"sh_comment",-1],[/\$(?:[A-Za-z0-9_]+|\{[A-Za-z0-9_]+\})/g,"sh_variable",-1],[/\\\||\|/g,"sh_regexp",-3]],[[/@/g,"sh_regexp",9]],[[/[ \t]+#.*/g,"sh_comment",-1],[/\$(?:[A-Za-z0-9_]+|\{[A-Za-z0-9_]+\})/g,"sh_variable",-1],[/\\@|@/g,"sh_regexp",-3]],[[/</g,"sh_regexp",11]],[[/[ \t]+#.*/g,"sh_comment",-1],[/\$(?:[A-Za-z0-9_]+|\{[A-Za-z0-9_]+\})/g,"sh_variable",-1],[/\\<|\\>|>/g,"sh_regexp",-3]],[[/\[/g,"sh_regexp",13]],[[/[ \t]+#.*/g,"sh_comment",-1],[/\$(?:[A-Za-z0-9_]+|\{[A-Za-z0-9_]+\})/g,"sh_variable",-1],[/\\]|\]/g,"sh_regexp",-3]],[[/\\/g,"sh_regexp",15]],[[/[ \t]+#.*/g,"sh_comment",-1],[/\$(?:[A-Za-z0-9_]+|\{[A-Za-z0-9_]+\})/g,"sh_variable",-1],[/\\\\|\\/g,"sh_regexp",-3]],[[/\//g,"sh_regexp",17]],[[/[ \t]+#.*/g,"sh_comment",-1],[/\$(?:[A-Za-z0-9_]+|\{[A-Za-z0-9_]+\})/g,"sh_variable",-1],[/\\\/|\//g,"sh_regexp",-3]],[[/$/g,null,-2],[/\\(?:\\|")/g,null,-1],[/"/g,"sh_string",-2]],[[/$/g,null,-2],[/\\(?:\\|')/g,null,-1],[/'/g,"sh_string",-2]],[[/$/g,null,-2],[/>/g,"sh_string",-2]],[[/\=cut/g,"sh_comment",-2]]];
