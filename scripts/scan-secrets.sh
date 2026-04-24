@@ -19,7 +19,11 @@ docker run --rm -v "$PWD:/src" -w /src python:3.12-slim sh -c \
   'apt-get update -qq >/dev/null 2>&1 && apt-get install -y -q --no-install-recommends git >/dev/null 2>&1 &&
    pip install --quiet detect-secrets==1.5.0 >/dev/null 2>&1 &&
    git config --global --add safe.directory /src &&
-   detect-secrets-hook --baseline .secrets.baseline "$@"' \
+   detect-secrets-hook --baseline .secrets.baseline "$@"
+   rc=$?
+   # Fix ownership in case the hook rewrote the baseline as root.
+   chown '"$(id -u):$(id -g)"' .secrets.baseline 2>/dev/null || true
+   exit $rc' \
   -- "${FILES[@]}" \
   > docs/scan-reports/detect-secrets.txt 2>&1 || {
     echo "FAIL — new secrets detected. See docs/scan-reports/detect-secrets.txt"

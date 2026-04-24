@@ -239,3 +239,112 @@ documented justification.
 **Time spent on phase 4.** ~2h (target was 4-6h; the per-finding
 atomic-commit discipline plus the upstream's already-modern stack made
 this faster than estimated).
+
+---
+
+## 2026-04-23 — Phase 5: CI pipeline
+
+**Outcome.** `security.yml` runs on every PR to `main`; all 8 jobs
+green on the first PR (#1). Branch protection on `main` requires every
+job before merge. Image published and signed at
+`ghcr.io/setounkpe7/railsgoat-security:latest`.
+
+**Job graph (final):**
+```
+secrets-scan
+    ├── sast               (Brakeman + Semgrep)
+    ├── sca                (bundler-audit + Trivy fs)
+    └── docker-build       (Hadolint + Trivy config + image build)
+            ├── image-scan (Trivy OS + libs)
+            ├── dast       (ZAP baseline)
+                    └── sbom         (Syft + Grype)
+                            └── sign-and-push (GHCR + Cosign)
+```
+
+**Pipeline runtime (final green run):** 9 min 48 s wall-clock.
+Within the 12-16 min spec estimate.
+
+**Iterations to green:** nine. The first eight failures were not bugs
+in the application or pipeline logic — they were environment friction
+between my local docker-first workflow and the third-party GitHub
+Actions used initially:
+
+1. **GitHub Actions cannot create pull requests by default.**
+   `auto-pr.yml` was rejected with
+   `GitHub Actions is not permitted to create or approve pull requests`.
+   Worked around by opening PR #1 manually with my user token.
+   Long-term fix: enable the repo setting (Settings → Actions →
+   General → "Allow GitHub Actions to create and approve pull
+   requests") or switch the workflow to a fine-grained PAT.
+
+2. **detect-secrets version mismatch.** The local install was a
+   non-PyPI 1.5.47 build with a different plugin set; PyPI's latest
+   is 1.5.0. The CI `pip install detect-secrets==1.5.47` failed,
+   then 1.5.0 against a 1.5.47-generated baseline caused
+   "baseline file was updated" and exit code 3. Standardised on
+   1.5.0 across local + pre-commit + CI; regenerated the baseline.
+
+3. **`aquasecurity/trivy-action` tag conventions.** Wrote `0.36.0`,
+   then added the `v` prefix. Even with `severity: CRITICAL`,
+   trivy-action 0.36.0 + Trivy 0.70.0 returns non-zero on any
+   misconfig finding regardless of severity, breaking `exit-code: 1`
+   semantics.
+
+4. **`zaproxy/action-baseline` artifact-name regression.** Internal
+   artifact name `zap_scan` is no longer accepted by GitHub artifact
+   v4.
+
+5. **bundler-audit + `set -euo pipefail`.** `bundle-audit check`
+   exits 1 on any finding, killing the script before its
+   Critical-only gate ran.
+
+The fix that resolved the last five all at once: replace every
+third-party security action with the same docker run invocation used
+in `scripts/scan-*.sh`. One gating logic to maintain, identical
+behavior local and remote, no surprise behavior from action releases.
+SARIF outputs continue to flow to the Security tab via
+`codeql-action/upload-sarif`.
+
+**Cosign verify works locally.** From any machine with cosign v2+:
+```
+cosign verify ghcr.io/setounkpe7/railsgoat-security:latest \
+  --certificate-identity-regexp='https://github.com/Setounkpe7/.*' \
+  --certificate-oidc-issuer=https://token.actions.githubusercontent.com
+```
+
+**Time spent on phase 5.** ~2h30 (target was 3-4h). Most of it
+debugging third-party-action quirks and refactoring around them.
+
+---
+
+## 2026-04-23 — Phase 6: Portfolio
+
+**Outcome.** Four reviewer-facing artefacts produced
+([REPORT.md](../REPORT.md), [README.md](../README.md),
+[docs/ARCHITECTURE.md](ARCHITECTURE.md), [docs/RUNBOOK.md](RUNBOOK.md)).
+Cross-links established with `find-one-devsecops-case-study/REPORT.md`
+and `Setounkpe7/Setounkpe7` profile README.
+
+**Voice.** Practitioner-senior tone applied from the first draft (no
+"we struggled / finally figured out" register), accessible to
+non-technical readers (acronyms glossed at first occurrence). Single
+sentence in REPORT § 10 and README credits acknowledges AI assistance;
+no dedicated AI section.
+
+**`add-portfolio` skill not invoked.** The `add-portfolio` skill
+exists to package an arbitrary project into a recruiter-facing
+case-study repo (the way `find-one-devsecops-case-study` was generated
+from the Find-One project). `railsgoat-security` is *already*
+structured as a self-contained case study: REPORT, ARCHITECTURE,
+RUNBOOK, baseline-vs-final scan reports, SECURITY_EXCEPTIONS,
+DEV_JOURNAL. Running `add-portfolio` would produce a duplicate
+landing repo with no new information. Re-evaluate if a separate
+recruiter-only summary becomes useful later.
+
+**Total project time (all 6 phases).** ~10h wall-clock across one
+afternoon, against the spec estimate of 16-20h. The savings came
+from (a) the upstream stack already being modern (Phase 2 saved
+~2h), (b) the per-finding atomic-commit discipline keeping Phase 4
+focused (~3h saved), (c) replacing third-party security actions with
+known-good docker invocations early (Phase 5 saved another ~1h once
+the pattern was spotted).
