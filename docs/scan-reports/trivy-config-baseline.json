@@ -1,0 +1,48 @@
+{
+  "SchemaVersion": 2,
+  "Trivy": {
+    "Version": "0.70.0"
+  },
+  "ReportID": "019dbc40-07dc-7433-a484-0cacf656e5b4",
+  "CreatedAt": "2026-04-23T21:30:06.172277109Z",
+  "ArtifactID": "sha256:689d611a9165409987f39ff5e413db3b38dc0ca50eb1c472ef7fee5a933eff7f",
+  "ArtifactName": "/src",
+  "ArtifactType": "repository",
+  "Metadata": {
+    "RepoURL": "git@github.com:Setounkpe7/railsgoat-security.git",
+    "Branch": "dev",
+    "Commit": "7bbde527e182838b7509143b6bfdf2eeaff763e6",
+    "CommitMsg": "feat: add local scan scripts mirroring the CI pipeline\n\nscripts/\n  scan-secrets.sh   # detect-secrets diff vs baseline\n  scan-sast.sh      # Brakeman + Semgrep (Ruby + security-audit rulesets)\n  scan-sca.sh       # bundler-audit + Trivy fs (CRITICAL gate)\n  scan-image.sh     # Hadolint + Trivy config + Trivy image OS+libs\n  scan-dast.sh      # Container boot + ZAP baseline (High-risk gate)\n  generate-sbom.sh  # Syft (CycloneDX + SPDX) + Grype --fail-on critical\n  scan-all.sh       # Orchestrator: runs all 6, full report on failure\n\nTools that aren't installed locally (brakeman, bundler-audit, trivy,\nhadolint, syft, grype, ZAP) run from their official Docker images.\nThis keeps the scripts portable: same invocation locally and in CI,\nno host-side toolchain required beyond docker + jq + openssl.\n\nPer-tool gating thresholds match the spec table (decision 3.5):\n  detect-secrets   any new finding\n  Brakeman         High confidence\n  Semgrep          ERROR level\n  bundler-audit    Critical CVE\n  Trivy fs         Critical\n  Trivy image OS   Critical\n  Trivy image libs High+Critical\n  Hadolint         error level (config in .hadolint.yaml)\n  Trivy config     Critical\n  ZAP baseline     High alert\n  Grype            Critical (--fail-on critical)",
+    "Author": "Setounkpe7 \u003cmdoubogan@yahoo.fr\u003e",
+    "Committer": "Setounkpe7 \u003cmdoubogan@yahoo.fr\u003e"
+  },
+  "Results": [
+    {
+      "Target": "Dockerfile",
+      "Class": "config",
+      "Type": "dockerfile",
+      "MisconfSummary": {
+        "Successes": 7,
+        "Failures": 0
+      }
+    },
+    {
+      "Target": "openshift-configs/Dockerfile",
+      "Class": "config",
+      "Type": "dockerfile",
+      "MisconfSummary": {
+        "Successes": 7,
+        "Failures": 0
+      }
+    },
+    {
+      "Target": "openshift-configs/railsgoatservice.yaml",
+      "Class": "config",
+      "Type": "kubernetes",
+      "MisconfSummary": {
+        "Successes": 5,
+        "Failures": 0
+      }
+    }
+  ]
+}

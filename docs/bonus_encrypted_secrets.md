@@ -117,7 +117,3 @@ For real-world Rails applications:
 - Never commit `master.key`
 - Rotate secrets regularly
 - Restrict access to production secrets
-
-
-
-

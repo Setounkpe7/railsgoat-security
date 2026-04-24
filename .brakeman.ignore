@@ -1,0 +1,77 @@
+{
+  "ignored_warnings": [
+    {
+      "fingerprint": "07f5143982fb589796b35ec8252bef03d1696639ba57242317926977ae7e0d49",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — Remote Code Execution in app/controllers/password_resets_controller.rb:6"
+    },
+    {
+      "fingerprint": "2170a24c46533a0afaa85151bbce151f84aac05a3cd348b29b76cf35a98caff4",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — Redirect in app/controllers/sessions_controller.rb:26"
+    },
+    {
+      "fingerprint": "27033d08c8870bed7adc52075447f220c78d5e3b2c42ad05dc2c36625a0f5774",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — SQL Injection in app/models/analytics.rb:3"
+    },
+    {
+      "fingerprint": "46e6c67ae633f6424618e3efff2f8325e1babfd6fa09da557147c2cad905d052",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — Dangerous Send in app/controllers/dashboard_controller.rb:16"
+    },
+    {
+      "fingerprint": "686c3e9fd57abd6d1e64ec2fbadcc4a786a986c4657af270d73c661a55f2a1ab",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — Session Setting in config/initializers/session_store.rb:4"
+    },
+    {
+      "fingerprint": "6f5239fb87c64764d0c209014deb5cf504c2c10ee424bd33590f0a4f22e01d8f",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — Cross-Site Request Forgery in app/controllers/application_controller.rb:2"
+    },
+    {
+      "fingerprint": "715ad9c0d76f57a6a657192574d528b620176a80fec969e2f63c88eacab0b984",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — Session Setting in config/initializers/secret_token.rb:8"
+    },
+    {
+      "fingerprint": "71abb51a4f55c73468d91ccb62ff3719fe1d66f20032c8873d274f5c699d92fe",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — Remote Code Execution in app/controllers/api/v1/mobile_controller.rb:17"
+    },
+    {
+      "fingerprint": "753fe10585146c8cd9f3734a7143946da237745ff2b6162b7f5cb333675b080f",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — Mass Assignment in app/controllers/users_controller.rb:55"
+    },
+    {
+      "fingerprint": "7fe869279cad8ef1a72c671c1dc746b25b5d310aadd645c8555dae1ff1ba0349",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — SQL Injection in app/controllers/users_controller.rb:29"
+    },
+    {
+      "fingerprint": "8275f584e7cced41c26890e574cdbf6804bddff54374058834a562294c99d6f6",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — Cross-Site Scripting in config/environments/production.rb:2"
+    },
+    {
+      "fingerprint": "9f34c0a29e2cde79abdccddc790291d548128f0e47f75ed53f499da9249b66b8",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — Mass Assignment in app/controllers/users_controller.rb:50"
+    },
+    {
+      "fingerprint": "a21418b38aa77ef73946105fb1c9e3623b7be67a2419b960793871587200cbcc",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — Format Validation in app/models/user.rb:13"
+    },
+    {
+      "fingerprint": "b07b623a859b5fda9cd1dbd80aa3d19171cc257c1bce4c6e9204a45e563a85b3",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — Command Injection in app/models/benefits.rb:15"
+    },
+    {
+      "fingerprint": "ba6443b7682abc8ba6c4ee8fdf13bbc6cfcd3aa7b7bdfcf812ec99f4e5b7a641",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — Remote Code Execution in app/controllers/api/v1/mobile_controller.rb:10"
+    },
+    {
+      "fingerprint": "f63861a0e7ecd271e9f4211fbf6fe843bde57b48d3a11b475a80b27a9abf3759",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — File Access in app/controllers/benefit_forms_controller.rb:13"
+    },
+    {
+      "fingerprint": "febb21e45b226bb6bcdc23031091394a3ed80c76357f66b1f348844a7626f4df",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — Cross-Site Scripting in app/views/layouts/application.html.erb:427"
+    },
+    {
+      "fingerprint": "ff21c7fa4c5ef7f975a711304bcbd91447abe9723c54c59cb8e75a675ef7bf21",
+      "note": "RG-SEC: intentional RailsGoat training vulnerability — Remote Code Execution in app/controllers/benefit_forms_controller.rb:12"
+    }
+  ],
+  "updated": "2026-04-23"
+}

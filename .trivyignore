@@ -1,0 +1,17 @@
+# Trivy CVE exceptions. Each line corresponds to an RG-SEC-XXX entry
+# in SECURITY_EXCEPTIONS.md. Format:
+#   CVE-ID exp:YYYY-MM-DD  # short note (RG-SEC-XXX)
+#
+# Expiry policy: revisit on next base-image bump or every 6 months,
+# whichever comes first.
+
+# ── OS-level CRITICAL with no Debian bookworm backport at scan date ──
+CVE-2025-7458 exp:2026-10-23   # libsqlite3-0 3.40.1, no patch yet (RG-SEC-020)
+CVE-2023-45853 exp:2026-10-23  # zlib 1.2.13, Debian wontfix bookworm (RG-SEC-021)
+
+# ── Ruby stdlib default gems shipped with the runtime ──
+CVE-2025-24294 exp:2026-10-23  # resolv 0.6.0 in Ruby 3.4.1 (RG-SEC-022)
+CVE-2025-61594 exp:2026-10-23  # uri 1.0.2 in Ruby 3.4.1 (RG-SEC-023)
+
+# ── glibc CVE present across libc-bin/libc-dev-bin/libc6/libc6-dev ──
+CVE-2026-5450 exp:2026-10-23   # glibc 2.36, Debian no-fix-yet (RG-SEC-024)

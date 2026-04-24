@@ -21,8 +21,8 @@ Railsgoat::Application.configure do
   # Compress JavaScripts and CSS
   config.assets.compress = true
 
-  # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
+  # JS compression: no extra gem (uglifier is unmaintained; Terser/Closure
+  # would require Node). For a training/scanning target this is acceptable.
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.

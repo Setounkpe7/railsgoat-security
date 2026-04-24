@@ -1,0 +1,11 @@
+# Grype CVE exceptions. Mirror of .trivyignore — both tools scan the
+# same image, so accepted CVEs need to be silenced in both. Keep in sync.
+# Each entry corresponds to an RG-SEC-XXX in SECURITY_EXCEPTIONS.md.
+ignore:
+  - vulnerability: CVE-2025-7458    # libsqlite3, no Debian fix (RG-SEC-020)
+  - vulnerability: CVE-2023-45853   # zlib, Debian no-dsa (RG-SEC-021)
+  - vulnerability: CVE-2025-24294   # resolv stdlib (RG-SEC-022)
+  - vulnerability: CVE-2025-61594   # uri stdlib (RG-SEC-023)
+  - vulnerability: CVE-2026-5450    # glibc x4 packages (RG-SEC-024)
+  - vulnerability: GHSA-q628-fr66-cm6q   # resolv (RG-SEC-022, advisory id)
+  - vulnerability: GHSA-pj44-39h9-vmxr   # uri (RG-SEC-023, advisory id)

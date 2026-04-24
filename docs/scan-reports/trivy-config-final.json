@@ -1,0 +1,48 @@
+{
+  "SchemaVersion": 2,
+  "Trivy": {
+    "Version": "0.70.0"
+  },
+  "ReportID": "019dbc86-12ce-72dd-8247-564709a8eb3c",
+  "CreatedAt": "2026-04-23T22:46:36.494189323Z",
+  "ArtifactID": "sha256:af1965b57d828bea78c699aeb7a1d4f55e88ebcce67938925b21654c4a77fe35",
+  "ArtifactName": "/src",
+  "ArtifactType": "repository",
+  "Metadata": {
+    "RepoURL": "git@github.com:Setounkpe7/railsgoat-security.git",
+    "Branch": "dev",
+    "Commit": "31b811b14be103e0fe163f3b4e0f1e640b860ad6",
+    "CommitMsg": "fix(scans): apply ignore files in containerized invocations\n\nThree script bugs found while validating the Phase 4 ignore files:\n\n- scan-sast.sh: Brakeman in the official image runs from /code and\n  defaults to config/brakeman.ignore for auto-discovery, missing the\n  root-level .brakeman.ignore convention. Pass --ignore-config explicitly.\n- scan-secrets.sh: 'git ls-files' includes .brakeman.ignore whose\n  sha256 fingerprints trip 'Hex High Entropy String' as false positive;\n  filter the file out (same exclusion as in .pre-commit-config.yaml).\n- scan-image.sh + scan-sca.sh: Trivy in the container needs an explicit\n  --ignorefile path because the docker -v mount didn't include -w /src\n  for the image scans, so cwd-based .trivyignore lookup missed.\n- generate-sbom.sh: Grype doesn't read .trivyignore (different format);\n  added .grype.yaml mirroring the same CVE list and pass --config.\n\nAfter these fixes:\n  Secrets   OK   0 new vs baseline\n  SAST      OK   Brakeman 0 (18 ignored), Semgrep 22 \u003c ERROR\n  SCA       OK   Trivy fs 0 CRITICAL\n  Image     OK   Trivy OS+libs 0 (residuals via .trivyignore)\n  DAST      OK   ZAP 0 High\n  SBOM      OK   Grype 0 Critical (residuals via .grype.yaml)",
+    "Author": "Setounkpe7 \u003cmdoubogan@yahoo.fr\u003e",
+    "Committer": "Setounkpe7 \u003cmdoubogan@yahoo.fr\u003e"
+  },
+  "Results": [
+    {
+      "Target": "Dockerfile",
+      "Class": "config",
+      "Type": "dockerfile",
+      "MisconfSummary": {
+        "Successes": 7,
+        "Failures": 0
+      }
+    },
+    {
+      "Target": "openshift-configs/Dockerfile",
+      "Class": "config",
+      "Type": "dockerfile",
+      "MisconfSummary": {
+        "Successes": 7,
+        "Failures": 0
+      }
+    },
+    {
+      "Target": "openshift-configs/railsgoatservice.yaml",
+      "Class": "config",
+      "Type": "kubernetes",
+      "MisconfSummary": {
+        "Successes": 5,
+        "Failures": 0
+      }
+    }
+  ]
+}

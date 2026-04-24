@@ -51,5 +51,23 @@ _railsgoat-upstream/
 *.orig
 *.rej
 
-# NOTE: scan reports are deliberately NOT ignored — they are committed
-# to docs/scan-reports/ as part of the portfolio deliverable.
+# NOTE: scan reports are deliberately NOT ignored — but only the
+# -baseline.* and -final.* snapshots in docs/scan-reports/ are committed.
+# The unsuffixed copies below are overwritten on every
+# ./scripts/scan-all.sh run and stay local.
+/docs/scan-reports/brakeman.html
+/docs/scan-reports/brakeman.json
+/docs/scan-reports/semgrep.sarif
+/docs/scan-reports/bundler-audit.txt
+/docs/scan-reports/trivy-fs.json
+/docs/scan-reports/trivy-image-os.json
+/docs/scan-reports/trivy-image-lib.json
+/docs/scan-reports/trivy-config.json
+/docs/scan-reports/hadolint.txt
+/docs/scan-reports/zap-baseline.html
+/docs/scan-reports/zap-baseline.json
+/docs/scan-reports/zap.yaml
+/docs/scan-reports/sbom.cdx.json
+/docs/scan-reports/sbom.spdx.json
+/docs/scan-reports/grype.json
+/docs/scan-reports/detect-secrets.txt
