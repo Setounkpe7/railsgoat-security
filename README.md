@@ -1,30 +1,31 @@
 # railsgoat-security
 
-DevSecOps hardening of [OWASP RailsGoat](https://github.com/OWASP/railsgoat) —
-a deliberately vulnerable Ruby on Rails training application — with a full
-security pipeline (secrets, SAST, SCA, DAST, SBOM, signed container image)
-and a documented register of accepted residual risks.
+DevSecOps hardening of [OWASP RailsGoat](https://github.com/OWASP/railsgoat),
+a deliberately vulnerable Ruby on Rails training app. The repo wraps the
+upstream code in a full security pipeline (secrets, SAST, SCA, DAST, SBOM,
+signed image) and keeps a dated register of every risk I chose to accept
+rather than fix.
 
-## At a glance
+## What's in here
 
-- Eight-layer GitHub Actions security pipeline on every PR to `main`
-- Signed Docker image on GHCR, Cosign keyless via Sigstore
-- CycloneDX SBOM committed and re-published on every CI run
-- Branch-protected `main`, working branch `dev` with auto-PR
-- Findings visible in the GitHub Security tab via SARIF uploads
-- Local `scripts/scan-all.sh` mirrors the CI gates exactly
+- Eight-job GitHub Actions pipeline that runs on every PR to `main`.
+- Container image published to GHCR and signed with Cosign keyless (Sigstore OIDC, no key to manage).
+- CycloneDX SBOM committed under `docs/scan-reports/` and regenerated on every CI run.
+- `main` is branch-protected; all work happens on `dev` and lands via PR.
+- Scan findings show up in the GitHub Security tab as SARIF.
+- Whatever CI runs, `./scripts/scan-all.sh` runs locally with the same gates.
 
-## Repository navigation
+## Where to look
 
-| File | Purpose |
+| File | What it is |
 |---|---|
-| [REPORT.md](REPORT.md) | Full case study — start here |
-| [SECURITY_EXCEPTIONS.md](SECURITY_EXCEPTIONS.md) | Formally accepted residual risks (28 entries) |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Pipeline diagram and branch / PR flow |
+| [REPORT.md](REPORT.md) | The case study. Start here. |
+| [SECURITY_EXCEPTIONS.md](SECURITY_EXCEPTIONS.md) | 28 formally accepted residual risks, each with a CVE/CWE, owner and review date |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Pipeline diagram, branch and PR flow |
 | [docs/RUNBOOK.md](docs/RUNBOOK.md) | How to reproduce every scan locally |
-| [docs/DEV_JOURNAL.md](docs/DEV_JOURNAL.md) | Dated decisions, obstacles, time spent |
-| [docs/scan-reports/](docs/scan-reports/) | Baseline + final scan outputs, side by side |
-| [.github/workflows/security.yml](.github/workflows/security.yml) | CI pipeline source of truth |
+| [docs/DEV_JOURNAL.md](docs/DEV_JOURNAL.md) | Dated decisions, obstacles, time actually spent |
+| [docs/scan-reports/](docs/scan-reports/) | Baseline vs final scan outputs, side by side |
+| [.github/workflows/security.yml](.github/workflows/security.yml) | CI pipeline, source of truth |
 
 ## Pull and verify the signed image
 
@@ -41,23 +42,25 @@ cosign verify ghcr.io/setounkpe7/railsgoat-security:latest \
 ./scripts/scan-all.sh
 ```
 
-Outputs land in `docs/scan-reports/`. Same gating thresholds as CI — green
-locally guarantees green in CI.
+Reports land in `docs/scan-reports/`. The script uses the same gating
+thresholds as CI, so if it passes locally the CI run on your PR should pass too.
 
 ## Related work
 
-- [find-one-devsecops-case-study](https://github.com/Setounkpe7/find-one-devsecops-case-study) —
-  my first DevSecOps case study (Find-One platform).
+- [find-one-devsecops-case-study](https://github.com/Setounkpe7/find-one-devsecops-case-study),
+  my first DevSecOps case study (on the Find-One platform). Covers the
+  non-container layers; this repo covers the container and DAST story.
 
 ## Credits
 
-Built on [OWASP RailsGoat](https://github.com/OWASP/railsgoat) (MIT). See
-[CREDITS.md](CREDITS.md) and [NOTICE.md](NOTICE.md) for full attribution.
+Built on [OWASP RailsGoat](https://github.com/OWASP/railsgoat) (MIT).
+Attribution lives in [CREDITS.md](CREDITS.md) and [NOTICE.md](NOTICE.md).
 
-This project was built with AI assistance (Claude Code) to speed
-implementation; the engineering decisions are mine.
+I built this with AI assistance (Claude Code) to speed implementation.
+The engineering calls — scope, tool choice, gating thresholds, what to
+fix versus accept — are mine.
 
 ## License
 
-MIT — see [LICENSE.md](LICENSE.md). RailsGoat copyright preserved per the
-upstream MIT terms.
+MIT, see [LICENSE.md](LICENSE.md). The RailsGoat copyright stays intact
+per the upstream MIT terms.

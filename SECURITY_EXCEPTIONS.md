@@ -177,6 +177,20 @@ The 16 Low/Informational ZAP alerts are accepted in bulk under the same justific
 
 ---
 
+#### RG-SEC-029 — erb (CVE-2026-41316)
+
+- **Tool:** Trivy image (libs)
+- **Severity:** High (×2 findings, same upstream CVE)
+- **Location:** `erb@4.0.4` (Ruby 3.4.1 stdlib default gem) and `erb@6.0.1` (transitive gem in `Gemfile.lock`)
+- **Justification:** The fix (`erb@4.0.4.1` / `6.0.1.1` / `6.0.4`) is only shipped in the Ruby 4.0 line; no Ruby 3.4.x patch image embeds it as default gem. Bumping major Ruby version (3.4 → 4.0) is out of scope for this training repo and would risk breaking the railsgoat gem set. `erb` is not used to render attacker-controlled templates — RailsGoat ERB views render server-side templates only.
+- **Mitigation:** Container runs as non-root uid 1000; image is never deployed publicly (CI-only ephemeral instance for ZAP).
+- **Owner:** Michel-Ange Doubogan
+- **Accepted date:** 2026-05-04
+- **Review date:** 2026-11-04 (or earlier on Ruby 3.4.x patch release embedding the erb fix)
+- **Linked tracker:** https://nvd.nist.gov/vuln/detail/CVE-2026-41316
+
+---
+
 ## Re-baseline procedure
 
 To revisit the entries above on the review date or on a base-image bump:

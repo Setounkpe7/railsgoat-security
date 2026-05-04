@@ -1,12 +1,11 @@
 # railsgoat-security — DevSecOps hardening case study
 
-A short, honest report of taking a deliberately vulnerable Ruby on Rails
-training app (OWASP RailsGoat) and wrapping it in the security plumbing a
-real engineering team would expect: secrets scanning, code analysis,
-dependency analysis, container scanning, dynamic scanning, software
-inventory, signed artefacts, branch protection. The application code stays
-deliberately broken because that is the whole point of RailsGoat — what
-gets fixed and what gets formally accepted is the interesting story.
+A short, honest report of what it took to wrap OWASP RailsGoat in the
+security infrastructure a real team would expect: secrets scanning, code and
+dependency analysis, container and dynamic scanning, an SBOM, signed
+artefacts, branch protection. The application code stays deliberately
+broken because that's the whole point of RailsGoat. The interesting
+story is what got fixed and what got formally accepted.
 
 ---
 
@@ -18,15 +17,15 @@ intentional flaws across the [OWASP Top 10](https://owasp.org/www-project-top-te
 (injection, broken access control, weak cryptography and so on) so that
 developers can learn to spot and exploit them in a safe environment.
 
-The objective here is not to fix RailsGoat. It is to take that codebase as
-a stand-in for any inherited legacy app and answer the question: *what
-does it cost, in time and engineering judgement, to bring it up to a
-posture where every security finding is either fixed or formally accepted
-with a documented justification?*
+I wasn't trying to fix RailsGoat. The goal was to take that codebase as
+a stand-in for any inherited legacy app and answer the question: what
+does it actually cost, in time and engineering judgement, to bring it
+to a posture where every security finding is either fixed or formally
+accepted with a documented justification?
 
-The deliverable is a portfolio case study — auditable from the git log, a
-green CI pipeline, a register of accepted residual risks, and a signed
-container image any reviewer can pull and inspect.
+The deliverable is this repo: auditable from the git log, a green CI
+pipeline, a register of accepted residual risks, and a signed container
+image anyone can pull and inspect.
 
 ---
 
@@ -46,11 +45,11 @@ produced this baseline:
 | DAST (Dynamic Analysis) | OWASP ZAP baseline | 0 High, 4 Medium, 16 Low/Informational |
 | SBOM CVE scan | Grype | 7 Critical + 83 High |
 
-Worth noting up front: the upstream maintainers had already modernised
-RailsGoat from its old Ruby 2.x / Rails 4-5 base to Ruby 3.4.1 + Rails 8.0
-between the time this project's spec was written and the day I imported
-the snapshot. That changed the scope of the runtime work — see Decision
-3.1.
+One thing worth flagging up front: the upstream maintainers had already
+modernised RailsGoat from its old Ruby 2.x / Rails 4-5 base to Ruby 3.4.1
++ Rails 8.0 between the time this project's spec was written and the day
+I imported the snapshot. That changed the scope of the runtime work — I
+cover it in Decision 3.1.
 
 ---
 
@@ -62,11 +61,11 @@ The original plan called for a "minimum-viable migration to Ruby 3.3 +
 Rails 7.1". On opening the snapshot the Gemfile already pinned Ruby 3.4.1
 and Rails 8. Three options were on the table:
 
-- Follow the plan literally and downgrade to 3.3.5 / Rails 7.1. That would
-  reintroduce CVEs already patched upstream — an anti-pattern.
+- Follow the plan literally and downgrade to 3.3.5 / Rails 7.1. That
+  would reintroduce CVEs already patched upstream, an anti-pattern.
 - Keep Ruby 3.4.1 / Rails 8.0 and skip the migration tasks, since the
   runtime is already supported. **Chosen.**
-- Pin Ruby 3.3.5 but keep Rails 8 — a compromise without a clear gain.
+- Pin Ruby 3.3.5 but keep Rails 8, a compromise without a clear gain.
 
 What actually broke when booting on the upstream stack came not from the
 runtime version but from gaps in the legacy config: Active Storage in
@@ -163,15 +162,16 @@ secrets-scan
                             └── sign-and-push   (GHCR + Cosign keyless)
 ```
 
-Each job's gating threshold matches the local `scripts/scan-*.sh` exactly,
-so a green local run guarantees a green CI run. Findings in SARIF format
-are uploaded to the GitHub Security tab so a reviewer can browse them in
-the UI without downloading anything.
+Each job's gating threshold matches the local `scripts/scan-*.sh`
+exactly, so if the local run passes the CI run tends to pass too.
+Findings in SARIF format are uploaded to the GitHub Security tab so a
+reviewer can browse them in the UI without downloading anything.
 
-The container is published to `ghcr.io/setounkpe7/railsgoat-security` with
-three tags (`pr-N`, `sha-XXX`, `latest`) and signed via Cosign keyless
-using the OIDC identity of the workflow run. Anyone can verify the
-signature with the command in the README — no key distribution involved.
+The container is published to `ghcr.io/setounkpe7/railsgoat-security`
+with three tags (`pr-N`, `sha-XXX`, `latest`) and signed via Cosign
+keyless using the OIDC identity of the workflow run. Anyone can verify
+the signature with the command in the README. No key distribution
+involved.
 
 ---
 
@@ -204,12 +204,12 @@ mitigation note, an owner and a six-month review date.
 
 The project owns and documents the things it does not do:
 
-- **No live deployment.** The container exists to be scanned and pulled,
-  not exposed publicly. ZAP runs against an ephemeral instance inside the
-  pipeline. The four ZAP Medium-risk alerts (missing CSP header, missing
-  SRI attributes, HTTP-to-HTTPS form transition, vulnerable JS library)
-  would all be addressed in a real production deployment but make no
-  sense to fix here.
+- **No live deployment.** The container exists to be scanned and
+  pulled, not exposed publicly. ZAP runs against an ephemeral instance
+  inside the pipeline. The four ZAP Medium-risk alerts (missing CSP
+  header, missing SRI attributes, HTTP-to-HTTPS form transition,
+  vulnerable JS library) would all be addressed in a real production
+  deployment; they make no sense to fix here.
 - **Three OS-level CRITICAL CVEs without a Debian patch** at scan date:
   `libsqlite3-0` (CVE-2025-7458), `zlib1g` (CVE-2023-45853, declared
   `<no-dsa>` by Debian), and the four `glibc` packages affected by
@@ -237,24 +237,25 @@ The project owns and documents the things it does not do:
 
 ## 8. Engineering practices applied
 
-The things that distinguish "ran some scanners" from "built an auditable
-DevSecOps posture":
+What separates "ran some scanners" from "built an auditable DevSecOps
+posture":
 
 - Atomic commits per fix, with the tool name and rule ID in the commit
-  message body so a reviewer can trace any line of remediated code back
+  message body. A reviewer can trace any line of remediated code back
   to the finding that motivated it.
-- Upstream attribution preserved (`LICENSE`, `CREDITS.md`, `NOTICE.md`)
-  and the import commit kept clean so `git log` from commit four onwards
+- Upstream attribution preserved (`LICENSE`, `CREDITS.md`, `NOTICE.md`).
+  The import commit is kept clean so `git log` from commit four onward
   shows only this project's work.
 - Every accepted risk recorded with owner, justification, mitigation,
-  accept date, review date and external tracker URL — no silent ignores.
+  accept date, review date, and an external tracker URL. No silent
+  ignores.
 - Branch protection on `main`: no force pushes, no deletions, all eight
   status checks required.
-- Container image signed with Cosign keyless (no private key to manage).
-- Both `-baseline.*` and `-final.*` scan reports committed so a reviewer
-  can `diff` them and see the remediation impact tool by tool.
-- Local-first validation: `scripts/scan-all.sh` runs the same gates as CI,
-  so problems are caught before the pipeline burns runner minutes.
+- Container image signed with Cosign keyless, so no private key to manage.
+- Both `-baseline.*` and `-final.*` scan reports committed so a
+  reviewer can `diff` them and see the remediation impact tool by tool.
+- Local-first validation: `scripts/scan-all.sh` runs the same gates as
+  CI. Problems get caught before the pipeline burns runner minutes.
 - Pre-commit hooks (`detect-secrets`, hadolint, file hygiene) catch
   simple mistakes at commit time.
 
@@ -279,13 +280,13 @@ DevSecOps posture":
 
 ## 10. How to read this repository
 
-For a hurried reviewer, five files in this order:
+For a reviewer in a hurry, five files in this order:
 
-1. [REPORT.md](REPORT.md) — this file
-2. [SECURITY_EXCEPTIONS.md](SECURITY_EXCEPTIONS.md) — what was accepted and why
-3. [.github/workflows/security.yml](.github/workflows/security.yml) — the pipeline source of truth
-4. [docs/scan-reports/TRIAGE.md](docs/scan-reports/TRIAGE.md) — the baseline-to-final disposition table
-5. [docs/DEV_JOURNAL.md](docs/DEV_JOURNAL.md) — the dated decisions log
+1. [REPORT.md](REPORT.md), this file
+2. [SECURITY_EXCEPTIONS.md](SECURITY_EXCEPTIONS.md), what was accepted and why
+3. [.github/workflows/security.yml](.github/workflows/security.yml), the pipeline source of truth
+4. [docs/scan-reports/TRIAGE.md](docs/scan-reports/TRIAGE.md), the baseline-to-final disposition table
+5. [docs/DEV_JOURNAL.md](docs/DEV_JOURNAL.md), the dated decisions log
 
 Three commands a reviewer can run:
 
@@ -302,6 +303,6 @@ cosign verify ghcr.io/setounkpe7/railsgoat-security:latest \
   --certificate-oidc-issuer=https://token.actions.githubusercontent.com
 ```
 
-This project was built with AI assistance (Claude Code) to speed
-implementation; the engineering decisions — scope, tool choice, gating
-thresholds, what to fix versus accept — are mine.
+I built this with AI assistance (Claude Code) to speed implementation.
+The engineering calls — scope, tool choice, gating thresholds, what to
+fix versus accept — are mine.
