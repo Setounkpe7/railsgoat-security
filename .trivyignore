@@ -12,6 +12,7 @@ CVE-2023-45853 exp:2026-10-23  # zlib 1.2.13, Debian wontfix bookworm (RG-SEC-02
 # ── Ruby stdlib default gems shipped with the runtime ──
 CVE-2025-24294 exp:2026-10-23  # resolv 0.6.0 in Ruby 3.4.1 (RG-SEC-022)
 CVE-2025-61594 exp:2026-10-23  # uri 1.0.2 in Ruby 3.4.1 (RG-SEC-023)
+CVE-2026-41316 exp:2026-11-04  # erb 4.0.4 (default gem) + erb 6.0.1 (transitive); fix only in Ruby 4.0 line (RG-SEC-029)
 
 # ── glibc CVE present across libc-bin/libc-dev-bin/libc6/libc6-dev ──
 CVE-2026-5450 exp:2026-10-23   # glibc 2.36, Debian no-fix-yet (RG-SEC-024)
