@@ -1,7 +1,7 @@
 # railsgoat-security — DevSecOps hardening case study
 
 A short, honest report of what it took to wrap OWASP RailsGoat in the
-security plumbing a real team would expect: secrets scanning, code and
+security infrastructure a real team would expect: secrets scanning, code and
 dependency analysis, container and dynamic scanning, an SBOM, signed
 artefacts, branch protection. The application code stays deliberately
 broken because that's the whole point of RailsGoat. The interesting
